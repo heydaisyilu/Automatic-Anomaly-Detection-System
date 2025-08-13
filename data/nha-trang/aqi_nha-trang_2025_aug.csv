@@ -1,0 +1,15 @@
+timestamp,city,aqi,weather_icon,wind_speed,humidity
+2025-08-01T00:04:33.455894+07:00,Nha Trang,59,/dl/web/weather/ic-weather-04n.svg,7.4 km/h,68%
+2025-08-01T01:02:14.859817+07:00,Nha Trang,59,/dl/web/weather/ic-weather-04n.svg,8.5 km/h,69%
+2025-08-01T02:03:41.421324+07:00,Nha Trang,58,/dl/web/weather/ic-weather-04n.svg,7.9 km/h,69%
+2025-08-01T03:02:04.668754+07:00,Nha Trang,58,/dl/web/weather/ic-weather-04n.svg,7.9 km/h,70%
+2025-08-01T04:02:05.407597+07:00,Nha Trang,58,/dl/web/weather/ic-weather-04n.svg,7.1 km/h,70%
+2025-08-01T05:02:04.437473+07:00,Nha Trang,58,/dl/web/weather/ic-weather-04n.svg,7.2 km/h,70%
+2025-08-01T06:02:01.293005+07:00,Nha Trang,58,/dl/web/weather/ic-weather-04d.svg,7.1 km/h,70%
+2025-08-01T07:06:21.689263+07:00,Nha Trang,58,/dl/web/weather/ic-weather-04d.svg,7.9 km/h,65%
+2025-08-01T08:30:44.780341+07:00,Nha Trang,58,/dl/web/weather/ic-weather-03d.svg,6.1 km/h,57%
+2025-08-01T09:47:51.345948+07:00,Nha Trang,58,/dl/web/weather/ic-weather-03d.svg,3.4 km/h,50%
+2025-08-01T10:36:24.957295+07:00,Nha Trang,58,/dl/web/weather/ic-weather-04d.svg,9.7 km/h,49%
+2025-08-01T11:23:31.408710+07:00,Nha Trang,58,/dl/web/weather/ic-weather-04d.svg,16.6 km/h,49%
+2025-08-01T12:10:27.207824+07:00,Nha Trang,58,/dl/web/weather/ic-weather-04d.svg,19.3 km/h,52%
+2025-08-01T13:03:29.475879+07:00,Nha Trang,58,/dl/web/weather/ic-weather-04d.svg,22.2 km/h,51%
