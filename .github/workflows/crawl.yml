@@ -1,0 +1,47 @@
+name: Crawl IQAir Data
+
+on:
+  schedule:
+    - cron: '0 */1 * * *'
+  workflow_dispatch:
+
+jobs:
+  crawl-and-update:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          playwright install chromium
+
+      - name: Run crawler
+        env:
+          TZ: Asia/Ho_Chi_Minh
+        run: |
+          set -e
+          python crawl_data.py
+          echo "crawler done"
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if ls data/* 1> /dev/null 2>&1; then
+            git add data/*
+            git diff --staged --quiet || git commit -m "Update air quality data"
+            git push origin main
+          else
+            echo "No result files to commit."
+          fi
