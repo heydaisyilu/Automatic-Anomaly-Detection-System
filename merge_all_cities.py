@@ -42,7 +42,7 @@ def merge_city(city_dir: Path):
         except Exception as e:
             print(f"[{city}] Không thể parse thời gian theo cột {tc} -> {e}")
 
-    out_path = RESULT_DIR / f"result/aqi-{city}_{YEAR}.csv"
+    out_path = RESULT_DIR / f"aqi_{city}_{YEAR}.csv"
     RESULT_DIR.mkdir(parents=True, exist_ok=True)
     merged.to_csv(out_path, index=False)
     print(f"[{city}] Đã tạo/cập nhật {out_path}")
