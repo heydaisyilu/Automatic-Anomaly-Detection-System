@@ -97,50 +97,61 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         if weather_icon_raw and weather_icon_raw.startswith('/dl/assets/svg/weather/'):
             weather_icon_raw = weather_icon_raw.replace('/dl/assets/svg/weather/', '/dl/web/weather/')
 
-        # ---------- WIND: chọn container gió gần TOP nhất (ô "Now"), tránh forecast ----------
+        # ---------- WIND: lấy từ cột "Bây giờ / Now" trong phần Dự báo theo giờ ----------
         wind_speed_raw = ""
         try:
-            # Lấy tất cả container có icon gió (img là con trực tiếp)
-            wind_nodes = page.query_selector_all(
-                "div.flex.flex-col.items-center:has(> img[src*='ic-wind-s-sm-solid-weather'])"
+            # 1) Tìm section "Dự báo theo giờ" (VN hoặc EN)
+            hourly = page.query_selector(
+                "section:has(h2:has-text('Dự báo theo giờ')), section:has(h2:has-text('Hourly forecast'))"
+            ) or page.query_selector(
+                "div:has(h2:has-text('Dự báo theo giờ')), div:has(h2:has-text('Hourly forecast'))"
             )
 
-            top_idx = -1
-            top_y = None
+            # 2) Trong section đó, tìm cột có nhãn "Bây giờ" hoặc "Now"
+            now_col = None
+            if hourly:
+                now_col = hourly.query_selector("xpath=.//*[self::div or self::li][.//text()[contains(., 'Bây giờ') or contains(., 'Now')]]")
 
-            # Chọn container xuất hiện gần đầu trang nhất (ô Now)
-            for idx, node in enumerate(wind_nodes):
-                box = node.evaluate("n => n.getBoundingClientRect().top")
-                # bỏ các node ẩn (top = 0 & height 0); nhưng chủ yếu ta chọn top nhỏ nhất > 0
-                if top_y is None or (isinstance(box, (int, float)) and box < top_y):
-                    top_y = box
-                    top_idx = idx
+            # 3) Từ cột "Bây giờ", tìm container icon gió và lấy số
+            if now_col:
+                # container gió: div.flex.flex-col.items-center chứa icon wind
+                wind_container = now_col.query_selector(
+                    "div.flex.flex-col.items-center:has(> img[src*='ic-wind-s-sm-solid-weather'])"
+                )
+                if wind_container:
+                    # Lấy hai <p> liên tiếp: p[0] = số, p[1] = đơn vị (km/h)
+                    num_txt, unit_txt = wind_container.evaluate("""
+                        n => {
+                            const ps = n.querySelectorAll('p');
+                            const num  = (ps[0]?.textContent || '').trim();
+                            const unit = (ps[1]?.textContent || '').trim().toLowerCase();
+                            return [num, unit];
+                        }
+                    """)
+                    # Nếu không có unit, vẫn chấp nhận số thuần
+                    import re
+                    if num_txt and re.fullmatch(r"\\d+(\\.\\d+)?", num_txt):
+                        wind_speed_raw = f"{float(num_txt):.1f} km/h"
 
-            chosen = wind_nodes[top_idx] if 0 <= top_idx < len(wind_nodes) else None
-
-            if chosen:
-                # Lấy 2 <p> đầu: p[0] = số, p[1] = đơn vị (nếu có)
-                num_txt, unit_txt = chosen.evaluate("""
-                    n => {
-                        const ps = n.querySelectorAll('p');
-                        const num  = (ps[0]?.textContent || '').trim();
-                        const unit = (ps[1]?.textContent || '').trim().toLowerCase();
-                        return [num, unit];
-                    }
-                """)
-
-                # Nếu không đúng mẫu, fallback lấy số trong p.font-medium
-                if not num_txt:
-                    num_txt = chosen.evaluate(
-                        "n => (n.querySelector('p.font-medium')?.textContent || '').trim()"
-                    )
-
-                # Chỉ nhận khi num là số thuần; GHÉP ' km/h' sau khi crawl
-                if num_txt and re.fullmatch(r"\d+(\.\d+)?", num_txt):
-                    wind_speed_raw = f"{float(num_txt):.1f} km/h"
+            # 4) Fallback cực nhẹ: nếu vì lý do nào đó không tìm thấy cột "Bây giờ",
+            #    hãy dùng container icon gió "gần đầu trang" nhất (top nhỏ nhất) để thay thế.
+            if not wind_speed_raw:
+                wind_nodes = page.query_selector_all(
+                    "div.flex.flex-col.items-center:has(> img[src*='ic-wind-s-sm-solid-weather'])"
+                )
+                best = None
+                best_top = None
+                for node in wind_nodes:
+                    top = node.evaluate("n => n.getBoundingClientRect().top")
+                    if isinstance(top, (int, float)) and (best_top is None or top < best_top):
+                        best_top, best = top, node
+                if best:
+                    num_txt = best.evaluate("n => (n.querySelector('p.font-medium')?.textContent || '').trim()")
+                    import re
+                    if num_txt and re.fullmatch(r"\\d+(\\.\\d+)?", num_txt):
+                        wind_speed_raw = f"{float(num_txt):.1f} km/h"
         except Exception:
             pass
-
 
         # ---------- HUMIDITY (cần có '%', vẫn theo icon) ----------
         humidity_raw = ""
