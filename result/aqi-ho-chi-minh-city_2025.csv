@@ -3950,3 +3950,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-08-14 11:00:00+07:00,66.0,66.0,66.0,/dl/web/weather/ic-weather-04d.svg,Hồ Chí Minh
 2025-08-14 12:00:00+07:00,62.0,62.0,62.0,/dl/web/weather/ic-weather-04d.svg,Hồ Chí Minh
 2025-08-14 13:00:00+07:00,60.0,60.0,60.0,/dl/web/weather/ic-weather-04d.svg,Hồ Chí Minh
+2025-08-14 14:00:00+07:00,56.0,26.36,83.0,/dl/web/weather/ic-weather-04d.svg,Hồ Chí Minh
+2025-08-14 15:00:00+07:00,56.0,5.0,82.0,/dl/web/weather/ic-weather-10d.svg,Hồ Chí Minh
