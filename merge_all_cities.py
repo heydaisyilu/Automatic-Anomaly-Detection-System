@@ -1,4 +1,5 @@
 import os
+import re
 import glob
 from pathlib import Path
 import pandas as pd
@@ -23,6 +24,22 @@ def _mode_or_last(series: pd.Series):
         return m.iloc[0]
     notna = series.dropna()
     return notna.iloc[-1] if len(notna) > 0 else None
+
+_NUM_RE = re.compile(r"[-+]?\d*\.?\d+|\d+")
+def strip_units(val):
+    """Trích số đầu tiên trong chuỗi (vd: '7.4 km/h' -> 7.4; '78%' -> 78.0)."""
+    import pandas as pd
+    if pd.isna(val):
+        return pd.NA
+    if isinstance(val, (int, float)):
+        return float(val)
+    m = _NUM_RE.search(str(val))
+    if m:
+        try:
+            return float(m.group())
+        except Exception:
+            return pd.NA
+    return pd.NA
 
 def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
     df = df.copy()
