@@ -32,13 +32,23 @@ jobs:
         run: |
           python merge_all_cities.py
 
-      - name: Commit & push if changed
+            - name: Commit & push if changed
+        shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [ -n "$(git status --porcelain)" ]; then
+          set -euo pipefail
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # tranh CRLF gay loi parsing shell
+          git config --global core.autocrlf false
+
+          CHANGES="$(git status --porcelain || true)"
+          if [ -n "$CHANGES" ]; then
             git add -A
-            git commit -m "Auto-merge AQI CSVs for all cities $(date -u +'%Y-%m-%d %H:%M:%S')"
+            TS="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git commit -m "Auto-merge AQI CSVs for all cities ${TS}" || true
+            # push len nhanh mac dinh cua workflow (lich/schedule la default branch)
             git push
           else
             echo "No changes to commit."
+          fi
