@@ -1,71 +1,99 @@
-import pandas as pd
+import os
 import glob
 from pathlib import Path
+import pandas as pd
 
-# Thư mục chứa dữ liệu đầu vào
+# Thư mục dữ liệu và kết quả
 THU_MUC_DU_LIEU = Path("data")
-# Thư mục lưu kết quả sau khi gộp
-THU_MUC_KET_QUA = Path("result")
-# Năm cần xử lý
+THU_MUC_KQ = Path("result")
 NAM = 2025
 
-# Danh sách tên cột thời gian có thể gặp
-CAC_COT_THOI_GIAN = [
-    "timestamp", "time", "datetime", "created_at", "scraped_at", "date", "ngay", "thoi_gian"
-]
+# Tần suất resample mặc định: 1 giờ
+TANSUAT = os.getenv("RESAMPLE", "1H")  # "1H" = 1 giờ
 
-def chon_cot_thoi_gian(df: pd.DataFrame) -> str | None:
-    """Chọn cột thời gian phù hợp trong DataFrame."""
-    for c in df.columns:
-        if c.lower() in CAC_COT_THOI_GIAN:
-            return c
-    return None
+# Danh sách cột chuẩn
+COT_CHUAN = ["timestamp", "city", "aqi", "weather_icon", "wind_speed", "humidity"]
 
-def tien_xu_ly(df: pd.DataFrame) -> pd.DataFrame:
-    """Tiền xử lý dữ liệu: chuẩn hóa thời gian, xử lý thiếu, sắp xếp."""
+def _mode_or_last(series: pd.Series):
+    """Chọn mode; nếu không có, lấy giá trị cuối cùng không null."""
+    if series.empty:
+        return None
+    m = series.mode(dropna=True)
+    if len(m) > 0:
+        return m.iloc[0]
+    notna = series.dropna()
+    return notna.iloc[-1] if len(notna) > 0 else None
+
+def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
     df = df.copy()
 
-    # 1) Chọn cột thời gian
-    cot_tg = chon_cot_thoi_gian(df)
-    if cot_tg is None:
-        print("Không tìm thấy cột thời gian hợp lệ → Bỏ qua xử lý thời gian")
-    else:
-        # 2) Chuyển sang datetime
-        df[cot_tg] = pd.to_datetime(df[cot_tg], errors="coerce")
+    # Đảm bảo tồn tại cột city
+    if "city" not in df.columns:
+        df["city"] = ten_tp
 
-        # 3) Xóa các dòng có thời gian không hợp lệ
-        so_dong_dau = len(df)
-        df = df.dropna(subset=[cot_tg])
-        so_dong_xoa = so_dong_dau - len(df)
-        if so_dong_xoa > 0:
-            print(f"Đã xóa {so_dong_xoa} dòng có {cot_tg} không hợp lệ")
+    # Chuẩn hóa timestamp
+    if "timestamp" not in df.columns:
+        print(f"Không có cột 'timestamp' trong dữ liệu {ten_tp}.")
+        return pd.DataFrame(columns=COT_CHUAN)
+    df["timestamp"] = pd.to_datetime(df["timestamp"], errors="coerce")
+    truoc = len(df)
+    df = df.dropna(subset=["timestamp"])
+    da_xoa = truoc - len(df)
+    if da_xoa > 0:
+        print(f"Xóa {da_xoa} dòng timestamp không hợp lệ.")
 
-        # 4) Sắp xếp theo thời gian
-        df = df.sort_values(by=cot_tg, kind="mergesort")
-        print(f"Đã sắp xếp theo {cot_tg}")
+    # Chuẩn hóa số và cắt ngoại lai
+    for num_col, low, high in [("aqi", 0, 500), ("wind_speed", 0, 200), ("humidity", 0, 100)]:
+        if num_col in df.columns:
+            df[num_col] = pd.to_numeric(df[num_col], errors="coerce")
+            truoc = len(df)
+            df = df[(df[num_col].isna()) | ((df[num_col] >= low) & (df[num_col] <= high))]
+            if truoc - len(df) > 0:
+                print(f"Cắt {truoc - len(df)} dòng ngoại lai {num_col}.")
 
-    # 5) Xử lý cột aqi nếu có
-    if "aqi" in df.columns:
-        df["aqi"] = pd.to_numeric(df["aqi"], errors="coerce")
-        if df["aqi"].isnull().any():
-            gia_tri_tb = df["aqi"].mean()
-            if pd.notna(gia_tri_tb):
-                df["aqi"] = df["aqi"].fillna(gia_tri_tb)
-                print(f"Đã điền giá trị thiếu trong 'aqi' = {gia_tri_tb:.2f}")
-            else:
-                print("Không thể tính trung bình 'aqi' (toàn NaN) → Bỏ qua fillna")
-        else:
-            print("Không có giá trị thiếu trong 'aqi'")
-    else:
-        print("Không có cột 'aqi' → Bỏ qua xử lý aqi")
+    # Điền giá trị thiếu AQI bằng trung bình
+    if "aqi" in df.columns and df["aqi"].isnull().any():
+        mean_aqi = df["aqi"].mean()
+        if pd.notna(mean_aqi):
+            df["aqi"].fillna(mean_aqi, inplace=True)
+            print(f"Điền thiếu AQI = {mean_aqi:.2f}")
 
-    return df
+    # Giữ đúng 6 cột
+    for col in COT_CHUAN:
+        if col not in df.columns:
+            df[col] = pd.NA
+    df = df[COT_CHUAN]
 
-def gop_thanh_pho(thu_muc_tp: Path):
-    """Gộp dữ liệu của một thành phố."""
+    # Sắp xếp và resample
+    df = df.sort_values(by="timestamp").set_index("timestamp")
+    agg_map = {
+        "aqi": "mean",
+        "wind_speed": "mean",
+        "humidity": "mean",
+        "weather_icon": _mode_or_last,
+        "city": _mode_or_last,
+    }
+    df_res = df.resample(TANSUAT).agg(agg_map)
+
+    # Làm gọn số
+    for col in ["aqi", "wind_speed", "humidity"]:
+        if col in df_res.columns:
+            df_res[col] = df_res[col].round(2)
+
+    df_res = df_res.reset_index()
+
+    # Loại dòng hoàn toàn trống
+    all_null_numeric = df_res[["aqi", "wind_speed", "humidity"]].isna().all(axis=1)
+    keep_mask = ~all_null_numeric | df_res["weather_icon"].notna() | df_res["city"].notna()
+    df_res = df_res[keep_mask]
+
+    print(f"Resample theo {TANSUAT} → còn {len(df_res)} dòng.")
+    return df_res
+
+def gop_mot_thanh_pho(thu_muc_tp: Path):
     ten_tp = thu_muc_tp.name
 
-    # Hỗ trợ cả dạng tên file aqi_{tp} và aqi-{tp}
+    # Hỗ trợ aqi_{city}_... và aqi-{city}_...
     patterns = str(thu_muc_tp / f"aqi_{ten_tp}_{NAM}_*.csv")
     files = []
     for p in patterns:
@@ -76,45 +104,34 @@ def gop_thanh_pho(thu_muc_tp: Path):
         return
 
     print(f"[{ten_tp}] Tìm thấy {len(files)} file.")
-
-    ds_df = []
+    ds = []
     for f in files:
         try:
             df = pd.read_csv(f)
-            df["__nguon_file"] = Path(f).name
-            ds_df.append(df)
+            ds.append(df)
         except Exception as e:
             print(f"[{ten_tp}] Lỗi đọc {f} -> {e}")
 
-    if not ds_df:
+    if not ds:
         print(f"[{ten_tp}] Không có dữ liệu hợp lệ.")
         return
 
-    df_gop = pd.concat(ds_df, ignore_index=True)
+    df_gop = pd.concat(ds, ignore_index=True).drop_duplicates()
+    df_kq = _lam_sach_va_resample(df_gop, ten_tp)
 
-    # Loại bỏ trùng lặp toàn bộ hàng
-    so_dong_truoc = len(df_gop)
-    df_gop = df_gop.drop_duplicates()
-    so_dong_xoa = so_dong_truoc - len(df_gop)
-    if so_dong_xoa > 0:
-        print(f"[{ten_tp}] Đã loại {so_dong_xoa} dòng trùng lặp")
-
-    # Tiền xử lý dữ liệu
-    df_gop = tien_xu_ly(df_gop)
-
-    # Lưu kết quả
-    duong_dan_kq = THU_MUC_KET_QUA / f"aqi-{ten_tp}_{NAM}.csv"
-    duong_dan_kq.parent.mkdir(parents=True, exist_ok=True)
-    df_gop.to_csv(duong_dan_kq, index=False)
-    print(f"[{ten_tp}] Đã tạo/cập nhật {duong_dan_kq}")
+    duong_dan = THU_MUC_KQ / f"aqi-{ten_tp}_{NAM}.csv"
+    duong_dan.parent.mkdir(parents=True, exist_ok=True)
+    df_kq.to_csv(duong_dan, index=False)
+    print(f"[{ten_tp}] Đã tạo/cập nhật {duong_dan}")
 
 def main():
+    print(f"👉 Tần suất resample: {TANSUAT}")
     if not THU_MUC_DU_LIEU.exists():
         print("Không có thư mục dữ liệu:", THU_MUC_DU_LIEU)
         return
     for thu_muc_tp in sorted(THU_MUC_DU_LIEU.iterdir()):
         if thu_muc_tp.is_dir():
-            gop_thanh_pho(thu_muc_tp)
+            gop_mot_thanh_pho(thu_muc_tp)
 
 if __name__ == "__main__":
     main()
