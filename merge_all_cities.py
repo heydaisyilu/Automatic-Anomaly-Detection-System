@@ -9,7 +9,7 @@ YEAR = 2025
 
 def merge_city(city_dir: Path):
     city = city_dir.name
-    pattern = str(city_dir / f"aqi-{city}_{YEAR}_*.csv")
+    pattern = str(city_dir / f"data/aqi-{city}_{YEAR}_*.csv")
     files = sorted(glob.glob(pattern))
     if not files:
         print(f"[{city}] Không tìm thấy file CSV tháng nào.")
@@ -42,7 +42,7 @@ def merge_city(city_dir: Path):
         except Exception as e:
             print(f"[{city}] Không thể parse thời gian theo cột {tc} -> {e}")
 
-    out_path = RESULT_DIR / f"aqi-{city}_{YEAR}.csv"
+    out_path = RESULT_DIR / f"result/aqi-{city}_{YEAR}.csv"
     RESULT_DIR.mkdir(parents=True, exist_ok=True)
     merged.to_csv(out_path, index=False)
     print(f"[{city}] Đã tạo/cập nhật {out_path}")
