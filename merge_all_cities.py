@@ -9,7 +9,7 @@ YEAR = 2025
 
 def merge_city(city_dir: Path):
     city = city_dir.name
-    pattern = str(city_dir / f"data/aqi-{city}_{YEAR}_*.csv")
+    pattern = str(city_dir / f"aqi_{city}_{YEAR}_*.csv")
     files = sorted(glob.glob(pattern))
     if not files:
         print(f"[{city}] Không tìm thấy file CSV tháng nào.")
