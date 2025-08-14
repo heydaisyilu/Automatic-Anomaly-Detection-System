@@ -97,22 +97,33 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         if weather_icon_raw and weather_icon_raw.startswith('/dl/assets/svg/weather/'):
             weather_icon_raw = weather_icon_raw.replace('/dl/assets/svg/weather/', '/dl/web/weather/')
 
-        # ---------- WIND (CHỈ LẤY SỐ, KHÔNG CẦN 'km/h' TRONG DOM) ----------
+        # ---------- WIND: CHỈ ĐỌC SỐ trong div có icon gió (không fallback) ----------
         wind_speed_raw = ""
         try:
-            wind_img = page.query_selector("img[src*='ic-wind-s-sm-solid-weather']")
-            if wind_img:
-                container = wind_img.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
-                container_el = container.as_element() if container else None
-                if container_el:
-                    num_txt = container_el.evaluate("""
-                        n => {
-                            const p = n.querySelector('p.font-medium');
-                            return (p?.textContent || '').trim();
-                        }
-                    """)
-                    if re.fullmatch(r"\d+(\.\d+)?", num_txt or ""):
-                        wind_speed_raw = f"{float(num_txt):.1f} km/h"
+            # Tìm đúng container có icon gió là con trực tiếp
+            wind_container = page.query_selector(
+                "div.flex.flex-col.items-center:has(> img[src*='ic-wind-s-sm-solid-weather'])"
+            )
+            if wind_container:
+                # Lấy 2 <p> đầu: p[0] = số, p[1] = đơn vị (nếu có)
+                num_txt, unit_txt = wind_container.evaluate("""
+                    n => {
+                        const ps = n.querySelectorAll('p');
+                        const num  = (ps[0]?.textContent || '').trim();
+                        const unit = (ps[1]?.textContent || '').trim().toLowerCase();
+                        return [num, unit];
+                    }
+                """)
+
+                # fallback: nếu num trống, lấy p.font-medium trong container
+                if not num_txt:
+                    num_txt = wind_container.evaluate(
+                        "n => (n.querySelector('p.font-medium')?.textContent || '').trim()"
+                    )
+
+                # Validate bằng Python (tránh ăn nhầm AQI): chỉ nhận khi num là số thuần
+                if num_txt and re.fullmatch(r"\d+(\.\d+)?", num_txt):
+                    wind_speed_raw = f"{float(num_txt):.1f} km/h"
         except Exception:
             pass
 
