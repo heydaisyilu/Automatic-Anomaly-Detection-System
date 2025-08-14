@@ -45,8 +45,8 @@ jobs:
           CHANGES="$(git status --porcelain || true)"
           if [ -n "$CHANGES" ]; then
             git add -A
-            TS="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-            git commit -m "Auto-merge AQI CSVs for all cities ${TS}" || true
+            git add -A
+            git commit -m "Update merge AQI CSVs for all cities"
             # push len nhanh mac dinh cua workflow (lich/schedule la default branch)
             git push
           else
