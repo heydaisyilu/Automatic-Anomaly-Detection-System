@@ -46,15 +46,14 @@ def validate_weather_icon(icon: str) -> Optional[str]:
         return icon
     return None
 
-def validate_wind_speed(speed: str) -> Optional[str]:
+# 👉 Validator gió MỚI: chỉ cần tách số, KHÔNG bắt buộc có 'km/h'
+def validate_wind_speed_number(speed_text: str) -> Optional[str]:
     """
-    Chỉ chấp nhận chuỗi có 'km/h' để tránh 'ăn' nhầm AQI.
-    Trả về phần số (không đơn vị), ví dụ '7.4 km/h' -> '7.4'
+    Trích số (float) đầu tiên từ chuỗi gió.
+    Ví dụ: '5.9', '5.9 km/h', 'wind 5.9' -> '5.9'
     """
     try:
-        s = (speed or "").strip()
-        if "km/h" not in s:
-            return None
+        s = (speed_text or "").strip()
         m = re.search(r"(\d+(\.\d+)?)", s)
         if m:
             return m.group(1)
@@ -98,63 +97,65 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         if weather_icon_raw and weather_icon_raw.startswith('/dl/assets/svg/weather/'):
             weather_icon_raw = weather_icon_raw.replace('/dl/assets/svg/weather/', '/dl/web/weather/')
 
-        # ---------- WIND ----------
+        # ---------- WIND (CHỈ LẤY SỐ, KHÔNG CẦN 'km/h' TRONG DOM) ----------
         wind_speed_raw = ""
         try:
-            # Cách 1: gần icon gió
+            # Ưu tiên: tìm container gần icon gió
             wind_img = page.query_selector("img[src*='ic-wind-s-sm-solid-weather'], img[alt*='Gió'], img[alt*='gio']")
+            wind_container = None
             if wind_img:
                 wind_container_js = wind_img.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
                 wind_container = wind_container_js.as_element() if wind_container_js else None
-                if wind_container:
-                    # Thử dạng p + p (SỐ + 'km/h')
-                    unit_elem = wind_container.query_selector(":text('km/h')")
-                    if unit_elem:
-                        # Lấy số liền trước
-                        num_elem = unit_elem.query_selector("xpath=preceding-sibling::*[1]") or unit_elem
-                        num_txt = (num_elem.text_content() or "").strip()
-                        if re.fullmatch(r"\d+(\.\d+)?", num_txt):
-                            wind_num = validate_wind_speed(f"{num_txt} km/h")
-                            wind_speed_raw = f"{float(wind_num):.1f} km/h" if wind_num else ""
 
-            # Cách 2: fallback container có text 'km/h' (bất kỳ thẻ)
-            if not wind_speed_raw:
-                container = page.query_selector("div.flex.flex-col.items-center:has-text('km/h')")
-                if container:
-                    txts = [t.strip() for t in container.text_content().split() if t.strip()]
-                    # tìm số ngay trước 'km/h'
-                    for i, t in enumerate(txts):
-                        if "km/h" in t.lower() and i > 0 and re.fullmatch(r"\d+(\.\d+)?", txts[i-1]):
-                            wind_num = validate_wind_speed(f"{txts[i-1]} km/h")
-                            wind_speed_raw = f"{float(wind_num):.1f} km/h" if wind_num else ""
-                            break
+            # Fallback: container có text 'km/h' hoặc chứa số nghi là gió
+            if not wind_container:
+                wind_container = page.query_selector("div.flex.flex-col.items-center:has-text('km/h')") \
+                                  or page.query_selector("div.flex.flex-col.items-center")
+
+            wind_num_txt = ""
+            if wind_container:
+                # 1) Thử lấy từ <p.font-medium> chỉ chứa số
+                for ptag in wind_container.query_selector_all("p.font-medium"):
+                    txt = (ptag.text_content() or "").strip()
+                    if re.fullmatch(r"\d+(\.\d+)?", txt):
+                        wind_num_txt = txt
+                        break
+                # 2) Nếu chưa có, tìm số đầu tiên trong toàn bộ text container
+                if not wind_num_txt:
+                    all_txt = (wind_container.text_content() or "").strip()
+                    m = re.search(r"(\d+(\.\d+)?)", all_txt)
+                    if m:
+                        wind_num_txt = m.group(1)
+
+            # Chuẩn hóa số & GHÉP ' km/h' SAU KHI CRAWL
+            if wind_num_txt:
+                wind_num = validate_wind_speed_number(wind_num_txt)
+                if wind_num is not None:
+                    wind_speed_raw = f"{float(wind_num):.1f} km/h"
         except Exception:
             pass
 
-        # ---------- HUMIDITY: lấy <p.font-medium> có '%' trong container gần icon ----------
+        # ---------- HUMIDITY (cần có '%', vẫn theo icon) ----------
         humidity_raw = ""
         try:
             humidity_img = page.query_selector("img[src*='ic-humidity-2-solid-weather'], img[alt*='Độ ẩm'], img[alt*='do am']")
+            hum_container = None
             if humidity_img:
                 hum_container_js = humidity_img.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
                 hum_container = hum_container_js.as_element() if hum_container_js else None
-                if hum_container:
-                    hum_p = hum_container.query_selector("xpath=.//p[contains(@class,'font-medium')][contains(.,'%')]") \
-                           or hum_container.query_selector("xpath=.//p[contains(.,'%')]")
-                    hum_txt = (hum_p.text_content() or "").strip() if hum_p else ""
-                    if "%" in hum_txt:
-                        hum_num = validate_humidity(hum_txt)
-                        humidity_raw = f"{hum_num}%" if hum_num else ""
-            # Fallback cuối: container có ký tự '%'
-            if not humidity_raw:
-                container = page.query_selector("div.flex.flex-col.items-center:has-text('%')")
-                if container:
-                    hum_p = container.query_selector("xpath=.//p[contains(@class,'font-medium')][contains(.,'%')]") \
-                            or container.query_selector("xpath=.//p[contains(.,'%')]")
-                    hum_txt = (hum_p.text_content() or "").strip() if hum_p else ""
-                    if "%" in hum_txt:
-                        hum_num = validate_humidity(hum_txt)
-                        humidity_raw = f"{hum_num}%" if hum_num else ""
+
+            if not hum_container:
+                hum_container = page.query_selector("div.flex.flex-col.items-center:has-text('%')")
+
+            hum_txt = ""
+            if hum_container:
+                hum_p = hum_container.query_selector("xpath=.//p[contains(@class,'font-medium')][contains(.,'%')]") \
+                       or hum_container.query_selector("xpath=.//p[contains(.,'%')]")
+                hum_txt = (hum_p.text_content() or "").strip() if hum_p else ""
+
+            if hum_txt and "%" in hum_txt:
+                hum_num = validate_humidity(hum_txt)
+                humidity_raw = f"{hum_num}%" if hum_num else ""
         except Exception:
             pass
 
@@ -175,7 +176,7 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
             "city": city['display_name'],
             "aqi": aqi,                # "68"
             "weather_icon": weather_icon,
-            "wind_speed": wind_speed,  # "7.4 km/h"
+            "wind_speed": wind_speed,  # ĐÃ GHÉP " km/h" SAU KHI LẤY SỐ
             "humidity": humidity,      # "78%"
         }
 
