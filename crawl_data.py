@@ -51,7 +51,7 @@ CITIES: List[Dict[str, str]] = [
 ]
 
 def get_vietnam_time():
-    return datetime.now(ZoneInfo("Asia/Bangkok"))
+    return datetime.now(ZoneInfo("Asia/Ho_Chi_Minh"))
 
 def validate_aqi(aqi: str) -> Optional[str]:
     try:
@@ -73,7 +73,10 @@ def validate_weather_icon(icon: str) -> Optional[str]:
 
 def validate_wind_speed(speed: str) -> Optional[str]:
     try:
-        m = re.search(r'(\d+(\.\d+)?)', speed or "")
+        s = (speed or "").strip()
+        if "km/h" not in s:
+            return None
+        m = re.search(r'(\d+(\.\d+)?)', s)
         if m:
             return m.group(1)
     except Exception:
@@ -82,9 +85,14 @@ def validate_wind_speed(speed: str) -> Optional[str]:
 
 def validate_humidity(humidity: str) -> Optional[str]:
     try:
-        m = re.search(r'(\d{1,3})', humidity or "")
+        s = (humidity or "").strip()
+        if "%" not in s:
+            return None
+        m = re.search(r'(\d{1,3})', s)
         if m:
-            return m.group(1)
+            val = int(m.group(1))
+            if 0 <= val <= 100:
+                return str(val)
     except Exception:
         pass
     return None
@@ -96,7 +104,7 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         print("Page loaded", flush=True)
         aqi_selector = "p.flex.h-full.w-full.flex-col.items-center.justify-center.text-sm.font-medium"
         page.wait_for_selector(aqi_selector, timeout=30000)
-        aqi_raw = page.query_selector(aqi_selector).text_content()
+        aqi_raw = (page.query_selector(aqi_selector).text_content() or "").strip()
 
         # Weather icon
         weather_icon_elem = page.query_selector("img[alt='Biểu tượng thời tiết']")
