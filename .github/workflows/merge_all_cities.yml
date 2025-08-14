@@ -32,7 +32,7 @@ jobs:
         run: |
           python merge_all_cities.py
 
-            - name: Commit & push if changed
+      - name: Commit & push if changed
         shell: bash
         run: |
           set -euo pipefail
