@@ -114,79 +114,48 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         if weather_icon_raw and weather_icon_raw.startswith('/dl/assets/svg/weather/'):
             weather_icon_raw = weather_icon_raw.replace('/dl/assets/svg/weather/', '/dl/web/weather/')
 
-        # ---------- WIND (đa chiến lược + kiểm tra 'km/h') ----------
+        # ---------- WIND: số là <p.font-medium> ngay trước <p> đơn vị 'km/h' trong container gần icon ----------
         wind_speed_raw = ""
         try:
-            wind_container = None
-
-            # 1) theo src icon gió
-            cand = page.query_selector("img[src*='ic-wind-s-sm-solid-weather']")
-            if cand:
-                wind_container = cand.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
-
-            # 2) fallback theo alt có chữ 'Gió'
-            if not wind_container:
-                cand = page.query_selector("img[alt*='Gió']")
-                if cand:
-                    wind_container = cand.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
-
-            # 3) fallback theo container có text 'km/h'
-            if not wind_container:
-                wind_container = page.query_selector("div.flex.flex-col.items-center:has-text('km/h')")
-
-            if wind_container:
-                num_el = None
-                unit_txt = ""
-                ps = wind_container.query_selector_all("p")
-                if ps:
-                    # p số (font-medium, chỉ chứa số)
-                    for ptag in ps:
-                        cls = (ptag.get_attribute("class") or "")
-                        txt = (ptag.text_content() or "").strip()
-                        if "font-medium" in cls and re.fullmatch(r"\d+(\.\d+)?", txt or ""):
-                            num_el = ptag
-                            break
-                    # p đơn vị
-                    for ptag in ps:
+            wind_img = page.query_selector("img[src*='ic-wind-s-sm-solid-weather']")
+            if wind_img:
+                wind_container = wind_img.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
+                if wind_container:
+                    num_txt = ""
+                    unit_txt = ""
+                    # Tìm p đơn vị (có chữ 'km/h') rồi lấy p trước nó làm số
+                    unit_p = None
+                    for ptag in wind_container.query_selector_all("p"):
                         txt = (ptag.text_content() or "").strip().lower()
                         if "km/h" in txt:
+                            unit_p = ptag
                             unit_txt = txt
                             break
-
-                num_txt = (num_el.text_content() if num_el else "").strip() if num_el else ""
-                if num_txt and "km/h" in unit_txt:
-                    wind_num = validate_wind_speed(f"{num_txt} km/h")
-                    wind_speed_raw = f"{float(wind_num):.1f} km/h" if wind_num else ""
+                    num_p = unit_p.evaluate_handle("n => n.previousElementSibling") if unit_p else None
+                    if num_p:
+                        num_el = num_p.as_element()
+                        num_txt = (num_el.text_content() or "").strip()
+                    # Chỉ xác nhận khi có đúng cặp số + 'km/h'
+                    if num_txt and "km/h" in unit_txt and re.fullmatch(r"\d+(\.\d+)?", num_txt):
+                        wind_num = validate_wind_speed(f"{num_txt} km/h")
+                        wind_speed_raw = f"{float(wind_num):.1f} km/h" if wind_num else ""
         except Exception:
-            # Không kill toàn bộ record chỉ vì gió lỗi
             pass
 
-        # ---------- HUMIDITY (đa chiến lược + bắt buộc có '%') ----------
+        # ---------- HUMIDITY: lấy <p.font-medium> có ký tự '%' trong container gần icon ----------
         humidity_raw = ""
         try:
-            hum_container = None
-
-            # 1) theo src icon ẩm
-            cand = page.query_selector("img[src*='ic-humidity-2-solid-weather']")
-            if cand:
-                hum_container = cand.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
-
-            # 2) fallback theo alt có 'Độ ẩm'
-            if not hum_container:
-                cand = page.query_selector("img[alt*='Độ ẩm']")
-                if cand:
-                    hum_container = cand.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
-
-            # 3) fallback theo container có '%'
-            if not hum_container:
-                hum_container = page.query_selector("div.flex.flex-col.items-center:has-text('%')")
-
-            if hum_container:
-                hum_el = hum_container.query_selector("p.font-medium") or hum_container.query_selector("p")
-                hum_txt = (hum_el.text_content() if hum_el else "").strip()
-                if "%" in hum_txt:
-                    hum_num = validate_humidity(hum_txt)
-                    humidity_raw = f"{hum_num}%" if hum_num else ""
+            humidity_img = page.query_selector("img[src*='ic-humidity-2-solid-weather']")
+            if humidity_img:
+                hum_container = humidity_img.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
+                if hum_container:
+                    hum_txt = ""
+                    # Ưu tiên p.font-medium, fallback p thường
+                    hum_el = hum_container.query_selector("p.font-medium") or hum_container.query_selector("p")
+                    hum_txt = (hum_el.text_content() if hum_el else "").strip()
+                    if "%" in hum_txt:
+                        hum_num = validate_humidity(hum_txt)
+                        humidity_raw = f"{hum_num}%" if hum_num else ""
         except Exception:
             pass
 
