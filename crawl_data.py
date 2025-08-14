@@ -98,31 +98,36 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         if weather_icon_raw and weather_icon_raw.startswith('/dl/assets/svg/weather/'):
             weather_icon_raw = weather_icon_raw.replace('/dl/assets/svg/weather/', '/dl/web/weather/')
 
-        # ---------- WIND: số <p.font-medium> ngay TRƯỚC <p> 'km/h' trong container gần icon ----------
+        # ---------- WIND ----------
         wind_speed_raw = ""
         try:
+            # Cách 1: gần icon gió
             wind_img = page.query_selector("img[src*='ic-wind-s-sm-solid-weather'], img[alt*='Gió'], img[alt*='gio']")
             if wind_img:
                 wind_container_js = wind_img.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
                 wind_container = wind_container_js.as_element() if wind_container_js else None
                 if wind_container:
-                    unit_p = wind_container.query_selector("xpath=.//p[normalize-space()='km/h']")
-                    if unit_p:
-                        num_p = unit_p.query_selector("xpath=preceding-sibling::p[contains(@class,'font-medium')][1]")
-                        num_txt = (num_p.text_content() or "").strip() if num_p else ""
-                        if num_txt and re.fullmatch(r"\d+(\.\d+)?", num_txt):
+                    # Thử dạng p + p (SỐ + 'km/h')
+                    unit_elem = wind_container.query_selector(":text('km/h')")
+                    if unit_elem:
+                        # Lấy số liền trước
+                        num_elem = unit_elem.query_selector("xpath=preceding-sibling::*[1]") or unit_elem
+                        num_txt = (num_elem.text_content() or "").strip()
+                        if re.fullmatch(r"\d+(\.\d+)?", num_txt):
                             wind_num = validate_wind_speed(f"{num_txt} km/h")
                             wind_speed_raw = f"{float(wind_num):.1f} km/h" if wind_num else ""
-            # Fallback cuối: container có text 'km/h'
+
+            # Cách 2: fallback container có text 'km/h' (bất kỳ thẻ)
             if not wind_speed_raw:
                 container = page.query_selector("div.flex.flex-col.items-center:has-text('km/h')")
                 if container:
-                    unit_p = container.query_selector("xpath=.//p[normalize-space()='km/h']")
-                    num_p = unit_p.query_selector("xpath=preceding-sibling::p[contains(@class,'font-medium')][1]") if unit_p else None
-                    num_txt = (num_p.text_content() or "").strip() if num_p else ""
-                    if num_txt and re.fullmatch(r"\d+(\.\d+)?", num_txt):
-                        wind_num = validate_wind_speed(f'{num_txt} km/h')
-                        wind_speed_raw = f"{float(wind_num):.1f} km/h" if wind_num else ""
+                    txts = [t.strip() for t in container.text_content().split() if t.strip()]
+                    # tìm số ngay trước 'km/h'
+                    for i, t in enumerate(txts):
+                        if "km/h" in t.lower() and i > 0 and re.fullmatch(r"\d+(\.\d+)?", txts[i-1]):
+                            wind_num = validate_wind_speed(f"{txts[i-1]} km/h")
+                            wind_speed_raw = f"{float(wind_num):.1f} km/h" if wind_num else ""
+                            break
         except Exception:
             pass
 
