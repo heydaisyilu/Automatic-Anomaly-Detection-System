@@ -93,24 +93,22 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
 def gop_mot_thanh_pho(thu_muc_tp: Path):
     ten_tp = thu_muc_tp.name
 
-    # Hỗ trợ aqi_{city}_... và aqi-{city}_...
-    patterns = str(thu_muc_tp / f"aqi_{ten_tp}_{NAM}_*.csv")
-    files = []
-    for p in patterns:
-        files.extend(sorted(glob.glob(p)))
+    pattern = str(thu_muc_tp / f"aqi_{ten_tp}_{NAM}_*.csv")
+    files = sorted(glob.glob(pattern))
 
     if not files:
         print(f"[{ten_tp}] Không tìm thấy file CSV tháng nào.")
         return
 
-    print(f"[{ten_tp}] Tìm thấy {len(files)} file.")
+    print(f"[{ten_tp}] Tìm thấy {len(files)} file: " + ", ".join(Path(f).name for f in files))
+
     ds = []
     for f in files:
         try:
             df = pd.read_csv(f)
             ds.append(df)
         except Exception as e:
-            print(f"[{ten_tp}] Lỗi đọc {f} -> {e}")
+            print(f"[{ten_tp}] Lỗi đọc {Path(f).name} -> {e}")
 
     if not ds:
         print(f"[{ten_tp}] Không có dữ liệu hợp lệ.")
@@ -125,7 +123,7 @@ def gop_mot_thanh_pho(thu_muc_tp: Path):
     print(f"[{ten_tp}] Đã tạo/cập nhật {duong_dan}")
 
 def main():
-    print(f"👉 Tần suất resample: {TANSUAT}")
+    print(f"Tần suất resample: {TANSUAT}")
     if not THU_MUC_DU_LIEU.exists():
         print("Không có thư mục dữ liệu:", THU_MUC_DU_LIEU)
         return
