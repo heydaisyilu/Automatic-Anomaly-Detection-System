@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import re
 import glob
@@ -9,7 +10,7 @@ THU_MUC_DU_LIEU = Path("data")
 THU_MUC_KQ = Path("result")
 NAM = 2025
 
-# Tần suất resample mặc định: 1 giờ
+# Tần suất resample mặc định: 1 giờ (có thể override bằng ENV RESAMPLE)
 TANSUAT = os.getenv("RESAMPLE", "1H")  # "1H" = 1 giờ
 
 # Danh sách cột chuẩn
@@ -25,10 +26,11 @@ def _mode_or_last(series: pd.Series):
     notna = series.dropna()
     return notna.iloc[-1] if len(notna) > 0 else None
 
+# Regex số (lấy số đầu tiên trong chuỗi, ví dụ '7.4 km/h' -> 7.4; '78%' -> 78.0)
 _NUM_RE = re.compile(r"[-+]?\d*\.?\d+|\d+")
+
 def strip_units(val):
-    """Trích số đầu tiên trong chuỗi (vd: '7.4 km/h' -> 7.4; '78%' -> 78.0)."""
-    import pandas as pd
+    """Trích số đầu tiên trong chuỗi; trả về float hoặc pd.NA."""
     if pd.isna(val):
         return pd.NA
     if isinstance(val, (int, float)):
@@ -59,7 +61,7 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
     if da_xoa > 0:
         print(f"Xóa {da_xoa} dòng timestamp không hợp lệ.")
 
-    # Tự động bỏ đơn vị (vd: '7.4 km/h' -> 7.4; '78%' -> 78.0)
+    # Bỏ đơn vị -> về số cho các cột số
     for col in ["aqi", "wind_speed", "humidity"]:
         if col in df.columns:
             df[col] = df[col].map(strip_units)
@@ -79,13 +81,13 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
             df["aqi"].fillna(mean_aqi, inplace=True)
             print(f"Điền thiếu AQI = {mean_aqi:.2f}")
 
-    # Giữ đúng 6 cột
+    # Giữ đúng 6 cột (thêm cột trống nếu thiếu)
     for col in COT_CHUAN:
         if col not in df.columns:
             df[col] = pd.NA
     df = df[COT_CHUAN]
 
-    # Sắp xếp và resample 1 giờ
+    # Sắp xếp và resample theo TANSUAT (mặc định 1H)
     df = df.sort_values(by="timestamp").set_index("timestamp")
     agg_map = {
         "aqi": "mean",
@@ -94,7 +96,7 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
         "weather_icon": _mode_or_last,
         "city": _mode_or_last,
     }
-    df_res = df.resample("1H").agg(agg_map)
+    df_res = df.resample(TANSUAT).agg(agg_map)
 
     # Làm gọn số
     for col in ["aqi", "wind_speed", "humidity"]:
@@ -108,12 +110,13 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
     keep_mask = ~all_null_numeric | df_res["weather_icon"].notna() | df_res["city"].notna()
     df_res = df_res[keep_mask]
 
-    print(f"Resample 1 giờ → còn {len(df_res)} dòng.")
+    print(f"Resample {TANSUAT} → còn {len(df_res)} dòng.")
     return df_res
 
 def gop_mot_thanh_pho(thu_muc_tp: Path):
     ten_tp = thu_muc_tp.name
 
+    # Chỉ lấy file CSV dạng aqi_{city}_{NAM}_*.csv
     pattern = str(thu_muc_tp / f"aqi_{ten_tp}_{NAM}_*.csv")
     files = sorted(glob.glob(pattern))
 
@@ -126,7 +129,8 @@ def gop_mot_thanh_pho(thu_muc_tp: Path):
     ds = []
     for f in files:
         try:
-            df = pd.read_csv(f)
+            # Đọc an toàn: tự đoán dấu phân tách, bỏ dòng hỏng nếu có
+            df = pd.read_csv(f, engine="python", sep=None, on_bad_lines="skip")
             ds.append(df)
         except Exception as e:
             print(f"[{ten_tp}] Lỗi đọc {Path(f).name} -> {e}")
