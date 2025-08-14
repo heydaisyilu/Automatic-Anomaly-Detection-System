@@ -1,0 +1,3 @@
+# Automatic-Anomaly-Detection-System,__nguon_file,playwright==1.41.0
+git clone https://github.com/heydaisyilu/Automatic-Anomaly-Detection-System.git,README.md,
+,requirements.txt,python-dotenv==1.0.0
