@@ -42,10 +42,14 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
     if da_xoa > 0:
         print(f"Xóa {da_xoa} dòng timestamp không hợp lệ.")
 
-    # Chuẩn hóa số và cắt ngoại lai
+    # Tự động bỏ đơn vị (vd: '7.4 km/h' -> 7.4; '78%' -> 78.0)
+    for col in ["aqi", "wind_speed", "humidity"]:
+        if col in df.columns:
+            df[col] = df[col].map(strip_units)
+
+    # Cắt ngoại lai
     for num_col, low, high in [("aqi", 0, 500), ("wind_speed", 0, 200), ("humidity", 0, 100)]:
         if num_col in df.columns:
-            df[num_col] = pd.to_numeric(df[num_col], errors="coerce")
             truoc = len(df)
             df = df[(df[num_col].isna()) | ((df[num_col] >= low) & (df[num_col] <= high))]
             if truoc - len(df) > 0:
@@ -64,7 +68,7 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
             df[col] = pd.NA
     df = df[COT_CHUAN]
 
-    # Sắp xếp và resample
+    # Sắp xếp và resample 1 giờ
     df = df.sort_values(by="timestamp").set_index("timestamp")
     agg_map = {
         "aqi": "mean",
@@ -73,7 +77,7 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
         "weather_icon": _mode_or_last,
         "city": _mode_or_last,
     }
-    df_res = df.resample(TANSUAT).agg(agg_map)
+    df_res = df.resample("1H").agg(agg_map)
 
     # Làm gọn số
     for col in ["aqi", "wind_speed", "humidity"]:
@@ -87,7 +91,7 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
     keep_mask = ~all_null_numeric | df_res["weather_icon"].notna() | df_res["city"].notna()
     df_res = df_res[keep_mask]
 
-    print(f"Resample theo {TANSUAT} → còn {len(df_res)} dòng.")
+    print(f"Resample 1 giờ → còn {len(df_res)} dòng.")
     return df_res
 
 def gop_mot_thanh_pho(thu_muc_tp: Path):
