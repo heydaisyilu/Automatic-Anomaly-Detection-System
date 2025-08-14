@@ -100,38 +100,19 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         # ---------- WIND (CHỈ LẤY SỐ, KHÔNG CẦN 'km/h' TRONG DOM) ----------
         wind_speed_raw = ""
         try:
-            # Ưu tiên: tìm container gần icon gió
-            wind_img = page.query_selector("img[src*='ic-wind-s-sm-solid-weather'], img[alt*='Gió'], img[alt*='gio']")
-            wind_container = None
+            wind_img = page.query_selector("img[src*='ic-wind-s-sm-solid-weather']")
             if wind_img:
-                wind_container_js = wind_img.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
-                wind_container = wind_container_js.as_element() if wind_container_js else None
-
-            # Fallback: container có text 'km/h' hoặc chứa số nghi là gió
-            if not wind_container:
-                wind_container = page.query_selector("div.flex.flex-col.items-center:has-text('km/h')") \
-                                  or page.query_selector("div.flex.flex-col.items-center")
-
-            wind_num_txt = ""
-            if wind_container:
-                # 1) Thử lấy từ <p.font-medium> chỉ chứa số
-                for ptag in wind_container.query_selector_all("p.font-medium"):
-                    txt = (ptag.text_content() or "").strip()
-                    if re.fullmatch(r"\d+(\.\d+)?", txt):
-                        wind_num_txt = txt
-                        break
-                # 2) Nếu chưa có, tìm số đầu tiên trong toàn bộ text container
-                if not wind_num_txt:
-                    all_txt = (wind_container.text_content() or "").strip()
-                    m = re.search(r"(\d+(\.\d+)?)", all_txt)
-                    if m:
-                        wind_num_txt = m.group(1)
-
-            # Chuẩn hóa số & GHÉP ' km/h' SAU KHI CRAWL
-            if wind_num_txt:
-                wind_num = validate_wind_speed_number(wind_num_txt)
-                if wind_num is not None:
-                    wind_speed_raw = f"{float(wind_num):.1f} km/h"
+                container = wind_img.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
+                container_el = container.as_element() if container else None
+                if container_el:
+                    num_txt = container_el.evaluate("""
+                        n => {
+                            const p = n.querySelector('p.font-medium');
+                            return (p?.textContent || '').trim();
+                        }
+                    """)
+                    if re.fullmatch(r"\d+(\.\d+)?", num_txt or ""):
+                        wind_speed_raw = f"{float(num_txt):.1f} km/h"
         except Exception:
             pass
 
