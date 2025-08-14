@@ -102,6 +102,8 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
     try:
         page.goto(city['url'], timeout=60000)
         print("Page loaded", flush=True)
+
+        # AQI
         aqi_selector = "p.flex.h-full.w-full.flex-col.items-center.justify-center.text-sm.font-medium"
         page.wait_for_selector(aqi_selector, timeout=30000)
         aqi_raw = (page.query_selector(aqi_selector).text_content() or "").strip()
@@ -109,50 +111,88 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         # Weather icon
         weather_icon_elem = page.query_selector("img[alt='Biểu tượng thời tiết']")
         weather_icon_raw = weather_icon_elem.get_attribute("src") if weather_icon_elem else None
-
         if weather_icon_raw and weather_icon_raw.startswith('/dl/assets/svg/weather/'):
             weather_icon_raw = weather_icon_raw.replace('/dl/assets/svg/weather/', '/dl/web/weather/')
 
-        # Wind speed
+        # ---------- WIND (đa chiến lược + kiểm tra 'km/h') ----------
         wind_speed_raw = ""
-        wind_img = page.query_selector("img[src*='ic-wind-s-sm-solid-weather']")
-        if wind_img:
-            wind_container = wind_img.evaluate_handle(
-                "node => node.closest('div.flex.flex-col.items-center')"
-            )
-            if wind_container:
-                num_el = wind_container.query_selector("p.font-medium")
-                unit_el = None
-                # Tìm thẻ <p> kế bên làm đơn vị
-                ps = wind_container.query_selector_all("p")
-                if len(ps) >= 2:
-                    # ps[0] thường là font-medium (số), ps[1] là đơn vị
-                    unit_el = ps[1]
-                num_txt = (num_el.text_content() if num_el else "").strip()
-                unit_txt = (unit_el.text_content() if unit_el else "").strip().lower()
+        try:
+            wind_container = None
 
-                # Chỉ nhận khi đơn vị thật sự là 'km/h'
-                if "km/h" in unit_txt:
+            # 1) theo src icon gió
+            cand = page.query_selector("img[src*='ic-wind-s-sm-solid-weather']")
+            if cand:
+                wind_container = cand.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
+
+            # 2) fallback theo alt có chữ 'Gió'
+            if not wind_container:
+                cand = page.query_selector("img[alt*='Gió']")
+                if cand:
+                    wind_container = cand.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
+
+            # 3) fallback theo container có text 'km/h'
+            if not wind_container:
+                wind_container = page.query_selector("div.flex.flex-col.items-center:has-text('km/h')")
+
+            if wind_container:
+                num_el = None
+                unit_txt = ""
+                ps = wind_container.query_selector_all("p")
+                if ps:
+                    # p số (font-medium, chỉ chứa số)
+                    for ptag in ps:
+                        cls = (ptag.get_attribute("class") or "")
+                        txt = (ptag.text_content() or "").strip()
+                        if "font-medium" in cls and re.fullmatch(r"\d+(\.\d+)?", txt or ""):
+                            num_el = ptag
+                            break
+                    # p đơn vị
+                    for ptag in ps:
+                        txt = (ptag.text_content() or "").strip().lower()
+                        if "km/h" in txt:
+                            unit_txt = txt
+                            break
+
+                num_txt = (num_el.text_content() if num_el else "").strip() if num_el else ""
+                if num_txt and "km/h" in unit_txt:
                     wind_num = validate_wind_speed(f"{num_txt} km/h")
                     wind_speed_raw = f"{float(wind_num):.1f} km/h" if wind_num else ""
+        except Exception:
+            # Không kill toàn bộ record chỉ vì gió lỗi
+            pass
 
-        # Humidity
+        # ---------- HUMIDITY (đa chiến lược + bắt buộc có '%') ----------
         humidity_raw = ""
-        humidity_img = page.query_selector("img[src*='ic-humidity-2-solid-weather']")
-        if humidity_img:
-            humidity_container = humidity_img.evaluate_handle(
-                "node => node.closest('div.flex.flex-col.items-center')"
-            )
-            if humidity_container:
-                hum_el = humidity_container.query_selector("p.font-medium")
+        try:
+            hum_container = None
+
+            # 1) theo src icon ẩm
+            cand = page.query_selector("img[src*='ic-humidity-2-solid-weather']")
+            if cand:
+                hum_container = cand.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
+
+            # 2) fallback theo alt có 'Độ ẩm'
+            if not hum_container:
+                cand = page.query_selector("img[alt*='Độ ẩm']")
+                if cand:
+                    hum_container = cand.evaluate_handle("n => n.closest('div.flex.flex-col.items-center')")
+
+            # 3) fallback theo container có '%'
+            if not hum_container:
+                hum_container = page.query_selector("div.flex.flex-col.items-center:has-text('%')")
+
+            if hum_container:
+                hum_el = hum_container.query_selector("p.font-medium") or hum_container.query_selector("p")
                 hum_txt = (hum_el.text_content() if hum_el else "").strip()
-                # Chỉ nhận khi có ký tự %
                 if "%" in hum_txt:
                     hum_num = validate_humidity(hum_txt)
                     humidity_raw = f"{hum_num}%" if hum_num else ""
+        except Exception:
+            pass
 
         print(f"aqi_raw={aqi_raw}, weather_icon_raw={weather_icon_raw}, wind_speed_raw={wind_speed_raw}, humidity_raw={humidity_raw}", flush=True)
 
+        # Validate cuối
         aqi = validate_aqi(aqi_raw)
         weather_icon = validate_weather_icon(weather_icon_raw)
         wind_speed = wind_speed_raw
@@ -160,6 +200,7 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         if not all([aqi, weather_icon, wind_speed, humidity]):
             print(f"Invalid data for {city['display_name']}: aqi={aqi}, weather_icon={weather_icon}, wind_speed={wind_speed}, humidity={humidity}", flush=True)
             return None
+
         now = get_vietnam_time()
         return {
             "timestamp": now.isoformat(),
@@ -169,6 +210,7 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
             "wind_speed": wind_speed,
             "humidity": humidity
         }
+
     except Exception as e:
         print(f"Error extracting data for {city['display_name']}: {str(e)}", flush=True)
         traceback.print_exc()
