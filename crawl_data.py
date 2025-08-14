@@ -97,59 +97,25 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         if weather_icon_raw and weather_icon_raw.startswith('/dl/assets/svg/weather/'):
             weather_icon_raw = weather_icon_raw.replace('/dl/assets/svg/weather/', '/dl/web/weather/')
 
-        # ---------- WIND: lấy từ cột "Bây giờ / Now" trong phần Dự báo theo giờ ----------
+        # ---------- WIND: đọc số ngay trong container icon gió (ô Now) ----------
         wind_speed_raw = ""
         try:
-            # 1) Tìm section "Dự báo theo giờ" (VN hoặc EN)
-            hourly = page.query_selector(
-                "section:has(h2:has-text('Dự báo theo giờ')), section:has(h2:has-text('Hourly forecast'))"
-            ) or page.query_selector(
-                "div:has(h2:has-text('Dự báo theo giờ')), div:has(h2:has-text('Hourly forecast'))"
+            # container có IMG icon gió là con trực tiếp
+            wind_container = page.query_selector(
+                "div.flex.flex-col.items-center:has(> img[src*='ic-wind-s-sm-solid-weather'])"
             )
-
-            # 2) Trong section đó, tìm cột có nhãn "Bây giờ" hoặc "Now"
-            now_col = None
-            if hourly:
-                now_col = hourly.query_selector("xpath=.//*[self::div or self::li][.//text()[contains(., 'Bây giờ') or contains(., 'Now')]]")
-
-            # 3) Từ cột "Bây giờ", tìm container icon gió và lấy số
-            if now_col:
-                # container gió: div.flex.flex-col.items-center chứa icon wind
-                wind_container = now_col.query_selector(
-                    "div.flex.flex-col.items-center:has(> img[src*='ic-wind-s-sm-solid-weather'])"
-                )
-                if wind_container:
-                    # Lấy hai <p> liên tiếp: p[0] = số, p[1] = đơn vị (km/h)
-                    num_txt, unit_txt = wind_container.evaluate("""
-                        n => {
-                            const ps = n.querySelectorAll('p');
-                            const num  = (ps[0]?.textContent || '').trim();
-                            const unit = (ps[1]?.textContent || '').trim().toLowerCase();
-                            return [num, unit];
-                        }
-                    """)
-                    # Nếu không có unit, vẫn chấp nhận số thuần
-                    import re
-                    if num_txt and re.fullmatch(r"\\d+(\\.\\d+)?", num_txt):
-                        wind_speed_raw = f"{float(num_txt):.1f} km/h"
-
-            # 4) Fallback cực nhẹ: nếu vì lý do nào đó không tìm thấy cột "Bây giờ",
-            #    hãy dùng container icon gió "gần đầu trang" nhất (top nhỏ nhất) để thay thế.
-            if not wind_speed_raw:
-                wind_nodes = page.query_selector_all(
-                    "div.flex.flex-col.items-center:has(> img[src*='ic-wind-s-sm-solid-weather'])"
-                )
-                best = None
-                best_top = None
-                for node in wind_nodes:
-                    top = node.evaluate("n => n.getBoundingClientRect().top")
-                    if isinstance(top, (int, float)) and (best_top is None or top < best_top):
-                        best_top, best = top, node
-                if best:
-                    num_txt = best.evaluate("n => (n.querySelector('p.font-medium')?.textContent || '').trim()")
-                    import re
-                    if num_txt and re.fullmatch(r"\\d+(\\.\\d+)?", num_txt):
-                        wind_speed_raw = f"{float(num_txt):.1f} km/h"
+            if wind_container:
+                num_txt, unit_txt = wind_container.evaluate("""
+                    n => {
+                        const ps = n.querySelectorAll('p');
+                        const num  = (ps[0]?.textContent || '').trim();              // '5'
+                        const unit = (ps[1]?.textContent || '').trim().toLowerCase(); // 'km/h'
+                        return [num, unit];
+                    }
+                """)
+                import re
+                if num_txt and re.fullmatch(r"\d+(\.\d+)?", num_txt):
+                    wind_speed_raw = f"{float(num_txt):.1f} km/h"
         except Exception:
             pass
 
