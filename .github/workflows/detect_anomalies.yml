@@ -2,7 +2,7 @@ name: Detect AQI Anomalies
 
 on:
   schedule:
-    - cron: "5 * * * *" # mỗi giờ (sau merge 5 phút)
+    - cron: "5 * * * *" # chạy mỗi giờ (sau merge 5 phút)
   workflow_dispatch:
 
 permissions:
@@ -33,6 +33,7 @@ jobs:
         run: |
           cd detection
           jupyter nbconvert --to notebook --execute detection.ipynb --output detection_output.ipynb
+          cd ..
 
       - name: Commit & Push Results (if changed)
         run: |
@@ -42,7 +43,9 @@ jobs:
 
           if [ -n "$(git status --porcelain)" ]; then
             git add result_anomaly/
-            git commit -m "🔍 Auto-detect anomalies and update results"
+            git add detection/detection_output.ipynb
+            git commit -m "🔍 Auto-detect anomalies, update results & notebook"
             git push
           else
             echo "✅ No anomaly detection changes to commit."
+          fi
