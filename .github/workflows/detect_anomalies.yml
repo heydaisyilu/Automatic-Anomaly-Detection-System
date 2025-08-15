@@ -44,8 +44,8 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add result_anomaly/
             git add detection/detection_output.ipynb
-            git commit -m "🔍 Auto-detect anomalies, update results & notebook"
+            git commit -m "Auto-detect anomalies, update results & notebook"
             git push
           else
-            echo "✅ No anomaly detection changes to commit."
+            echo "No anomaly detection changes to commit."
           fi
