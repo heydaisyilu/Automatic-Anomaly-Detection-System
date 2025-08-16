@@ -4576,3 +4576,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-08-16 16:00:00+07:00,14.0,6.8,92.0,/dl/web/weather/ic-weather-10d.svg,Hải Phòng
 2025-08-16 17:00:00+07:00,14.0,6.6,92.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng
 2025-08-16 18:00:00+07:00,28.0,7.4,88.0,/dl/web/weather/ic-weather-10d.svg,Hải Phòng
+2025-08-16 19:00:00+07:00,17.0,7.9,89.0,/dl/web/weather/ic-weather-04n.svg,Hải Phòng
+2025-08-16 20:00:00+07:00,14.0,8.1,90.0,/dl/web/weather/ic-weather-04n.svg,Hải Phòng
