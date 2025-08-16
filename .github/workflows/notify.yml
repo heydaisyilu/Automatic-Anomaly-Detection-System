@@ -14,7 +14,7 @@ on:
 
 permissions:
   contents: read
-  issues: write  # cần quyền này để tạo/cập nhật Issue (qua GITHUB_TOKEN)
+  issues: write
 
 jobs:
   notify:
@@ -59,7 +59,8 @@ jobs:
           #  Cảnh báo bất thường AQI/Gió (DEMO)
           | Thành phố | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |
           |---|---:|---:|---:|---|---|
-          | Ho Chi Minh City | 2025-08-16 19:00 | 180 | 12.30 | Z-score, IF | result_anomaly/demo.csv |
+          | Ho_Chi_Minh | 2025-08-16 19:00 | 180 | 12.30 | Z-score[AQI,Wind] | result_anomaly/z_score/ho_chi_minh_zscore.csv |
+          | Ho_Chi_Minh | 2025-08-16 19:00 | 175 | 11.80 | IsolationForest | result_anomaly/isolation_forest/anomalies_ho_chi_minh_2025.csv |
           MD
 
       - name: Render report (auto run after detect)
@@ -67,6 +68,7 @@ jobs:
         env:
           CHANGED_FILES: ${{ steps.diff.outputs.files }}
           LOCAL_TZ: Asia/Ho_Chi_Minh
+          RECENT_HOURS: "3"   # có thể chỉnh 1/2/4...
         run: |
           python notify/notify.py
 
@@ -74,6 +76,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && !inputs.demo }}
         env:
           LOCAL_TZ: Asia/Ho_Chi_Minh
+          RECENT_HOURS: "3"
         run: |
           python notify/notify.py
 
