@@ -7,10 +7,8 @@ import numpy as np
 OUT_DIR = Path("out"); OUT_DIR.mkdir(parents=True, exist_ok=True)
 OUT_PATH = OUT_DIR / "anomaly_email.md"
 
-# Múi giờ hiển thị (có thể override bằng env LOCAL_TZ)
 LOCAL_TZ = os.getenv("LOCAL_TZ", "Asia/Ho_Chi_Minh")
-# Nếu input timestamp là "naive" (không tz), có thể set INPUT_TZ để localize trước
-INPUT_TZ = os.getenv("INPUT_TZ")  # ví dụ: "Asia/Ho_Chi_Minh"
+INPUT_TZ = os.getenv("INPUT_TZ")  # nếu timestamp naive là giờ local
 
 ALIASES = {
     "city": ["city", "thanh_pho", "tinh", "province", "location"],
@@ -21,12 +19,11 @@ ALIASES = {
     "method": ["method", "algo", "algorithm", "detector", "source"],
 }
 
-# Các cột flag đặc thù từng detector
 Z_FLAG_COLS = {
     "Z-score AQI": "zscore_flag_aqi",
     "Z-score Wind": "zscore_flag_wind",
 }
-IF_FLAG_COL = ("IsolationForest", "anomaly")  # (tên hiển thị, tên cột)
+IF_FLAG_COL = ("IsolationForest", "anomaly")
 
 def pick_col(df, names):
     cols = {c.lower(): c for c in df.columns}
@@ -38,28 +35,15 @@ def pick_col(df, names):
     return None
 
 def coerce_time(series):
-    """
-    Chuẩn hoá về tz-aware:
-    - Nếu chuỗi đã có tz -> giữ nguyên
-    - Nếu naive & có INPUT_TZ -> localize về INPUT_TZ
-    - Nếu naive & không có INPUT_TZ -> coi là UTC
-    Trả về pandas Series tz-aware UTC.
-    """
     dt = pd.to_datetime(series, errors="coerce", utc=False)
-    # Nếu là Series of Timestamps
     if hasattr(dt, "dt"):
-        # tz-aware?
         try:
-            tzinfo = dt.dt.tz
+            is_tzaware = dt.dt.tz is not None
         except Exception:
-            tzinfo = None
-        if tzinfo is None:
-            if INPUT_TZ:
-                dt = dt.dt.tz_localize(INPUT_TZ)
-            else:
-                dt = dt.dt.tz_localize("UTC")
+            is_tzaware = False
+        if not is_tzaware:
+            dt = dt.dt.tz_localize(INPUT_TZ or "UTC")
         return dt.dt.tz_convert("UTC")
-    # Fallback: cố ép utc
     return pd.to_datetime(series, errors="coerce", utc=True)
 
 def read_csv_any(p):
@@ -74,12 +58,8 @@ def read_csv_any(p):
 def read_json_any(p):
     try:
         obj = json.loads(Path(p).read_text(encoding="utf-8"))
-        if isinstance(obj, dict) and isinstance(obj.get("data"), list):
-            rows = obj["data"]
-        elif isinstance(obj, list):
-            rows = obj
-        else:
-            return None
+        rows = obj["data"] if isinstance(obj, dict) and isinstance(obj.get("data"), list) else (obj if isinstance(obj, list) else None)
+        if rows is None: return None
         df = pd.DataFrame(rows)
         df["__source"] = p
         return df
@@ -88,40 +68,25 @@ def read_json_any(p):
         return None
 
 def parse_flag_generic(series):
-    """
-    Chuẩn hoá flag tổng quát:
-    - numeric: bất thường nếu == -1 (phù hợp IsolationForest & Z-score)
-    - string: nhận -1/true/yes/anomaly/outlier/...
-    """
     sn = pd.to_numeric(series, errors="coerce")
     out = pd.Series(False, index=series.index)
-
     num_mask = ~sn.isna()
-    out[num_mask] = (sn[num_mask] == -1)
-
+    out[num_mask] = (sn[num_mask] == -1)  # chuẩn chung: -1 là bất thường
     st = series.astype(str).str.strip().str.lower()
     tokens = {"-1","true","yes","y","t","anomaly","outlier","abnormal","alert"}
     out[~num_mask] = st[~num_mask].isin(tokens)
     return out
 
 def derive_detector_flags(df):
-    """
-    Trích xuất các cờ bất thường riêng của từng detector.
-    Trả về:
-      - any_flag: Series bool, True nếu bất kỳ detector nào báo bất thường
-      - methods:  Series str, liệt kê phương pháp nổ cờ (comma-separated)
-    """
     methods_fired = []
     flags = []
 
-    # Z-score: 2 cột riêng
     for label, col in Z_FLAG_COLS.items():
         if col in df.columns:
             f = parse_flag_generic(df[col])
             flags.append(f)
             methods_fired.append(np.where(f, label, ""))
 
-    # Isolation Forest: 1 cột "anomaly"
     if IF_FLAG_COL[1] in df.columns:
         f = parse_flag_generic(df[IF_FLAG_COL[1]])
         flags.append(f)
@@ -129,14 +94,8 @@ def derive_detector_flags(df):
 
     if flags:
         any_flag = np.logical_or.reduce(flags)
-        # Ghép phương pháp đã kích hoạt
-        methods_arr = []
-        for arr in methods_fired:
-            methods_arr.append(arr)
-        # Kết hợp tên method theo hàng
-        if methods_arr:
-            stacked = np.vstack(methods_arr)
-            # Lọc rỗng và join bằng ", "
+        if methods_fired:
+            stacked = np.vstack(methods_fired)
             methods = pd.Series(
                 [", ".join([m for m in row if m]) if any(row) else "" for row in stacked.T],
                 index=df.index
@@ -156,74 +115,49 @@ def to_canonical(df):
     c_wind = pick_col(df, ALIASES["wind"])
     c_flag = pick_col(df, ALIASES["flag"])
     c_meth = pick_col(df, ALIASES["method"])
-
-    if c_city is None or c_time is None:
-        return None
+    if c_city is None or c_time is None: return None
 
     out = pd.DataFrame()
     out["city"] = df[c_city].astype(str)
-
-    # time -> UTC tz-aware
     out["time_utc"] = coerce_time(df[c_time])
 
-    # AQI
     if c_aqi in df.columns:
         out["aqi"] = pd.to_numeric(df[c_aqi], errors="coerce")
 
-    # WIND (có thể là "12 km/h" -> lấy số)
     if c_wind in df.columns:
         wind_raw = df[c_wind].astype(str).str.extract(r"([\d.]+)", expand=False)
         out["wind"] = pd.to_numeric(wind_raw, errors="coerce")
 
-    # 1) Ưu tiên flag đặc thù từng detector
     det_flag, det_method = derive_detector_flags(df)
 
-    # 2) Nếu file có sẵn cột flag/generic anomaly -> hợp vào với detector flags
     if c_flag in df.columns:
         gen_flag = parse_flag_generic(df[c_flag])
         out["flag"] = det_flag | gen_flag
     else:
         out["flag"] = det_flag
 
-    # 3) Method: ưu tiên cột method có sẵn + cộng thêm các detector đã nổ
     base_method = df[c_meth].astype(str) if c_meth in df.columns else pd.Series("", index=df.index)
     meth = base_method.str.strip()
     det_method = det_method.fillna("").astype(str).str.strip()
     both = []
     for m1, m2 in zip(meth, det_method):
-        if m1 and m2:
-            both.append(f"{m1}, {m2}")
-        elif m1:
-            both.append(m1)
-        else:
-            both.append(m2)
+        if m1 and m2: both.append(f"{m1}, {m2}")
+        elif m1: both.append(m1)
+        else: both.append(m2)
     out["method"] = pd.Series(both, index=df.index).replace("", np.nan)
 
     out["__source"] = df["__source"]
-    # bỏ time null
-    out = out.dropna(subset=["time_utc"])
-    return out
+    return out.dropna(subset=["time_utc"])
 
 def decode_changed_files_env(s):
-    """
-    GH Actions output dùng %0A cho newline và %25 cho '%'.
-    Hàm này giải mã để lấy danh sách file.
-    """
-    if not s:
-        return []
-    # Trả về string giải mã
+    if not s: return []
     s = s.replace("%0D", "").replace("%0A", "\n").replace("%25", "%")
     return [line.strip() for line in s.splitlines() if line.strip()]
 
 def main():
     raw = os.getenv("CHANGED_FILES", "")
     changed = decode_changed_files_env(raw)
-    if not changed:
-        # fallback: quét toàn bộ result_anomaly/**
-        paths = glob.glob("result_anomaly/**/*", recursive=True)
-    else:
-        paths = changed
-
+    paths = changed if changed else glob.glob("result_anomaly/**/*", recursive=True)
     paths = [p for p in paths if p.lower().endswith((".csv",".json"))]
     if not paths:
         print("No changed anomaly files.")
@@ -243,27 +177,20 @@ def main():
         return
 
     big = pd.concat(frames, ignore_index=True)
-
-    # Chỉ giữ dòng có flag True
     big = big[big["flag"] == True].copy()
     if big.empty:
         print("No positive flags.")
         return
 
-    # Lấy bản ghi mới nhất theo city (theo time_utc)
     big = big.sort_values("time_utc")
     latest = big.groupby("city", as_index=False).tail(1).copy()
 
-    # Render time sang LOCAL_TZ
     def fmt_local(ts):
         ts = pd.to_datetime(ts, utc=True)
         return ts.tz_convert(LOCAL_TZ).strftime("%Y-%m-%d %H:%M")
 
-    # Tiêu đề: hiển thị giờ hiện tại theo LOCAL_TZ
-    now = (pd.Timestamp.utcnow()
-             .tz_localize("UTC")
-             .tz_convert(LOCAL_TZ))
-    tz_label = now.strftime("%Z")  # ví dụ ICT
+    now = (pd.Timestamp.utcnow().tz_localize("UTC").tz_convert(LOCAL_TZ))
+    tz_label = now.strftime("%Z")
     now_str  = now.strftime("%Y-%m-%d %H:%M %Z")
 
     lines = [
