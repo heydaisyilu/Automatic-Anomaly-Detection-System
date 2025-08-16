@@ -1,2 +1,9 @@
 playwright==1.41.0
 python-dotenv==1.0.0
+pandas
+numpy
+matplotlib
+papermill
+ipykernel
+seaborn
+scikit-learn
