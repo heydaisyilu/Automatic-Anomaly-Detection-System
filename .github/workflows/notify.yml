@@ -1,0 +1,91 @@
+name: Notify anomalies by email
+
+on:
+  # Tự chạy sau khi Detect AQI Anomalies hoàn tất
+  workflow_run:
+    workflows: ["Detect AQI Anomalies"]
+    types: [completed]
+  # Cho phép chạy tay để test ngay
+  workflow_dispatch:
+    inputs:
+      demo:
+        description: "Gửi email demo (không cần anomaly thực)"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  notify:
+    # Chỉ gửi khi detect thành công, hoặc nếu bạn chạy tay (workflow_dispatch)
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo at detect commit (or default)
+        uses: actions/checkout@v4
+        with:
+          # Khi workflow_run: checkout đúng commit mà detect đã chạy
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || '' }}
+          fetch-depth: 2  # để diff được với HEAD~1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy
+
+      # Khi được trigger bởi detect, tính list file mới/sửa trong result_anomaly
+      - name: Collect changed anomaly files (only on workflow_run)
+        id: diff
+        if: ${{ github.event_name == 'workflow_run' }}
+        run: |
+          # Lấy các file thay đổi giữa HEAD~1 và HEAD, giới hạn thư mục result_anomaly
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            CHANGED="$(git diff --name-only HEAD~1 HEAD -- result_anomaly || true)"
+          else
+            CHANGED="$(git ls-files result_anomaly || true)"
+          fi
+          echo "Changed files:"
+          echo "$CHANGED"
+          # Xuất ra output để dùng ở bước render
+          CHANGED_ESCAPED="$(printf "%s" "$CHANGED" | sed -e 's/%/%25/g' -e 's/\r/%0D/g' -e 's/\n/%0A/g')"
+          echo "files=$CHANGED_ESCAPED" >> "$GITHUB_OUTPUT"
+
+      # Trường hợp chạy tay: tạo email demo để thấy ngay
+      - name: Build demo email (only on manual run)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.demo }}
+        run: |
+          mkdir -p out
+          cat > out/anomaly_email.md <<'MD'
+          # 🚨 Cảnh báo bất thường AQI/Gió (DEMO)
+          | Thành phố | Thời điểm (UTC) | AQI | Gió | Phương pháp | Nguồn |
+          |---|---:|---:|---:|---|---|
+          | Ho Chi Minh City | 2025-08-16 12:00 | 180 | 12.3 | Z-score, IF | result_anomaly/demo.csv |
+          MD
+
+      - name: Render email from result_anomaly (only when files changed)
+        if: ${{ github.event_name == 'workflow_run' && steps.diff.outputs.files != '' }}
+        env:
+          CHANGED_FILES: ${{ steps.diff.outputs.files }}
+        run: |
+          python notify/render_email.py
+
+      - name: Send mail
+        if: hashFiles('out/anomaly_email.md') != ''
+        uses: dawidd6/action-send-mail@v6
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          secure: true
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "⚠️ AQI/Gió bất thường — ${{ github.repository }}"
+          to: ${{ secrets.TO_EMAIL }}
+          from: "${{ secrets.FROM_NAME }} <${{ secrets.SMTP_USERNAME }}>"
+          content_type: text/html
+          html_body: file://out/anomaly_email.md
+          convert_markdown: true
