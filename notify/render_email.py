@@ -7,206 +7,172 @@ import numpy as np
 OUT_DIR = Path("out"); OUT_DIR.mkdir(parents=True, exist_ok=True)
 OUT_PATH = OUT_DIR / "anomaly_email.md"
 
-LOCAL_TZ = os.getenv("LOCAL_TZ", "Asia/Ho_Chi_Minh")
-INPUT_TZ = os.getenv("INPUT_TZ")  # nếu timestamp naive là giờ local
+# Nếu timestamp trong CSV là "naive" (không kèm tz) thì giả định nó thuộc TZ này để so sánh thời gian.
+ASSUME_TZ = os.getenv("ASSUME_TZ", "Asia/Ho_Chi_Minh")
 
+# ---- Helpers ----
 ALIASES = {
     "city": ["city", "thanh_pho", "tinh", "province", "location"],
-    "time": ["time", "timestamp", "datetime", "date"],
-    "aqi": ["aqi", "AQI", "aqi_value"],
-    "wind": ["wind", "wind_speed", "windspeed", "gio", "gió"],
-    "flag": ["flag", "is_anomaly", "anomaly", "is_outlier", "label"],
-    "method": ["method", "algo", "algorithm", "detector", "source"],
+    "time": ["timestamp","time","datetime","date"],
+    "aqi":  ["AQI","aqi","aqi_value"],
+    "wind": ["wind_speed","wind","windspeed","gio","gió"],
+    "flag": ["flag","is_anomaly","anomaly","is_outlier","label"],
+    "method":["method","algo","algorithm","detector","source"],
 }
 
-Z_FLAG_COLS = {
-    "Z-score AQI": "zscore_flag_aqi",
-    "Z-score Wind": "zscore_flag_wind",
-}
-IF_FLAG_COL = ("IsolationForest", "anomaly")
-
-def pick_col(df, names):
+def pick_col(df, cands):
     cols = {c.lower(): c for c in df.columns}
-    for n in names:
+    for n in cands:
         if n in df.columns: return n
         if n.lower() in cols: return cols[n.lower()]
     for c in df.columns:
-        if any(n.lower() in c.lower() for n in names): return c
+        if any(n.lower() in c.lower() for n in cands): return c
     return None
 
-def coerce_time(series):
-    dt = pd.to_datetime(series, errors="coerce", utc=False)
-    if hasattr(dt, "dt"):
-        try:
-            is_tzaware = dt.dt.tz is not None
-        except Exception:
-            is_tzaware = False
-        if not is_tzaware:
-            dt = dt.dt.tz_localize(INPUT_TZ or "UTC")
-        return dt.dt.tz_convert("UTC")
-    return pd.to_datetime(series, errors="coerce", utc=True)
-
-def read_csv_any(p):
+def read_csv(p):
     try:
         df = pd.read_csv(p)
         df["__source"] = p
         return df
     except Exception as e:
-        print(f"[WARN] skip {p}: {e}")
-        return None
+        print(f"[WARN] skip {p}: {e}"); return None
 
-def read_json_any(p):
+def read_json(p):
     try:
         obj = json.loads(Path(p).read_text(encoding="utf-8"))
         rows = obj["data"] if isinstance(obj, dict) and isinstance(obj.get("data"), list) else (obj if isinstance(obj, list) else None)
         if rows is None: return None
-        df = pd.DataFrame(rows)
-        df["__source"] = p
+        df = pd.DataFrame(rows); df["__source"] = p
         return df
     except Exception as e:
-        print(f"[WARN] skip {p}: {e}")
-        return None
+        print(f"[WARN] skip {p}: {e}"); return None
 
-def parse_flag_generic(series):
+def parse_flag(series):
+    # Chuẩn chung: numeric == -1 là bất thường; string: một số token hay dùng
     sn = pd.to_numeric(series, errors="coerce")
     out = pd.Series(False, index=series.index)
-    num_mask = ~sn.isna()
-    out[num_mask] = (sn[num_mask] == -1)  # chuẩn chung: -1 là bất thường
+    mask = sn.notna()
+    out[mask] = (sn[mask] == -1)
     st = series.astype(str).str.strip().str.lower()
     tokens = {"-1","true","yes","y","t","anomaly","outlier","abnormal","alert"}
-    out[~num_mask] = st[~num_mask].isin(tokens)
+    out[~mask] = st[~mask].isin(tokens)
     return out
 
-def derive_detector_flags(df):
-    methods_fired = []
-    flags = []
+def to_epoch_utc(series):
+    # Dùng để so sánh "mốc mới nhất" (không dùng để hiển thị)
+    dt = pd.to_datetime(series, errors="coerce", utc=False)
+    if hasattr(dt, "dt"):
+        try:
+            has_tz = dt.dt.tz is not None
+        except Exception:
+            has_tz = False
+        if not has_tz:
+            # Naive -> localize theo ASSUME_TZ để tránh lệch khi so sánh
+            dt = dt.dt.tz_localize(ASSUME_TZ)
+        dt = dt.dt.tz_convert("UTC")
+        return dt.view("int64")  # ns since epoch
+    return pd.to_datetime(series, errors="coerce", utc=True).view("int64")
 
-    for label, col in Z_FLAG_COLS.items():
-        if col in df.columns:
-            f = parse_flag_generic(df[col])
-            flags.append(f)
-            methods_fired.append(np.where(f, label, ""))
+def detect_methods_row(df_row):
+    methods = []
+    if "zscore_flag_aqi" in df_row and parse_flag(pd.Series([df_row["zscore_flag_aqi"]])).iloc[0]:
+        methods.append("Z-score AQI")
+    if "zscore_flag_wind" in df_row and parse_flag(pd.Series([df_row["zscore_flag_wind"]])).iloc[0]:
+        methods.append("Z-score Wind")
+    if "anomaly" in df_row and parse_flag(pd.Series([df_row["anomaly"]])).iloc[0]:
+        methods.append("IsolationForest")
+    # generic flag (nếu có)
+    c_flag = pick_col(pd.DataFrame([df_row]), ALIASES["flag"])
+    if c_flag and c_flag not in ["zscore_flag_aqi","zscore_flag_wind","anomaly"]:
+        if parse_flag(pd.Series([df_row[c_flag]])).iloc[0]:
+            methods.append("GenericFlag")
+    return methods
 
-    if IF_FLAG_COL[1] in df.columns:
-        f = parse_flag_generic(df[IF_FLAG_COL[1]])
-        flags.append(f)
-        methods_fired.append(np.where(f, IF_FLAG_COL[0], ""))
-
-    if flags:
-        any_flag = np.logical_or.reduce(flags)
-        if methods_fired:
-            stacked = np.vstack(methods_fired)
-            methods = pd.Series(
-                [", ".join([m for m in row if m]) if any(row) else "" for row in stacked.T],
-                index=df.index
-            )
-        else:
-            methods = pd.Series("", index=df.index)
-    else:
-        any_flag = pd.Series(False, index=df.index)
-        methods = pd.Series("", index=df.index)
-
-    return pd.Series(any_flag, index=df.index), pd.Series(methods, index=df.index)
-
-def to_canonical(df):
+def canonicalize(df):
     c_city = pick_col(df, ALIASES["city"])
     c_time = pick_col(df, ALIASES["time"])
+    if not c_city or not c_time: return None
+
     c_aqi  = pick_col(df, ALIASES["aqi"])
     c_wind = pick_col(df, ALIASES["wind"])
-    c_flag = pick_col(df, ALIASES["flag"])
-    c_meth = pick_col(df, ALIASES["method"])
-    if c_city is None or c_time is None: return None
 
     out = pd.DataFrame()
     out["city"] = df[c_city].astype(str)
-    out["time_utc"] = coerce_time(df[c_time])
+    out["time_raw"] = df[c_time].astype(str)  # giữ nguyên để hiển thị
+    out["time_key"] = to_epoch_utc(df[c_time])  # để so sánh mốc mới nhất
 
-    if c_aqi in df.columns:
-        out["aqi"] = pd.to_numeric(df[c_aqi], errors="coerce")
+    if c_aqi:  out["aqi"]  = pd.to_numeric(df[c_aqi], errors="coerce")
+    if c_wind:
+        # lấy số nếu có đơn vị dạng "12 km/h"
+        w = df[c_wind].astype(str).str.extract(r"([\d.]+)", expand=False)
+        out["wind"] = pd.to_numeric(w, errors="coerce")
 
-    if c_wind in df.columns:
-        wind_raw = df[c_wind].astype(str).str.extract(r"([\d.]+)", expand=False)
-        out["wind"] = pd.to_numeric(wind_raw, errors="coerce")
-
-    det_flag, det_method = derive_detector_flags(df)
-
-    if c_flag in df.columns:
-        gen_flag = parse_flag_generic(df[c_flag])
-        out["flag"] = det_flag | gen_flag
-    else:
-        out["flag"] = det_flag
-
-    base_method = df[c_meth].astype(str) if c_meth in df.columns else pd.Series("", index=df.index)
-    meth = base_method.str.strip()
-    det_method = det_method.fillna("").astype(str).str.strip()
-    both = []
-    for m1, m2 in zip(meth, det_method):
-        if m1 and m2: both.append(f"{m1}, {m2}")
-        elif m1: both.append(m1)
-        else: both.append(m2)
-    out["method"] = pd.Series(both, index=df.index).replace("", np.nan)
-
+    # flag + method
     out["__source"] = df["__source"]
-    return out.dropna(subset=["time_utc"])
+    # Tạo cờ tổng hợp nhanh theo từng hàng
+    flags = []
+    methods = []
+    for _, row in df.iterrows():
+        ms = detect_methods_row(row)
+        methods.append(", ".join(ms))
+        flags.append(bool(ms))
+    out["method"] = methods
+    out["flag"] = flags
+    return out.dropna(subset=["time_key"])
 
-def decode_changed_files_env(s):
-    if not s: return []
-    s = s.replace("%0D", "").replace("%0A", "\n").replace("%25", "%")
-    return [line.strip() for line in s.splitlines() if line.strip()]
-
+# ---- Main ----
 def main():
-    raw = os.getenv("CHANGED_FILES", "")
-    changed = decode_changed_files_env(raw)
-    paths = changed if changed else glob.glob("result_anomaly/**/*", recursive=True)
+    raw = os.getenv("CHANGED_FILES","").replace("%0D","").replace("%0A","\n").replace("%25","%")
+    paths = [p for p in raw.splitlines() if p.strip()] or glob.glob("result_anomaly/**/*", recursive=True)
     paths = [p for p in paths if p.lower().endswith((".csv",".json"))]
     if not paths:
-        print("No changed anomaly files.")
-        return
+        print("No anomaly files."); return
 
-    frames=[]
+    frames = []
     for p in paths:
-        df = read_csv_any(p) if p.lower().endswith(".csv") else read_json_any(p)
-        if df is None or df.empty: 
-            continue
-        cdf = to_canonical(df)
-        if cdf is not None and not cdf.empty:
-            frames.append(cdf)
+        df = read_csv(p) if p.lower().endswith(".csv") else read_json(p)
+        if df is None or df.empty: continue
+        cdf = canonicalize(df)
+        if cdf is not None and not cdf.empty: frames.append(cdf)
 
     if not frames:
-        print("No usable rows.")
-        return
+        print("No usable rows."); return
 
     big = pd.concat(frames, ignore_index=True)
-    big = big[big["flag"] == True].copy()
-    if big.empty:
-        print("No positive flags.")
-        return
 
-    big = big.sort_values("time_utc")
-    latest = big.groupby("city", as_index=False).tail(1).copy()
+    # 1) Lấy mốc thời gian MỚI NHẤT toàn cục (UTC epoch)
+    latest_key = big["time_key"].max()
 
-    def fmt_local(ts):
-        ts = pd.to_datetime(ts, utc=True)
-        return ts.tz_convert(LOCAL_TZ).strftime("%Y-%m-%d %H:%M")
+    # 2) Giữ nguyên CHỈ các dòng thuộc mốc đó & có flag bất thường
+    cur = big[(big["time_key"] == latest_key) & (big["flag"] == True)].copy()
+    if cur.empty:
+        print("No anomalies at latest timestamp."); return
 
-    now = (pd.Timestamp.utcnow().tz_localize("UTC").tz_convert(LOCAL_TZ))
-    tz_label = now.strftime("%Z")
-    now_str  = now.strftime("%Y-%m-%d %H:%M %Z")
+    # 3) Gộp theo (city, time_raw) để hợp nhất trùng nhau giữa các detector
+    def agg_first_nonnull(s): 
+        return next((x for x in s if pd.notna(x) and str(x) != ""), "")
+    cur = (cur
+           .groupby(["city","time_raw"], as_index=False)
+           .agg({
+               "aqi": agg_first_nonnull,
+               "wind": agg_first_nonnull,
+               "method": lambda s: ", ".join(sorted(set(", ".join(m.split(", ")).strip() for m in s if m))),
+               "__source": lambda s: "; ".join(sorted(set(s)))
+           }))
 
+    # 4) Render giữ nguyên timestamp như CSV (time_raw)
     lines = [
-        f"#  Cảnh báo bất thường AQI/Gió ({now_str})",
+        f"#  Cảnh báo bất thường AQI/Gió (tại mốc mới nhất)",
         "",
-        f"| Thành phố | Thời điểm ({tz_label}) | AQI | Gió | Phương pháp | Nguồn |",
+        "| Thành phố | Thời điểm (CSV) | AQI | Gió | Phương pháp | Nguồn |",
         "|---|---:|---:|---:|---|---|",
     ]
-
-    for _, r in latest.iterrows():
-        ts  = fmt_local(r["time_utc"])
-        aqi = "" if pd.isna(r.get("aqi")) else f"{r['aqi']:.0f}"
-        wnd = "" if pd.isna(r.get("wind")) else f"{r['wind']:.2f}"
-        meth = "" if pd.isna(r.get("method")) else str(r["method"])
-        src  = r.get("__source", "")
-        lines.append(f"| {r['city']} | {ts} | {aqi} | {wnd} | {meth} | {src} |")
+    for _, r in cur.sort_values(["city","time_raw"]).iterrows():
+        aqi  = "" if pd.isna(r.get("aqi")) else f"{float(r['aqi']):.0f}"
+        wind = "" if pd.isna(r.get("wind")) else f"{float(r['wind']):.2f}"
+        meth = r.get("method","")
+        src  = r.get("__source","")
+        lines.append(f"| {r['city']} | {r['time_raw']} | {aqi} | {wind} | {meth} | {src} |")
 
     OUT_PATH.write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote {OUT_PATH}")
