@@ -1,0 +1,9 @@
+city,timestamp,aqi_latest,__source_file
+Cần Thơ,2025-08-16 18:00:00+07:00,33.0,aqi-can-tho_2025.csv
+Huế,2025-08-16 18:00:00+07:00,47.0,aqi-hue_2025.csv
+Hà Nội,2025-08-16 18:00:00+07:00,56.0,aqi-hanoi_2025.csv
+Hải Phòng,2025-08-16 18:00:00+07:00,28.0,aqi-hai-phong_2025.csv
+Hồ Chí Minh,2025-08-16 18:00:00+07:00,69.0,aqi-ho-chi-minh-city_2025.csv
+Nha Trang,2025-08-16 18:00:00+07:00,69.0,aqi-nha-trang_2025.csv
+Vinh,2025-08-16 18:00:00+07:00,53.0,aqi-vinh_2025.csv
+Đà Nẵng,2025-08-16 18:00:00+07:00,19.0,aqi-da-nang_2025.csv
