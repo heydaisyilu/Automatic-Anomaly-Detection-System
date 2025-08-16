@@ -1,4 +1,4 @@
-name: Notify anomalies by email
+name: Notify anomalies by issue
 
 on:
   workflow_run:
@@ -14,12 +14,13 @@ on:
 
 permissions:
   contents: read
-  issues: write
+  issues: write  # cần quyền này để tạo/cập nhật Issue (qua GITHUB_TOKEN)
 
 jobs:
   notify:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout at detect commit (if workflow_run)
         uses: actions/checkout@v4
@@ -47,49 +48,40 @@ jobs:
             CHANGED="$(git ls-files result_anomaly || true)"
           fi
           echo "$CHANGED"
-          {
-            echo 'files<<EOF'
-            echo "$CHANGED"
-            echo 'EOF'
-          } >> "$GITHUB_OUTPUT"
+          CHANGED_ESCAPED="$(printf "%s" "$CHANGED" | sed -e 's/%/%25/g' -e 's/\r/%0D/g' -e 's/\n/%0A/g')"
+          echo "files=$CHANGED_ESCAPED" >> "$GITHUB_OUTPUT"
 
       - name: Build DEMO report (manual run)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.demo }}
         run: |
           mkdir -p out
           cat > out/anomaly_email.md <<'MD'
-          # 🚨 Cảnh báo bất thường AQI/Gió (DEMO, UTC+7)
+          #  Cảnh báo bất thường AQI/Gió (DEMO)
           | Thành phố | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |
           |---|---:|---:|---:|---|---|
-          | Ho Chi Minh City | 2025-08-16 12:00 | 180 | 12.3 | Z-score | result_anomaly/z_score/demo.csv |
-          | Ho Chi Minh City | 2025-08-16 12:00 | 182 | 12.0 | IsolationForest | result_anomaly/isolation_forest/demo.csv |
+          | Ho Chi Minh City | 2025-08-16 19:00 | 180 | 12.30 | Z-score, IF | result_anomaly/demo.csv |
           MD
 
-      - name: Render report
+      - name: Render report (auto run after detect)
+        if: ${{ github.event_name == 'workflow_run' && steps.diff.outputs.files != '' }}
         env:
           CHANGED_FILES: ${{ steps.diff.outputs.files }}
+          LOCAL_TZ: Asia/Ho_Chi_Minh
         run: |
-          python notify/render_email.py
+          python notify/notify.py
 
-      - name: Send email (SMTP)
-        if: hashFiles('out/anomaly_email.md') != ''
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
-          to: ${{ secrets.MAIL_TO }}
-          from: AQI Bot <${{ secrets.MAIL_FROM }}>
-          subject: 'AQI/Gió bất thường — Live feed'
-          content_type: text/plain
-          body: file://out/anomaly_email.md
+      - name: Render report (manual run without DEMO)
+        if: ${{ github.event_name == 'workflow_dispatch' && !inputs.demo }}
+        env:
+          LOCAL_TZ: Asia/Ho_Chi_Minh
+        run: |
+          python notify/notify.py
 
-      - name: Create/Update alert issue and ping you (UTC+7)
+      - name: Create/Update alert issue and ping you
         if: hashFiles('out/anomaly_email.md') != ''
         uses: actions/github-script@v7
         env:
-          PING_USER: TONY
+          PING_USER: TONY   # TODO: đổi thành username GitHub của bạn
         with:
           script: |
             const fs = require('fs');
@@ -107,14 +99,15 @@ jobs:
               const res = await github.rest.issues.create({ owner, repo, title, body });
               issue = res.data;
             } else {
-              await github.rest.issues.update({ owner, repo, issue_number: issue.number, body });
+              await github.rest.issues.update({
+                owner, repo, issue_number: issue.number, body
+              });
             }
 
             const ping = process.env.PING_USER ? `@${process.env.PING_USER}` : '';
-            // Lấy giờ VN (UTC+7) không 12h, dạng YYYY-MM-DD HH:MM
-            const vn = new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Ho_Chi_Minh', hour12: false }).replace(',', '');
-            const stamp = vn.slice(0,16) + ' (UTC+7)';
             await github.rest.issues.createComment({
               owner, repo, issue_number: issue.number,
-              body: `Cập nhật: ${stamp} ${ping}`
+              body: `Cập nhật: ${new Date().toISOString()} ${ping}`
             });
+
+            core.setOutput('issue_number', String(issue.number));
