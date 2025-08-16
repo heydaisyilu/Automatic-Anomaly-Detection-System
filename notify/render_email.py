@@ -80,7 +80,7 @@ def main():
     latest = big.groupby("city", as_index=False).tail(1)
 
     now = pd.Timestamp.utcnow().strftime("%Y-%m-%d %H:%M UTC")
-    lines = [f"# 🚨 Cảnh báo bất thường AQI/Gió ({now})","",
+    lines = [f"#  Cảnh báo bất thường AQI/Gió ({now})","",
              "| Thành phố | Thời điểm (UTC) | AQI | Gió | Phương pháp | Nguồn |",
              "|---|---:|---:|---:|---|---|"]
     for _, r in latest.iterrows():
