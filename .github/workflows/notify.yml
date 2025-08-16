@@ -56,7 +56,7 @@ jobs:
         run: |
           mkdir -p out
           cat > out/anomaly_email.md <<'MD'
-          # 🚨 Cảnh báo bất thường AQI/Gió (DEMO)
+          #  Cảnh báo bất thường AQI/Gió (DEMO)
           | Thành phố | Thời điểm (UTC) | AQI | Gió | Phương pháp | Nguồn |
           |---|---:|---:|---:|---|---|
           | Ho Chi Minh City | 2025-08-16 12:00 | 180 | 12.3 | Z-score, IF | result_anomaly/demo.csv |
@@ -79,7 +79,7 @@ jobs:
             const fs = require('fs'); // OK: built-in module
             const body = fs.readFileSync('out/anomaly_email.md', 'utf8');
             const {owner, repo} = context.repo;
-            const title = '🚨 AQI/Gió bất thường — Live feed';
+            const title = ' AQI/Gió bất thường — Live feed';
 
             // Lấy danh sách issue đang mở (dùng paginate để chắc chắn không sót)
             const issues = await github.paginate(
