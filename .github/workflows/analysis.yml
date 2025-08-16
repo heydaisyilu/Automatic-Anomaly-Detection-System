@@ -2,7 +2,7 @@ name: Run AQI analysis hourly
 
 on:
   schedule:
-    - cron: "5 * * * *"   # phút thứ 05 mỗi giờ
+    - cron: "5 * * * *"   # chạy phút thứ 05 mỗi giờ
   workflow_dispatch: {}
   push:
     paths:
@@ -14,6 +14,7 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,14 +34,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Install deps
+      - name: Install core Jupyter stack
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          else
-            pip install pandas numpy ipykernel nbconvert
-          fi
+          pip install --upgrade jupyter "nbconvert[execute]" nbclient ipykernel
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Verify Jupyter stack
+        run: |
+          jupyter --version
+          python - << 'PY'
+import jupyter, nbconvert, nbclient
+print("jupyter:", jupyter.__version__)
+print("nbconvert:", nbconvert.__version__)
+print("nbclient:", nbclient.__version__)
+PY
+          jupyter nbconvert --help | sed -n '1,40p'
 
       - name: Execute analysis.ipynb -> analysis_output.ipynb
         run: |
