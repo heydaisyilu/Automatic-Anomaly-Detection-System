@@ -7,6 +7,9 @@ import numpy as np
 OUT_DIR = Path("out"); OUT_DIR.mkdir(parents=True, exist_ok=True)
 OUT_PATH = OUT_DIR / "anomaly_email.md"
 
+# Múi giờ hiển thị (có thể override bằng env LOCAL_TZ)
+LOCAL_TZ = os.getenv("LOCAL_TZ", "Asia/Ho_Chi_Minh")
+
 ALIASES = {
     "city": ["city", "thanh_pho", "tinh", "province", "location"],
     "time": ["time", "timestamp", "datetime", "date"],
@@ -26,6 +29,7 @@ def pick_col(df, names):
     return None
 
 def coerce_time(s):
+    # chuẩn hoá về UTC tz-aware, sau đó khi render sẽ convert sang LOCAL_TZ
     try: return pd.to_datetime(s, errors="coerce", utc=True)
     except: return pd.to_datetime(s, errors="coerce")
 
@@ -63,7 +67,8 @@ def main():
     changed = [f for f in os.getenv("CHANGED_FILES","").splitlines() if f.strip()]
     if not changed: changed = glob.glob("result_anomaly/**/*", recursive=True)
     paths = [p for p in changed if p.lower().endswith((".csv",".json"))]
-    if not paths: print("No changed anomaly files."); return
+    if not paths:
+        print("No changed anomaly files."); return
 
     frames=[]
     for p in paths:
@@ -72,19 +77,30 @@ def main():
         cdf = to_canonical(df)
         if cdf is not None and not cdf.empty: frames.append(cdf)
 
-    if not frames: print("No usable rows."); return
+    if not frames:
+        print("No usable rows."); return
     big = pd.concat(frames, ignore_index=True); big = big[big["flag"]==True].copy()
-    if big.empty: print("No positive flags."); return
+    if big.empty:
+        print("No positive flags."); return
 
     big = big.sort_values("time")
     latest = big.groupby("city", as_index=False).tail(1)
 
-    now = pd.Timestamp.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    # Hiển thị thời gian tiêu đề theo LOCAL_TZ
+    now = (pd.Timestamp.utcnow()
+             .tz_localize("UTC")
+             .tz_convert(LOCAL_TZ)
+             .strftime("%Y-%m-%d %H:%M %Z"))
+
     lines = [f"#  Cảnh báo bất thường AQI/Gió ({now})","",
-             "| Thành phố | Thời điểm (UTC) | AQI | Gió | Phương pháp | Nguồn |",
+             "| Thành phố | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |",
              "|---|---:|---:|---:|---|---|"]
+
     for _, r in latest.iterrows():
-        ts = pd.to_datetime(r["time"], utc=True).strftime("%Y-%m-%d %H:%M")
+        # Convert từng timestamp sang LOCAL_TZ khi render
+        ts = (pd.to_datetime(r["time"], utc=True)
+                .tz_convert(LOCAL_TZ)
+                .strftime("%Y-%m-%d %H:%M"))
         aqi  = "" if pd.isna(r.get("aqi")) else f"{r['aqi']:.0f}"
         wind = "" if pd.isna(r.get("wind")) else f"{r['wind']:.2f}"
         meth = "" if pd.isna(r.get("method")) else str(r["method"])
