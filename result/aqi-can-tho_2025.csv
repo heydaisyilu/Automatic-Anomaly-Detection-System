@@ -4582,3 +4582,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-08-16 18:00:00+07:00,33.0,14.4,93.0,/dl/web/weather/ic-weather-04d.svg,Cần Thơ
 2025-08-16 19:00:00+07:00,39.0,14.6,93.0,/dl/web/weather/ic-weather-04n.svg,Cần Thơ
 2025-08-16 20:00:00+07:00,33.0,9.9,93.0,/dl/web/weather/ic-weather-04n.svg,Cần Thơ
+2025-08-16 21:00:00+07:00,53.0,9.3,96.0,/dl/web/weather/ic-weather-04n.svg,Cần Thơ
+2025-08-16 22:00:00+07:00,53.0,10.1,98.0,/dl/web/weather/ic-weather-04n.svg,Cần Thơ
