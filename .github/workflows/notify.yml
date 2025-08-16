@@ -1,34 +1,34 @@
-name: Notify anomalies by email
+name: Notify anomalies by issue
 
 on:
-  # Tự chạy sau khi Detect AQI Anomalies hoàn tất
   workflow_run:
     workflows: ["Detect AQI Anomalies"]
     types: [completed]
-  # Cho phép chạy tay để test ngay
   workflow_dispatch:
     inputs:
       demo:
-        description: "Gửi email demo (không cần anomaly thực)"
+        description: "Gửi thông báo DEMO ngay"
         required: false
         default: false
         type: boolean
 
+permissions:
+  contents: read
+  issues: write   # cần quyền này để tạo/cập nhật Issue (qua GITHUB_TOKEN) 
+
 jobs:
   notify:
-    # Chỉ gửi khi detect thành công, hoặc nếu bạn chạy tay (workflow_dispatch)
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo at detect commit (or default)
+      - name: Checkout at detect commit (if workflow_run)
         uses: actions/checkout@v4
         with:
-          # Khi workflow_run: checkout đúng commit mà detect đã chạy
           ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || '' }}
-          fetch-depth: 2  # để diff được với HEAD~1
+          fetch-depth: 2
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -38,25 +38,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas numpy
 
-      # Khi được trigger bởi detect, tính list file mới/sửa trong result_anomaly
       - name: Collect changed anomaly files (only on workflow_run)
         id: diff
         if: ${{ github.event_name == 'workflow_run' }}
         run: |
-          # Lấy các file thay đổi giữa HEAD~1 và HEAD, giới hạn thư mục result_anomaly
           if git rev-parse HEAD~1 >/dev/null 2>&1; then
             CHANGED="$(git diff --name-only HEAD~1 HEAD -- result_anomaly || true)"
           else
             CHANGED="$(git ls-files result_anomaly || true)"
           fi
-          echo "Changed files:"
           echo "$CHANGED"
-          # Xuất ra output để dùng ở bước render
           CHANGED_ESCAPED="$(printf "%s" "$CHANGED" | sed -e 's/%/%25/g' -e 's/\r/%0D/g' -e 's/\n/%0A/g')"
           echo "files=$CHANGED_ESCAPED" >> "$GITHUB_OUTPUT"
 
-      # Trường hợp chạy tay: tạo email demo để thấy ngay
-      - name: Build demo email (only on manual run)
+      - name: Build DEMO report (manual run)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.demo }}
         run: |
           mkdir -p out
@@ -67,25 +62,43 @@ jobs:
           | Ho Chi Minh City | 2025-08-16 12:00 | 180 | 12.3 | Z-score, IF | result_anomaly/demo.csv |
           MD
 
-      - name: Render email from result_anomaly (only when files changed)
+      - name: Render report (auto run after detect)
         if: ${{ github.event_name == 'workflow_run' && steps.diff.outputs.files != '' }}
         env:
           CHANGED_FILES: ${{ steps.diff.outputs.files }}
         run: |
           python notify/render_email.py
 
-      - name: Send mail
+      - name: Create/Update alert issue and ping you
         if: hashFiles('out/anomaly_email.md') != ''
-        uses: dawidd6/action-send-mail@v6
+        uses: actions/github-script@v7
+        env:
+          PING_USER: your_github_username   # TODO: đổi thành username của bạn, ví dụ: tony123
         with:
-          server_address: ${{ secrets.SMTP_SERVER }}
-          server_port: ${{ secrets.SMTP_PORT }}
-          secure: true
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "⚠️ AQI/Gió bất thường — ${{ github.repository }}"
-          to: ${{ secrets.TO_EMAIL }}
-          from: "${{ secrets.FROM_NAME }} <${{ secrets.SMTP_USERNAME }}>"
-          content_type: text/html
-          html_body: file://out/anomaly_email.md
-          convert_markdown: true
+          script: |
+            const fs = require('fs');
+            const core = require('@actions/core');
+            const body = fs.readFileSync('out/anomaly_email.md', 'utf8');
+            const {owner, repo} = context.repo;
+            const title = '🚨 AQI/Gió bất thường — Live feed';
+
+            // Try find open issue with the same title
+            const {data: issues} = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', per_page: 100
+            });
+            let issue = issues.find(i => i.title === title);
+
+            if (!issue) {
+              const res = await github.rest.issues.create({ owner, repo, title, body });
+              issue = res.data;
+            } else {
+              await github.rest.issues.update({ owner, repo, issue_number: issue.number, body });
+            }
+
+            const ping = process.env.PING_USER ? `@${process.env.PING_USER}` : '';
+            // Add a short comment to trigger a fresh notification
+            await github.rest.issues.createComment({
+              owner, repo, issue_number: issue.number,
+              body: `Cập nhật: ${new Date().toISOString()} ${ping}`
+            });
+            core.setOutput('issue_number', issue.number);
