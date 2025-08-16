@@ -75,10 +75,10 @@ jobs:
         if: ${{ github.event_name == 'workflow_run' && steps.diff.outputs.files != '' }}
         env:
           CHANGED_FILES: ${{ steps.diff.outputs.files }}
-          LOCAL_TZ: Asia/Ho_Chi_Minh     # render cột thời gian theo UTC+7
-          INPUT_TZ: Asia/Ho_Chi_Minh     # nếu CSV timestamp là giờ VN nhưng không có tz
+          ASSUME_TZ: Asia/Ho_Chi_Minh
         run: |
           python notify/render_email.py
+
 
       - name: Create/Update alert issue and ping you
         if: hashFiles('out/anomaly_email.md') != ''
