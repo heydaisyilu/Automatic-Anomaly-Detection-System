@@ -14,17 +14,22 @@ on:
 
 permissions:
   contents: read
-  issues: write   # cần quyền này để tạo/cập nhật Issue (qua GITHUB_TOKEN) 
+  issues: write
+
+concurrency:
+  group: notify-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   notify:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout at detect commit (if workflow_run)
         uses: actions/checkout@v4
         with:
+          # lấy đúng commit của workflow "Detect AQI Anomalies"
           ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || '' }}
           fetch-depth: 2
 
@@ -38,16 +43,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas numpy
 
+      # Chỉ cần khi chạy theo sau detect: lấy danh sách file thay đổi trong result_anomaly/**
       - name: Collect changed anomaly files (only on workflow_run)
         id: diff
         if: ${{ github.event_name == 'workflow_run' }}
         run: |
+          set -e
           if git rev-parse HEAD~1 >/dev/null 2>&1; then
             CHANGED="$(git diff --name-only HEAD~1 HEAD -- result_anomaly || true)"
           else
             CHANGED="$(git ls-files result_anomaly || true)"
           fi
           echo "$CHANGED"
+          # escape để truyền qua output an toàn
           CHANGED_ESCAPED="$(printf "%s" "$CHANGED" | sed -e 's/%/%25/g' -e 's/\r/%0D/g' -e 's/\n/%0A/g')"
           echo "files=$CHANGED_ESCAPED" >> "$GITHUB_OUTPUT"
 
@@ -57,15 +65,18 @@ jobs:
           mkdir -p out
           cat > out/anomaly_email.md <<'MD'
           #  Cảnh báo bất thường AQI/Gió (DEMO)
-          | Thành phố | Thời điểm (UTC) | AQI | Gió | Phương pháp | Nguồn |
+          | Thành phố | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |
           |---|---:|---:|---:|---|---|
-          | Ho Chi Minh City | 2025-08-16 12:00 | 180 | 12.3 | Z-score, IF | result_anomaly/demo.csv |
+          | Ho Chi Minh City | 2025-08-16 19:00 | 180 | 12.30 | Z-score AQI, Z-score Wind | result_anomaly/z_score/ho_chi_minh_zscore.csv |
+          | Ho Chi Minh City | 2025-08-16 19:00 | 175 | 11.80 | IsolationForest | result_anomaly/isolation_forest/anomalies_ho_chi_minh_2025.csv |
           MD
 
       - name: Render report (auto run after detect)
         if: ${{ github.event_name == 'workflow_run' && steps.diff.outputs.files != '' }}
         env:
           CHANGED_FILES: ${{ steps.diff.outputs.files }}
+          LOCAL_TZ: Asia/Ho_Chi_Minh     # render cột thời gian theo UTC+7
+          INPUT_TZ: Asia/Ho_Chi_Minh     # nếu CSV timestamp là giờ VN nhưng không có tz
         run: |
           python notify/render_email.py
 
@@ -73,15 +84,14 @@ jobs:
         if: hashFiles('out/anomaly_email.md') != ''
         uses: actions/github-script@v7
         env:
-          PING_USER: TONY   # TODO: đổi thành username của bạn
+          PING_USER: heydaisyilu   # đổi thành username GitHub của bạn nếu khác
         with:
           script: |
-            const fs = require('fs'); // OK: built-in module
+            const fs = require('fs');
             const body = fs.readFileSync('out/anomaly_email.md', 'utf8');
             const {owner, repo} = context.repo;
-            const title = ' AQI/Gió bất thường — Live feed';
+            const title = 'AQI/Gió bất thường — Live feed';
 
-            // Lấy danh sách issue đang mở (dùng paginate để chắc chắn không sót)
             const issues = await github.paginate(
               github.rest.issues.listForRepo,
               {owner, repo, state: 'open', per_page: 100}
@@ -92,18 +102,13 @@ jobs:
               const res = await github.rest.issues.create({ owner, repo, title, body });
               issue = res.data;
             } else {
-              // Cập nhật body cho gọn (nội dung chính nằm ở phần body của issue)
-              await github.rest.issues.update({
-                owner, repo, issue_number: issue.number, body
-              });
+              await github.rest.issues.update({ owner, repo, issue_number: issue.number, body });
             }
 
             const ping = process.env.PING_USER ? `@${process.env.PING_USER}` : '';
-            // Thêm comment ngắn để kích hoạt thông báo mới
             await github.rest.issues.createComment({
               owner, repo, issue_number: issue.number,
               body: `Cập nhật: ${new Date().toISOString()} ${ping}`
             });
 
             core.setOutput('issue_number', String(issue.number));
-
