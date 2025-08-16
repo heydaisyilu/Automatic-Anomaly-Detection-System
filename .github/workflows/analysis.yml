@@ -1,27 +1,27 @@
-name: Run AQI analysis hourly
+name: Run analysis hourly
 
 on:
   schedule:
-    - cron: "5 * * * *"   # chạy phút thứ 05 mỗi giờ
-  workflow_dispatch: {}
+    - cron: "5 * * * *"   # chạy vào phút thứ 05 mỗi giờ
+  workflow_dispatch: {}    # cho phép chạy tay
   push:
     paths:
       - "analysis.ipynb"
       - ".github/workflows/analysis.yml"
-      - "detection/result_summary/**"
       - "requirements.txt"
+      - "result/**"
 
 jobs:
   run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          persist-credentials: true
+          persist-credentials: true   # dùng GITHUB_TOKEN để push lại vào repo
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -34,23 +34,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Install core Jupyter stack
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install --upgrade jupyter "nbconvert[execute]" nbclient ipykernel
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install pandas numpy scikit-learn matplotlib seaborn ipykernel nbconvert papermill; fi
 
-      - name: Verify Jupyter stack
-        run: |
-          jupyter --version
-          python - << 'PY'
-import jupyter, nbconvert, nbclient
-print("jupyter:", jupyter.__version__)
-print("nbconvert:", nbconvert.__version__)
-print("nbclient:", nbclient.__version__)
-PY
-          jupyter nbconvert --help | sed -n '1,40p'
-
+      # Cách 1: nbconvert (đơn giản, y hệt bạn đã làm)
       - name: Execute analysis.ipynb -> analysis_output.ipynb
         run: |
           jupyter nbconvert \
@@ -60,15 +49,30 @@ PY
             --ExecutePreprocessor.kernel_name=python3 \
             --ExecutePreprocessor.timeout=1800
 
-      - name: Commit & push if changed
+      # (Tuỳ chọn) Cách 2: papermill để truyền tham số (ví dụ timezone, ngưỡng…)
+      # - name: Execute with papermill (parametrized)
+      #   run: |
+      #     papermill analysis.ipynb analysis_output.ipynb \
+      #       -p RUN_AT "$(date -u +'%Y-%m-%d %H:%M:%S UTC')" \
+      #       -p TZ "Asia/Ho_Chi_Minh" \
+      #       -p ZSCORE_THRESHOLD 3.0
+
+      - name: Show git status
         run: |
-          git config user.name  "github-actions[bot]"
+          echo "Changed files:"
+          git status --porcelain || true
+
+      - name: Commit & push if there are changes
+        run: |
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add analysis_output.ipynb detection/result_summary/ || true
+          # thêm các file đầu ra mà bạn muốn track
+          git add analysis_output.ipynb result_anomaly/ || true
 
+          # chỉ commit khi có diff
           if ! git diff --cached --quiet; then
-            git commit -m "chore(aqi): auto update $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+            git commit -m "chore(analysis): auto update $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
             git push
           else
             echo "No changes to commit."
