@@ -4577,3 +4577,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-08-16 16:00:00+07:00,44.0,10.8,78.0,/dl/web/weather/ic-weather-10d.svg,Vinh
 2025-08-16 17:00:00+07:00,44.0,9.9,82.0,/dl/web/weather/ic-weather-04d.svg,Vinh
 2025-08-16 18:00:00+07:00,53.0,7.0,85.0,/dl/web/weather/ic-weather-10d.svg,Vinh
+2025-08-16 19:00:00+07:00,55.0,5.8,88.0,/dl/web/weather/ic-weather-04n.svg,Vinh
+2025-08-16 20:00:00+07:00,69.0,5.0,90.0,/dl/web/weather/ic-weather-04n.svg,Vinh
