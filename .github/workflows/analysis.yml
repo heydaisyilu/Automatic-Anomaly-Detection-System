@@ -1,45 +1,38 @@
-name: Run analysis hourly
+name: Run AQI Analysis
 
 on:
   schedule:
-    - cron: "5 * * * *"   # chạy vào phút thứ 05 mỗi giờ
-  workflow_dispatch: {}    # cho phép chạy tay
-  push:
-    paths:
-      - "analysis.ipynb"
-      - ".github/workflows/analysis.yml"
-      - "requirements.txt"
-      - "result/**"
+    - cron: "5 * * * *" # chạy mỗi giờ (phút 05)
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  run:
+  run-analysis:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          persist-credentials: true   # dùng GITHUB_TOKEN để push lại vào repo
+          token: ${{ secrets.PAT || github.token }}
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install pandas numpy scikit-learn matplotlib seaborn ipykernel nbconvert papermill; fi
+          # Jupyter + nbconvert bắt buộc để execute notebook
+          pip install jupyter "nbconvert[execute]" nbclient ipykernel
+          # Lib tối thiểu cho notebook AQI (thêm nếu bạn cần)
+          pip install pandas numpy matplotlib
 
-      # Cách 1: nbconvert (đơn giản, y hệt bạn đã làm)
+      # Nếu analysis.ipynb ở ROOT, giữ nguyên. Nếu ở thư mục khác, đổi working-directory.
       - name: Execute analysis.ipynb -> analysis_output.ipynb
         run: |
           jupyter nbconvert \
@@ -49,31 +42,20 @@ jobs:
             --ExecutePreprocessor.kernel_name=python3 \
             --ExecutePreprocessor.timeout=1800
 
-      # (Tuỳ chọn) Cách 2: papermill để truyền tham số (ví dụ timezone, ngưỡng…)
-      # - name: Execute with papermill (parametrized)
-      #   run: |
-      #     papermill analysis.ipynb analysis_output.ipynb \
-      #       -p RUN_AT "$(date -u +'%Y-%m-%d %H:%M:%S UTC')" \
-      #       -p TZ "Asia/Ho_Chi_Minh" \
-      #       -p ZSCORE_THRESHOLD 3.0
-
-      - name: Show git status
-        run: |
-          echo "Changed files:"
-          git status --porcelain || true
-
-      - name: Commit & push if there are changes
+      - name: Commit & Push Results (if changed)
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config core.autocrlf false
 
-          # thêm các file đầu ra mà bạn muốn track
-          git add analysis_output.ipynb result_anomaly/ || true
+          # Track output notebook + thư mục kết quả tóm tắt
+          git add analysis_output.ipynb result_summary/ 2>/dev/null || true
 
-          # chỉ commit khi có diff
           if ! git diff --cached --quiet; then
-            git commit -m "chore(analysis): auto update $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+            git commit -m "Auto-run AQI analysis: update results & notebook"
+            # Kéo về trước để tránh lỗi non-fast-forward khi có push khác
+            git pull --rebase --autostash origin ${{ github.ref_name }} || true
             git push
           else
-            echo "No changes to commit."
+            echo "No analysis changes to commit."
           fi
