@@ -73,32 +73,37 @@ jobs:
         if: hashFiles('out/anomaly_email.md') != ''
         uses: actions/github-script@v7
         env:
-          PING_USER: your_github_username   # TODO: đổi thành username của bạn, ví dụ: tony123
+          PING_USER: TONY   # TODO: đổi thành username của bạn
         with:
           script: |
-            const fs = require('fs');
-            const core = require('@actions/core');
+            const fs = require('fs'); // OK: built-in module
             const body = fs.readFileSync('out/anomaly_email.md', 'utf8');
             const {owner, repo} = context.repo;
             const title = '🚨 AQI/Gió bất thường — Live feed';
 
-            // Try find open issue with the same title
-            const {data: issues} = await github.rest.issues.listForRepo({
-              owner, repo, state: 'open', per_page: 100
-            });
+            // Lấy danh sách issue đang mở (dùng paginate để chắc chắn không sót)
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {owner, repo, state: 'open', per_page: 100}
+            );
             let issue = issues.find(i => i.title === title);
 
             if (!issue) {
               const res = await github.rest.issues.create({ owner, repo, title, body });
               issue = res.data;
             } else {
-              await github.rest.issues.update({ owner, repo, issue_number: issue.number, body });
+              // Cập nhật body cho gọn (nội dung chính nằm ở phần body của issue)
+              await github.rest.issues.update({
+                owner, repo, issue_number: issue.number, body
+              });
             }
 
             const ping = process.env.PING_USER ? `@${process.env.PING_USER}` : '';
-            // Add a short comment to trigger a fresh notification
+            // Thêm comment ngắn để kích hoạt thông báo mới
             await github.rest.issues.createComment({
               owner, repo, issue_number: issue.number,
               body: `Cập nhật: ${new Date().toISOString()} ${ping}`
             });
-            core.setOutput('issue_number', issue.number);
+
+            core.setOutput('issue_number', String(issue.number));
+
