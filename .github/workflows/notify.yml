@@ -121,7 +121,7 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: "Cảnh báo AQI/Gió bất thường"
-          to: email1@gmail.com, email2@gmail.com  # Đổi thành các email bạn muốn gửi
+          to: huynhthaibaongan.d@gmail.com, tonyphuc9999@gmail.com
           from: AQI Alert Bot <aqi-bot@example.com>
           content_type: text/markdown
           body: file://out/anomaly_email.md
