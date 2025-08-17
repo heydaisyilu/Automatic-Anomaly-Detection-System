@@ -2,7 +2,7 @@ name: Merge AQI Data for All Cities
 
 on:
   schedule:
-    - cron: '0 * * * *'  # mỗi giờ (UTC)
+    - cron: '0 * * * *'  # mỗi giờ
   workflow_dispatch:
 
 permissions:

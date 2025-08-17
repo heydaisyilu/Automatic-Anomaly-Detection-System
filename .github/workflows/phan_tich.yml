@@ -47,7 +47,6 @@ jobs:
       - name: Run phan_tich.ipynb
         working-directory: detection
         run: |
-          # đảm bảo kernel ok
           python -m ipykernel install --user --name aqi-kernel
           # chạy notebook và xuất ra notebook kết quả
           jupyter nbconvert --to notebook --execute phan_tich.ipynb \
