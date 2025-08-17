@@ -26,10 +26,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout at detect commit (if workflow_run)
+      - name: Checkout at detect commit (workflow_run)
+        if: ${{ github.event_name == 'workflow_run' }}
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || '' }}
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 2
+
+      - name: Checkout (manual or others)
+        if: ${{ github.event_name != 'workflow_run' }}
+        uses: actions/checkout@v4
+        with:
           fetch-depth: 2
 
       - name: Setup Python
