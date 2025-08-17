@@ -6,7 +6,6 @@ import numpy as np
 OUT_DIR = Path("out"); OUT_DIR.mkdir(parents=True, exist_ok=True)
 OUT_PATH = OUT_DIR / "anomaly_email.md"
 
-# Nếu timestamp trong CSV là "naive" (không kèm tz) thì giả định nó thuộc TZ này để so sánh thời gian.
 ASSUME_TZ = os.getenv("ASSUME_TZ", "Asia/Ho_Chi_Minh")
 
 # ---- Helpers ----
