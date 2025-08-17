@@ -102,9 +102,12 @@ jobs:
             }
 
             const ping = process.env.PING_USER ? `@${process.env.PING_USER}` : '';
+            // Lấy giờ hiện tại ở Asia/Ho_Chi_Minh
+            const dt = new Date();
+            const vnTime = dt.toLocaleString('sv-SE', { timeZone: 'Asia/Ho_Chi_Minh' }).replace(' ', 'T');
             await github.rest.issues.createComment({
               owner, repo, issue_number: issue.number,
-              body: `Cập nhật: ${new Date().toISOString()} ${ping}`
+              body: `Cập nhật: ${vnTime} (Asia/Ho_Chi_Minh) ${ping}`
             });
 
             core.setOutput('issue_number', String(issue.number));
