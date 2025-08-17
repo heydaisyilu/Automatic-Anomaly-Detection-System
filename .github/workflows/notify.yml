@@ -46,6 +46,11 @@ jobs:
         id: diff
         if: ${{ github.event_name == 'workflow_run' }}
         run: |
+          git log --oneline -2
+          git status
+          git diff --name-only HEAD~1 HEAD
+          git diff --stat HEAD~1 HEAD
+          ls -l result_anomaly
           set -e
           if git rev-parse HEAD~1 >/dev/null 2>&1; then
             CHANGED="$(git diff --name-only HEAD~1 HEAD -- result_anomaly || true)"
