@@ -1,4 +1,4 @@
-name: Analyze AQI
+name: Analyze AQI & Detect Anomalies
 
 on:
   schedule:
