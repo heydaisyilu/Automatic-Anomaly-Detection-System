@@ -176,8 +176,8 @@ def main():
     lines = [
         f"#  Cảnh báo bất thường AQI/Gió (tại mốc mới nhất)",
         "",
-        "| Thành phố | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |",
-        "|---|---:|---:|---:|---|---|",
+        "|  Thành phố  | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |",
+        "|-------------|-------------------|-----|-----|-------------|-------|",
     ]
     for _, r in cur.sort_values(["city", "time_vn"]).iterrows():
         aqi  = "" if pd.isna(r.get("aqi")) else f"{float(r['aqi']):.0f}"

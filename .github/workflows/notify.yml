@@ -62,8 +62,8 @@ jobs:
           mkdir -p out
           cat > out/anomaly_email.md <<'MD'
           #  Cảnh báo bất thường AQI/Gió (DEMO)
-          | Thành phố | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |
-          |---|---:|---:|---:|---|---|
+          |  Thành phố  | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |,
+          |-------------|-------------------|-----|-----|-------------|-------|
           | Ho Chi Minh City | 2025-08-16 19:00 | 180 | 12.30 | Z-score AQI, Z-score Wind | result_anomaly/z_score/ho_chi_minh_zscore.csv |
           | Ho Chi Minh City | 2025-08-16 19:00 | 175 | 11.80 | IsolationForest | result_anomaly/isolation_forest/anomalies_ho_chi_minh_2025.csv |
           MD
