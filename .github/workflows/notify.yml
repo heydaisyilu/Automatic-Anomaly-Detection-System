@@ -58,8 +58,8 @@ jobs:
             CHANGED="$(git ls-files result_anomaly || true)"
           fi
           echo "$CHANGED"
-          CHANGED_ESCAPED="$(printf "%s" "$CHANGED" | sed -e 's/%/%25/g' -e 's/\r/%0D/g' -e 's/\n/%0A/g')"
-          echo "files=$CHANGED_ESCAPED" >> "$GITHUB_OUTPUT"
+          CHANGED_JOINED=$(echo "$CHANGED" | paste -sd "," -)
+          echo "files=$CHANGED_JOINED" >> "$GITHUB_OUTPUT"
 
       - name: Build DEMO report (manual run)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.demo }}
