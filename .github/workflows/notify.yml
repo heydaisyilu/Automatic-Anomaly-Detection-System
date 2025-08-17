@@ -69,7 +69,8 @@ jobs:
           MD
 
       - name: Render report (auto run after detect)
-        if: ${{ github.event_name == 'workflow_run' && steps.diff.outputs.files != '' }}
+        # SỬA ĐIỀU KIỆN CHO PHÉP CHẠY KHI WORKFLOW_DISPATCH
+        if: ${{ (github.event_name == 'workflow_run' && steps.diff.outputs.files != '') || github.event_name == 'workflow_dispatch' }}
         env:
           CHANGED_FILES: ${{ steps.diff.outputs.files }}
           ASSUME_TZ: Asia/Ho_Chi_Minh
