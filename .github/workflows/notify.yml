@@ -29,7 +29,6 @@ jobs:
       - name: Checkout at detect commit (if workflow_run)
         uses: actions/checkout@v4
         with:
-          # lấy đúng commit của workflow "Detect AQI Anomalies"
           ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || '' }}
           fetch-depth: 2
 
@@ -43,7 +42,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas numpy
 
-      # Chỉ cần khi chạy theo sau detect: lấy danh sách file thay đổi trong result_anomaly/**
       - name: Collect changed anomaly files (only on workflow_run)
         id: diff
         if: ${{ github.event_name == 'workflow_run' }}
@@ -55,7 +53,6 @@ jobs:
             CHANGED="$(git ls-files result_anomaly || true)"
           fi
           echo "$CHANGED"
-          # escape để truyền qua output an toàn
           CHANGED_ESCAPED="$(printf "%s" "$CHANGED" | sed -e 's/%/%25/g' -e 's/\r/%0D/g' -e 's/\n/%0A/g')"
           echo "files=$CHANGED_ESCAPED" >> "$GITHUB_OUTPUT"
 
@@ -78,7 +75,6 @@ jobs:
           ASSUME_TZ: Asia/Ho_Chi_Minh
         run: |
           python notify/render_email.py
-
 
       - name: Create/Update alert issue and ping you
         if: hashFiles('out/anomaly_email.md') != ''
@@ -112,3 +108,17 @@ jobs:
             });
 
             core.setOutput('issue_number', String(issue.number));
+
+      - name: Send email if anomalies detected
+        if: hashFiles('out/anomaly_email.md') != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "Cảnh báo AQI/Gió bất thường"
+          to: email1@gmail.com, email2@gmail.com  # Đổi thành các email bạn muốn gửi
+          from: AQI Alert Bot <aqi-bot@example.com>
+          content_type: text/markdown
+          body: file://out/anomaly_email.md
