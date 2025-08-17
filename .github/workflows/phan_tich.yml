@@ -1,0 +1,81 @@
+name: Analyze AQI
+
+on:
+  schedule:
+    - cron: "5 * * * *"   # chạy mỗi giờ (sau merge 5 phút)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aqi-analysis
+  cancel-in-progress: true
+
+jobs:
+  run-analysis:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Ho_Chi_Minh
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT || github.token }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Thư viện dùng trong các phân tích & notebook
+          pip install pandas numpy scipy scikit-learn matplotlib seaborn ipykernel nbconvert jupyter
+
+      - name: Run phan_tich.ipynb
+        working-directory: detection
+        run: |
+          # đảm bảo kernel ok
+          python -m ipykernel install --user --name aqi-kernel
+          # chạy notebook và xuất ra notebook kết quả
+          jupyter nbconvert --to notebook --execute phan_tich.ipynb \
+            --ExecutePreprocessor.timeout=1800 \
+            --output phan_tich_output.ipynb
+
+      - name: Show changed files (debug)
+        run: |
+          echo "Changed files:"
+          git status --porcelain || true
+
+      - name: Commit & Push Results (if changed)
+        run: |
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global core.autocrlf false
+
+          # Chỉ add các thư mục/kết quả liên quan
+          git add result_summary/ || true
+          git add out/plots/ || true
+          git add result_anomaly/ || true
+          git add detection/phan_tich_output.ipynb || true
+
+          # Nếu không có gì thay đổi thì bỏ qua
+          if git diff --cached --quiet; then
+            echo "No analysis changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Auto: run phan_tich.ipynb, update summaries/plots/anomalies"
+          git push
