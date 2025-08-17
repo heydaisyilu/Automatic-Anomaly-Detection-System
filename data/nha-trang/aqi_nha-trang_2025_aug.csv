@@ -110,3 +110,6 @@ timestamp,city,aqi,weather_icon,wind_speed,humidity
 2025-08-17T13:13:55.722886+07:00,Nha Trang,65,/dl/web/weather/ic-weather-04d.svg,9.3 km/h,61%
 2025-08-17T14:09:41.120437+07:00,Nha Trang,63,/dl/web/weather/ic-weather-04d.svg,9.8 km/h,61%
 2025-08-17T15:12:44.631351+07:00,Nha Trang,63,/dl/web/weather/ic-weather-04d.svg,9.1 km/h,72%
+2025-08-17T16:09:21.710770+07:00,Nha Trang,63,/dl/web/weather/ic-weather-04d.svg,5.5 km/h,87%
+2025-08-17T17:09:40.693523+07:00,Nha Trang,65,/dl/web/weather/ic-weather-04d.svg,3.9 km/h,87%
+2025-08-17T18:07:27.803788+07:00,Nha Trang,65,/dl/web/weather/ic-weather-10d.svg,3.2 km/h,88%
