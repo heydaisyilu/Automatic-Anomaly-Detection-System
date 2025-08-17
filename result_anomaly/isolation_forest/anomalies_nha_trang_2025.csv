@@ -1715,7 +1715,7 @@
 2025-04-04 10:00:00+07:00,87.0,9.7,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,-1
 2025-04-04 11:00:00+07:00,85.0,9.7,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-04-04 12:00:00+07:00,85.0,12.1,63.0,/dl/web/weather/ic-w-06-rain-full.svg,Nha Trang,1
-2025-04-04 13:00:00+07:00,85.0,14.2,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
+2025-04-04 13:00:00+07:00,85.0,14.2,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,-1
 2025-04-04 14:00:00+07:00,79.0,15.8,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-04-04 15:00:00+07:00,79.0,15.3,66.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-04-04 16:00:00+07:00,79.0,14.8,67.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
@@ -2190,7 +2190,7 @@
 2025-04-24 13:00:00+07:00,62.0,15.0,58.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-04-24 14:00:00+07:00,66.0,19.5,57.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-04-24 15:00:00+07:00,66.0,19.5,58.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
-2025-04-24 16:00:00+07:00,66.0,22.9,56.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,-1
+2025-04-24 16:00:00+07:00,66.0,22.9,56.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-04-24 17:00:00+07:00,64.0,19.3,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-04-24 18:00:00+07:00,64.0,15.9,70.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-04-24 19:00:00+07:00,64.0,11.6,75.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
@@ -2521,7 +2521,7 @@
 2025-05-08 11:00:00+07:00,64.0,11.3,56.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-05-08 12:00:00+07:00,64.0,11.3,56.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-05-08 13:00:00+07:00,64.0,19.2,52.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
-2025-05-08 14:00:00+07:00,71.0,19.2,52.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,-1
+2025-05-08 14:00:00+07:00,71.0,19.2,52.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-05-08 15:00:00+07:00,71.0,15.1,57.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-05-08 16:00:00+07:00,71.0,15.1,57.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
 2025-05-08 17:00:00+07:00,72.0,12.9,68.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Nha Trang,1
@@ -4605,4 +4605,4 @@
 2025-08-17 22:00:00+07:00,66.0,4.4,91.0,/dl/web/weather/ic-weather-04n.svg,Nha Trang,1
 2025-08-17 23:00:00+07:00,62.0,4.4,92.0,/dl/web/weather/ic-weather-04n.svg,Nha Trang,1
 2025-08-18 00:00:00+07:00,62.0,5.3,92.0,/dl/web/weather/ic-weather-04n.svg,Nha Trang,1
-2025-08-18 01:00:00+07:00,62.0,5.1,91.0,/dl/web/weather/ic-weather-04n.svg,Nha Trang,1
+2025-08-18 01:00:00+07:00,64.0,5.1,91.0,/dl/web/weather/ic-weather-04n.svg,Nha Trang,1
