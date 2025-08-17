@@ -1,4 +1,3 @@
-# notify/render_email.py
 import os, glob, json
 from pathlib import Path
 import pandas as pd
@@ -101,6 +100,20 @@ def canonicalize(df):
     out["time_raw"] = df[c_time].astype(str)  # giữ nguyên để hiển thị
     out["time_key"] = to_epoch_utc(df[c_time])  # để so sánh mốc mới nhất
 
+    # Lưu phiên bản datetime chuyển về Asia/Ho_Chi_Minh để hiển thị
+    dt = pd.to_datetime(df[c_time], errors="coerce", utc=False)
+    if hasattr(dt, "dt"):
+        try:
+            has_tz = dt.dt.tz is not None
+        except Exception:
+            has_tz = False
+        if not has_tz:
+            dt = dt.dt.tz_localize(ASSUME_TZ)
+        dt = dt.dt.tz_convert(ASSUME_TZ)
+        out["time_vn"] = dt.dt.strftime("%Y-%m-%d %H:%M")
+    else:
+        out["time_vn"] = df[c_time].astype(str)
+
     if c_aqi:  out["aqi"]  = pd.to_numeric(df[c_aqi], errors="coerce")
     if c_wind:
         # lấy số nếu có đơn vị dạng "12 km/h"
@@ -148,11 +161,11 @@ def main():
     if cur.empty:
         print("No anomalies at latest timestamp."); return
 
-    # 3) Gộp theo (city, time_raw) để hợp nhất trùng nhau giữa các detector
+    # 3) Gộp theo (city, time_raw, time_vn) để hợp nhất trùng nhau giữa các detector
     def agg_first_nonnull(s): 
         return next((x for x in s if pd.notna(x) and str(x) != ""), "")
     cur = (cur
-           .groupby(["city","time_raw"], as_index=False)
+           .groupby(["city","time_raw","time_vn"], as_index=False)
            .agg({
                "aqi": agg_first_nonnull,
                "wind": agg_first_nonnull,
@@ -160,19 +173,20 @@ def main():
                "__source": lambda s: "; ".join(sorted(set(s)))
            }))
 
-    # 4) Render giữ nguyên timestamp như CSV (time_raw)
+    # 4) Render bảng: hiển thị thời gian theo Asia/Ho_Chi_Minh
     lines = [
         f"#  Cảnh báo bất thường AQI/Gió (tại mốc mới nhất)",
         "",
-        "| Thành phố | Thời điểm (CSV) | AQI | Gió | Phương pháp | Nguồn |",
+        "| Thành phố | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |",
         "|---|---:|---:|---:|---|---|",
     ]
-    for _, r in cur.sort_values(["city","time_raw"]).iterrows():
+    for _, r in cur.sort_values(["city", "time_vn"]).iterrows():
         aqi  = "" if pd.isna(r.get("aqi")) else f"{float(r['aqi']):.0f}"
         wind = "" if pd.isna(r.get("wind")) else f"{float(r['wind']):.2f}"
         meth = r.get("method","")
         src  = r.get("__source","")
-        lines.append(f"| {r['city']} | {r['time_raw']} | {aqi} | {wind} | {meth} | {src} |")
+        time_vn = r.get("time_vn", r.get("time_raw", ""))
+        lines.append(f"| {r['city']} | {time_vn} | {aqi} | {wind} | {meth} | {src} |")
 
     OUT_PATH.write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote {OUT_PATH}")
