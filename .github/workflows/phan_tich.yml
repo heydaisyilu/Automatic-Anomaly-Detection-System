@@ -1,0 +1,6 @@
+- name: Run phan_tich.ipynb
+  working-directory: detection
+  run: |
+    jupyter nbconvert --to notebook --execute phan_tich.ipynb \
+      --ExecutePreprocessor.timeout=1800 \
+      --output phan_tich_output.ipynb
