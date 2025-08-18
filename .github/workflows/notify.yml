@@ -16,23 +16,34 @@ permissions:
   contents: read
   issues: write
 
+# Tránh chồng chéo giữa các lần chạy
 concurrency:
-  group: notify-${{ github.ref }}
+  group: notify-${{ github.event.workflow_run.id || github.run_id }}
   cancel-in-progress: false
 
 jobs:
   notify:
+    # Chạy khi detect thành công hoặc khi bấm tay
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     runs-on: ubuntu-latest
 
     steps:
-      # Luôn checkout main để repo có commit anomaly mới nhất (KHÔNG dùng head_sha)
-      - name: Checkout main branch (always)
+      # Luôn checkout nhánh đã chạy detect (thường là main); đảm bảo có commit bot vừa push
+      - name: Checkout branch (has latest anomaly commit)
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event.workflow_run.head_branch || 'main' }}
           fetch-depth: 0
 
+      - name: Debug context
+        run: |
+          echo "event_name=${{ github.event_name }}"
+          echo "head_branch=${{ github.event.workflow_run.head_branch }}"
+          echo "head_sha=${{ github.event.workflow_run.head_sha }}"
+          echo "current_tip=$(git rev-parse HEAD)"
+          git log --oneline -3 || true
+
+      # Python env
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -43,40 +54,44 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas numpy
 
+      # So sánh file thay đổi do detect push: BASE = head_sha (trước khi detect tự commit), HEAD = tip của nhánh
       - name: Collect changed anomaly files (only on workflow_run)
         id: diff
         if: ${{ github.event_name == 'workflow_run' }}
+        env:
+          BASE_SHA: ${{ github.event.workflow_run.head_sha }}
+          BRANCH: ${{ github.event.workflow_run.head_branch || 'main' }}
         run: |
           set -e
-          echo "Find 2 latest detect-anomalies commits on main..."
-          DETECT_COMMITS=$(git log main --pretty=format:"%H %s" --grep="Auto-detect anomalies, update results & notebook" | awk '/Auto-detect anomalies, update results & notebook/{print $1}')
-          LATEST_COMMIT=$(echo "$DETECT_COMMITS" | sed -n '1p')
-          PREV_COMMIT=$(echo "$DETECT_COMMITS" | sed -n '2p')
-          echo "LATEST_DETECT_COMMIT=$LATEST_COMMIT"
-          echo "PREV_DETECT_COMMIT=$PREV_COMMIT"
-          # Nếu không tìm ra 2 commit, thì ls toàn bộ file anomaly
-          if [ -z "$PREV_COMMIT" ]; then
-            CHANGED="$(git ls-files result_anomaly || true)"
-          else
-            CHANGED="$(git diff --name-only $PREV_COMMIT $LATEST_COMMIT -- result_anomaly || true)"
-          fi
-          echo "Changed anomaly files:"
+          echo "BASE_SHA=$BASE_SHA"
+          echo "BRANCH=$BRANCH"
+          git fetch origin "$BRANCH" --depth=0
+          # đảm bảo đang ở tip mới nhất
+          git checkout -q "$BRANCH"
+          git pull --ff-only
+          echo "HEAD tip: $(git rev-parse HEAD)"
+          # liệt kê thay đổi liên quan kết quả detect
+          CHANGED="$(git diff --name-only "$BASE_SHA..HEAD" -- \
+            result_anomaly \
+            detection/detection_output.ipynb || true)"
+          echo "Changed anomaly files since detect run:"
           echo "$CHANGED"
-          CHANGED_JOINED=$(echo "$CHANGED" | paste -sd "," -)
-          echo "files=$CHANGED_JOINED" >> "$GITHUB_OUTPUT"
+          echo "files=$(echo "$CHANGED" | paste -sd "," -)" >> "$GITHUB_OUTPUT"
 
+      # DEMO (chạy tay)
       - name: Build DEMO report (manual run)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.demo }}
         run: |
           mkdir -p out
           cat > out/anomaly_email.md <<'MD'
           #  Cảnh báo bất thường AQI/Gió (DEMO)
-          |  Thành phố  | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |,
+          |  Thành phố  | Thời điểm (UTC+7) | AQI | Gió | Phương pháp | Nguồn |
           |-------------|-------------------|-----|-----|-------------|-------|
           | Ho Chi Minh City | 2025-08-16 19:00 | 180 | 12.30 | Z-score AQI, Z-score Wind | result_anomaly/z_score/ho_chi_minh_zscore.csv |
           | Ho Chi Minh City | 2025-08-16 19:00 | 175 | 11.80 | IsolationForest | result_anomaly/isolation_forest/anomalies_ho_chi_minh_2025.csv |
           MD
 
+      # Render (tự động sau detect, hoặc khi chạy tay)
       - name: Render report (auto run after detect)
         if: ${{ (github.event_name == 'workflow_run' && steps.diff.outputs.files != '') || github.event_name == 'workflow_dispatch' }}
         env:
@@ -85,6 +100,7 @@ jobs:
         run: |
           python notify/render_email.py
 
+      # Tạo/cập nhật Issue thông báo
       - name: Create/Update alert issue and ping you
         if: hashFiles('out/anomaly_email.md') != ''
         uses: actions/github-script@v7
@@ -111,7 +127,6 @@ jobs:
             }
 
             const ping = process.env.PING_USER ? `@${process.env.PING_USER}` : '';
-            // Lấy giờ hiện tại ở Asia/Ho_Chi_Minh
             const dt = new Date();
             const vnTime = dt.toLocaleString('sv-SE', { timeZone: 'Asia/Ho_Chi_Minh' }).replace(' ', 'T');
             await github.rest.issues.createComment({
@@ -119,8 +134,7 @@ jobs:
               body: `Cập nhật: ${vnTime} (Asia/Ho_Chi_Minh) ${ping}`
             });
 
-            core.setOutput('issue_number', String(issue.number));
-
+      # Gửi email khi có báo cáo
       - name: Send email if anomalies detected
         if: hashFiles('out/anomaly_email.md') != ''
         uses: dawidd6/action-send-mail@v3
