@@ -10,13 +10,12 @@ THU_MUC_KQ = Path("result")
 NAM = 2025
 
 # Tần suất resample mặc định: 1 giờ
-TANSUAT = os.getenv("RESAMPLE", "1H")  # "1H" = 1 giờ
+TANSUAT = os.getenv("RESAMPLE", "1H") 
 
 # Danh sách cột chuẩn
 COT_CHUAN = ["timestamp", "city", "aqi", "weather_icon", "wind_speed", "humidity"]
 
 def _mode_or_last(series: pd.Series):
-    """Chọn mode; nếu không có, lấy giá trị cuối cùng không null."""
     if series.empty:
         return None
     m = series.mode(dropna=True)
@@ -27,7 +26,6 @@ def _mode_or_last(series: pd.Series):
 
 _NUM_RE = re.compile(r"[-+]?\d*\.?\d+|\d+")
 def strip_units(val):
-    """Trích số đầu tiên trong chuỗi (vd: '7.4 km/h' -> 7.4; '78%' -> 78.0)."""
     import pandas as pd
     if pd.isna(val):
         return pd.NA
@@ -59,7 +57,7 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
     if da_xoa > 0:
         print(f"Xóa {da_xoa} dòng timestamp không hợp lệ.")
 
-    # Tự động bỏ đơn vị (vd: '7.4 km/h' -> 7.4; '78%' -> 78.0)
+    # Tự động bỏ đơn vị 
     for col in ["aqi", "wind_speed", "humidity"]:
         if col in df.columns:
             df[col] = df[col].map(strip_units)

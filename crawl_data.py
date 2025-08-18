@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 import traceback
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeoutError
 from datetime import datetime
@@ -10,7 +7,7 @@ import pathlib
 import csv
 import re
 
-# ======================= CẤU HÌNH THÀNH PHỐ =======================
+# Cấu hình thành phố
 CITIES: List[Dict[str, str]] = [
     {"name": "hanoi",              "display_name": "Hà Nội",         "url": "https://www.iqair.com/vi/vietnam/hanoi/hanoi"},
     {"name": "ho-chi-minh-city",   "display_name": "Hồ Chí Minh",    "url": "https://www.iqair.com/vi/vietnam/ho-chi-minh-city/ho-chi-minh-city"},
@@ -22,7 +19,7 @@ CITIES: List[Dict[str, str]] = [
     {"name": "vinh",               "display_name": "Vinh",           "url": "https://www.iqair.com/vi/vietnam/tinh-nghe-an/vinh"},
 ]
 
-# ======================= TIỆN ÍCH & VALIDATOR =======================
+# Tiện ích và validator cho dữ liệu AQI
 def get_vietnam_time() -> datetime:
     # Múi giờ VN chuẩn
     return datetime.now(ZoneInfo("Asia/Ho_Chi_Minh"))
@@ -46,12 +43,8 @@ def validate_weather_icon(icon: str) -> Optional[str]:
         return icon
     return None
 
-# 👉 Validator gió MỚI: chỉ cần tách số, KHÔNG bắt buộc có 'km/h'
+# Validator gió MỚI: chỉ cần tách số, không bắt buộc có 'km/h'
 def validate_wind_speed_number(speed_text: str) -> Optional[str]:
-    """
-    Trích số (float) đầu tiên từ chuỗi gió.
-    Ví dụ: '5.9', '5.9 km/h', 'wind 5.9' -> '5.9'
-    """
     try:
         s = (speed_text or "").strip()
         m = re.search(r"(\d+(\.\d+)?)", s)
@@ -62,10 +55,6 @@ def validate_wind_speed_number(speed_text: str) -> Optional[str]:
     return None
 
 def validate_humidity(humidity: str) -> Optional[str]:
-    """
-    Chỉ chấp nhận chuỗi có '%' để tránh 'ăn' nhầm AQI.
-    Trả về phần số (0..100) dạng chuỗi.
-    """
     try:
         s = (humidity or "").strip()
         if "%" not in s:
@@ -79,14 +68,14 @@ def validate_humidity(humidity: str) -> Optional[str]:
         pass
     return None
 
-# ======================= CRAWL 1 THÀNH PHỐ =======================
+# Crawl 1 thành phố
 def crawl_city_data(page, city: Dict) -> Optional[Dict]:
     print(f"\nAccessing {city['display_name']} ({city['url']})...", flush=True)
     try:
         page.goto(city['url'], timeout=60_000)
         print("Page loaded", flush=True)
 
-        # AQI (cần chỉnh nếu IQAir đổi DOM)
+        # AQI
         aqi_selector = "p.flex.h-full.w-full.flex-col.items-center.justify-center.text-sm.font-medium"
         page.wait_for_selector(aqi_selector, timeout=30_000)
         aqi_raw = (page.query_selector(aqi_selector).text_content() or "").strip()
@@ -97,10 +86,9 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         if weather_icon_raw and weather_icon_raw.startswith('/dl/assets/svg/weather/'):
             weather_icon_raw = weather_icon_raw.replace('/dl/assets/svg/weather/', '/dl/web/weather/')
 
-        # ---------- WIND: đọc số ngay trong container icon gió (ô Now) ----------
+        # Wind
         wind_speed_raw = ""
         try:
-            # container có IMG icon gió là con trực tiếp
             wind_container = page.query_selector(
                 "div.flex.flex-col.items-center:has(> img[src*='ic-wind-s-sm-solid-weather'])"
             )
@@ -119,7 +107,7 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         except Exception:
             pass
 
-        # ---------- HUMIDITY (cần có '%', vẫn theo icon) ----------
+        # Humidity
         humidity_raw = ""
         try:
             humidity_img = page.query_selector("img[src*='ic-humidity-2-solid-weather'], img[alt*='Độ ẩm'], img[alt*='do am']")
@@ -158,10 +146,10 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
         return {
             "timestamp": now.isoformat(),
             "city": city['display_name'],
-            "aqi": aqi,                # "68"
+            "aqi": aqi,                
             "weather_icon": weather_icon,
-            "wind_speed": wind_speed,  # ĐÃ GHÉP " km/h" SAU KHI LẤY SỐ
-            "humidity": humidity,      # "78%"
+            "wind_speed": wind_speed,  
+            "humidity": humidity,     
         }
 
     except Exception as e:
@@ -173,12 +161,12 @@ def crawl_city_data(page, city: Dict) -> Optional[Dict]:
             pass
         return None
 
-# ======================= LƯU CSV =======================
+# Lưu csv
 def save_to_csv(data: Dict, city_name: str) -> pathlib.Path:
     now = get_vietnam_time()
     result_dir = pathlib.Path(f"data/{city_name}")
     result_dir.mkdir(parents=True, exist_ok=True)
-    filename = f"aqi_{city_name}_{now.year}_{now.strftime('%b').lower()}.csv"  # aqi_can-tho_2025_aug.csv
+    filename = f"aqi_{city_name}_{now.year}_{now.strftime('%b').lower()}.csv"  
     filepath = result_dir / filename
 
     headers = ["timestamp", "city", "aqi", "weather_icon", "wind_speed", "humidity"]
@@ -190,7 +178,7 @@ def save_to_csv(data: Dict, city_name: str) -> pathlib.Path:
         writer.writerow(data)
     return filepath
 
-# ======================= CHẠY TOÀN BỘ 8 THÀNH PHỐ =======================
+# Chạy crawler cho tất cả thành phố
 def crawl_all_cities() -> List[Dict]:
     results: List[Dict] = []
     for city in CITIES:
@@ -219,7 +207,7 @@ def crawl_all_cities() -> List[Dict]:
             traceback.print_exc()
     return results
 
-# ======================= MAIN =======================
+# Main
 if __name__ == "__main__":
     try:
         print("Starting IQAir data crawler...", flush=True)
