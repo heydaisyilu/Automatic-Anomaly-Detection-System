@@ -31,13 +31,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Checkout (manual or others)
         if: ${{ github.event_name != 'workflow_run' }}
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -53,17 +53,24 @@ jobs:
         id: diff
         if: ${{ github.event_name == 'workflow_run' }}
         run: |
-          git log --oneline -2
-          git status
-          git diff --name-only HEAD~1 HEAD
-          git diff --stat HEAD~1 HEAD
-          ls -l result_anomaly
           set -e
-          if git rev-parse HEAD~1 >/dev/null 2>&1; then
-            CHANGED="$(git diff --name-only HEAD~1 HEAD -- result_anomaly || true)"
-          else
+          echo "Find 2 latest detect-anomalies commits..."
+          # Get current commit (should be detect-anomalies)
+          CURRENT_COMMIT=$(git rev-parse HEAD)
+          # Find 2 latest commits with the message
+          DETECT_COMMITS=$(git log --pretty=format:"%H %s" --grep="Auto-detect anomalies, update results & notebook" | awk '/Auto-detect anomalies, update results & notebook/{print $1}')
+          LATEST_COMMIT=$(echo "$DETECT_COMMITS" | sed -n '1p')
+          PREV_COMMIT=$(echo "$DETECT_COMMITS" | sed -n '2p')
+          echo "CURRENT_COMMIT=$CURRENT_COMMIT"
+          echo "LATEST_DETECT_COMMIT=$LATEST_COMMIT"
+          echo "PREV_DETECT_COMMIT=$PREV_COMMIT"
+          # Nếu không tìm ra 2 commit, thì ls toàn bộ file anomaly
+          if [ -z "$PREV_COMMIT" ]; then
             CHANGED="$(git ls-files result_anomaly || true)"
+          else
+            CHANGED="$(git diff --name-only $PREV_COMMIT $LATEST_COMMIT -- result_anomaly || true)"
           fi
+          echo "Changed anomaly files:"
           echo "$CHANGED"
           CHANGED_JOINED=$(echo "$CHANGED" | paste -sd "," -)
           echo "files=$CHANGED_JOINED" >> "$GITHUB_OUTPUT"
@@ -81,7 +88,6 @@ jobs:
           MD
 
       - name: Render report (auto run after detect)
-        # SỬA ĐIỀU KIỆN CHO PHÉP CHẠY KHI WORKFLOW_DISPATCH
         if: ${{ (github.event_name == 'workflow_run' && steps.diff.outputs.files != '') || github.event_name == 'workflow_dispatch' }}
         env:
           CHANGED_FILES: ${{ steps.diff.outputs.files }}
