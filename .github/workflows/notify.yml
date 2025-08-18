@@ -29,7 +29,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Luôn checkout nhánh đã chạy detect (thường là main); đảm bảo có commit bot vừa push
       - name: Checkout branch (has latest anomaly commit)
         uses: actions/checkout@v4
         with:
@@ -55,7 +54,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas numpy
 
-      # So sánh file thay đổi do detect push: BASE = head_sha (trước khi detect tự commit), HEAD = tip của nhánh
       - name: Collect changed anomaly files (only on workflow_run)
         id: diff
         if: ${{ github.event_name == 'workflow_run' }}

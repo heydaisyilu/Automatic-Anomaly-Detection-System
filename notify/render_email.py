@@ -8,7 +8,6 @@ OUT_PATH = OUT_DIR / "anomaly_email.md"
 
 ASSUME_TZ = os.getenv("ASSUME_TZ", "Asia/Ho_Chi_Minh")
 
-# ---- Helpers ----
 ALIASES = {
     "city": ["city", "thanh_pho", "tinh", "province", "location"],
     "time": ["timestamp","time","datetime","date"],
@@ -79,7 +78,7 @@ def detect_methods_row(df_row):
         methods.append("Z-score Wind")
     if "anomaly" in df_row and parse_flag(pd.Series([df_row["anomaly"]])).iloc[0]:
         methods.append("IsolationForest")
-    # generic flag (nếu có)
+    # Generic flag (nếu có)
     c_flag = pick_col(pd.DataFrame([df_row]), ALIASES["flag"])
     if c_flag and c_flag not in ["zscore_flag_aqi","zscore_flag_wind","anomaly"]:
         if parse_flag(pd.Series([df_row[c_flag]])).iloc[0]:
@@ -96,8 +95,8 @@ def canonicalize(df):
 
     out = pd.DataFrame()
     out["city"] = df[c_city].astype(str)
-    out["time_raw"] = df[c_time].astype(str)  # giữ nguyên để hiển thị
-    out["time_key"] = to_epoch_utc(df[c_time])  # để so sánh mốc mới nhất
+    out["time_raw"] = df[c_time].astype(str)  # Giữ nguyên để hiển thị
+    out["time_key"] = to_epoch_utc(df[c_time])  # Để so sánh mốc mới nhất
 
     # Lưu phiên bản datetime chuyển về Asia/Ho_Chi_Minh để hiển thị
     dt = pd.to_datetime(df[c_time], errors="coerce", utc=False)
@@ -115,11 +114,11 @@ def canonicalize(df):
 
     if c_aqi:  out["aqi"]  = pd.to_numeric(df[c_aqi], errors="coerce")
     if c_wind:
-        # lấy số nếu có đơn vị dạng "12 km/h"
+        # Lấy số nếu có đơn vị dạng "12 km/h"
         w = df[c_wind].astype(str).str.extract(r"([\d.]+)", expand=False)
         out["wind"] = pd.to_numeric(w, errors="coerce")
 
-    # flag + method
+    # Flag + method
     out["__source"] = df["__source"]
     # Tạo cờ tổng hợp nhanh theo từng hàng
     flags = []
@@ -132,7 +131,7 @@ def canonicalize(df):
     out["flag"] = flags
     return out.dropna(subset=["time_key"])
 
-# ---- Main ----
+# Main
 def main():
     raw = os.getenv("CHANGED_FILES","").replace("%0D","").replace("%0A","\n").replace("%25","%")
     parts = []
@@ -146,7 +145,7 @@ def main():
         paths = []
         paths += glob.glob("result_anomaly/**/*.csv", recursive=True)
         paths += glob.glob("result_anomaly/**/*.json", recursive=True)
-        # nếu muốn render luôn notebook đã execute
+        # Nếu muốn render luôn notebook đã execute
         nb = Path("detection/detection_output.ipynb")
         if nb.exists():
             paths.append(str(nb))
@@ -168,15 +167,15 @@ def main():
 
     big = pd.concat(frames, ignore_index=True)
 
-    # 1) Lấy mốc thời gian MỚI NHẤT toàn cục (UTC epoch)
+    # 1. Lấy mốc thời gian MỚI NHẤT toàn cục (UTC epoch)
     latest_key = big["time_key"].max()
 
-    # 2) Giữ nguyên CHỈ các dòng thuộc mốc đó & có flag bất thường
+    # 2. Giữ nguyên CHỈ các dòng thuộc mốc đó & có flag bất thường
     cur = big[(big["time_key"] == latest_key) & (big["flag"] == True)].copy()
     if cur.empty:
         print("No anomalies at latest timestamp."); return
 
-    # 3) Gộp theo (city, time_raw, time_vn) để hợp nhất trùng nhau giữa các detector
+    # 3. Gộp theo (city, time_raw, time_vn) để hợp nhất trùng nhau giữa các detector
     def agg_first_nonnull(s): 
         return next((x for x in s if pd.notna(x) and str(x) != ""), "")
     cur = (cur
@@ -188,7 +187,7 @@ def main():
                "__source": lambda s: "; ".join(sorted(set(s)))
            }))
 
-    # 4) Render bảng: hiển thị thời gian theo Asia/Ho_Chi_Minh
+    # 4. Render bảng: hiển thị thời gian theo Asia/Ho_Chi_Minh
     lines = [
         f"#  Cảnh báo bất thường AQI/Gió (tại mốc mới nhất)",
         "",

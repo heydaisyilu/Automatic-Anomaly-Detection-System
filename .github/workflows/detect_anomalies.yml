@@ -3,7 +3,7 @@ name: Detect AQI Anomalies
 
 on:
   schedule:
-    - cron: "10 * * * *" # chạy mỗi giờ (sau merge 10 phút)
+    - cron: "15 * * * *"
   workflow_dispatch:
 
 permissions:

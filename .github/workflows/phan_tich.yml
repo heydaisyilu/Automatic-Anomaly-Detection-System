@@ -3,7 +3,7 @@ name: Analyze AQI
 
 on:
   schedule:
-    - cron: "5 * * * *"   # chạy mỗi giờ (sau merge 5 phút)
+    - cron: "10 * * * *"   
   workflow_dispatch:
 
 permissions:
