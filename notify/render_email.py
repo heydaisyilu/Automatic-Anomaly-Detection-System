@@ -135,10 +135,26 @@ def canonicalize(df):
 # ---- Main ----
 def main():
     raw = os.getenv("CHANGED_FILES","").replace("%0D","").replace("%0A","\n").replace("%25","%")
-    paths = [p for p in raw.splitlines() if p.strip()] or glob.glob("result_anomaly/**/*", recursive=True)
-    paths = [p for p in paths if p.lower().endswith((".csv",".json"))]
+    parts = []
+    for ln in raw.replace(",", "\n").splitlines():
+        ln = ln.strip()
+        if ln:
+            parts.append(ln)
+
+    paths = parts
+    if not paths:
+        paths = []
+        paths += glob.glob("result_anomaly/**/*.csv", recursive=True)
+        paths += glob.glob("result_anomaly/**/*.json", recursive=True)
+        # nếu muốn render luôn notebook đã execute
+        nb = Path("detection/detection_output.ipynb")
+        if nb.exists():
+            paths.append(str(nb))
+
+    paths = [p for p in paths if p.lower().endswith((".csv",".json")) and Path(p).exists()]
     if not paths:
         print("No anomaly files."); return
+
 
     frames = []
     for p in paths:
