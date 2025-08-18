@@ -1,3 +1,4 @@
+# Thông báo khi có bất thường
 name: Notify anomalies by issue
 
 on:
