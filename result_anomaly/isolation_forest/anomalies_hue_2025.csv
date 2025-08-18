@@ -11,7 +11,7 @@
 2025-01-22 04:00:00+07:00,105.0,3.7,88.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,1
 2025-01-22 05:00:00+07:00,106.0,1.8,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,1
 2025-01-22 06:00:00+07:00,112.0,3.7,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,1
-2025-01-22 07:00:00+07:00,116.0,3.7,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,-1
+2025-01-22 07:00:00+07:00,116.0,3.7,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,1
 2025-01-22 09:00:00+07:00,101.0,5.5,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
 2025-01-22 11:00:00+07:00,92.0,3.7,60.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
 2025-01-22 12:00:00+07:00,78.0,7.4,60.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
@@ -192,7 +192,7 @@
 2025-01-29 20:00:00+07:00,110.0,11.1,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
 2025-01-29 21:00:00+07:00,138.0,11.1,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
 2025-01-29 22:00:00+07:00,127.0,9.2,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
-2025-01-29 23:00:00+07:00,117.0,7.4,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
+2025-01-29 23:00:00+07:00,117.0,7.4,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
 2025-01-30 00:00:00+07:00,128.0,3.7,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
 2025-01-30 01:00:00+07:00,126.0,3.7,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
 2025-01-30 02:00:00+07:00,117.0,7.4,88.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,-1
@@ -627,7 +627,7 @@
 2025-02-17 01:00:00+07:00,31.0,13.0,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
 2025-02-17 02:00:00+07:00,30.0,11.1,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
 2025-02-17 03:00:00+07:00,29.0,9.2,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
-2025-02-17 04:00:00+07:00,28.0,3.7,100.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
+2025-02-17 04:00:00+07:00,28.0,3.7,100.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
 2025-02-17 05:00:00+07:00,29.0,5.6,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
 2025-02-17 06:00:00+07:00,33.0,3.7,100.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
 2025-02-17 07:00:00+07:00,48.0,3.7,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
@@ -1535,7 +1535,7 @@
 2025-03-27 11:00:00+07:00,117.0,3.7,65.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Huế,-1
 2025-03-27 12:00:00+07:00,123.0,7.4,63.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Huế,-1
 2025-03-27 13:00:00+07:00,115.0,11.1,70.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Huế,-1
-2025-03-27 14:00:00+07:00,103.0,9.2,67.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Huế,1
+2025-03-27 14:00:00+07:00,103.0,9.2,67.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Huế,-1
 2025-03-27 15:00:00+07:00,103.0,11.1,57.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Huế,-1
 2025-03-27 16:00:00+07:00,97.0,13.0,65.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
 2025-03-27 17:00:00+07:00,96.0,14.8,65.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
@@ -1740,7 +1740,7 @@
 2025-04-05 07:00:00+07:00,108.0,7.4,100.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,-1
 2025-04-05 08:00:00+07:00,115.0,5.5,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,1
 2025-04-05 09:00:00+07:00,115.0,7.4,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
-2025-04-05 10:00:00+07:00,115.0,3.7,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
+2025-04-05 10:00:00+07:00,115.0,3.7,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
 2025-04-05 11:00:00+07:00,113.0,3.7,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
 2025-04-05 12:00:00+07:00,113.0,5.5,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
 2025-04-05 13:00:00+07:00,113.0,7.4,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
@@ -2600,7 +2600,7 @@
 2025-05-11 14:00:00+07:00,44.0,27.8,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,-1
 2025-05-11 15:00:00+07:00,51.0,22.2,89.0,/dl/web/weather/ic-w-06-rain-full.svg,Huế,1
 2025-05-11 16:00:00+07:00,57.0,25.9,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Huế,-1
-2025-05-11 17:00:00+07:00,60.0,24.1,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,1
+2025-05-11 17:00:00+07:00,60.0,24.1,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,-1
 2025-05-11 18:00:00+07:00,59.0,20.4,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Huế,1
 2025-05-11 19:00:00+07:00,58.0,18.5,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,1
 2025-05-11 20:00:00+07:00,56.0,18.5,100.0,/dl/web/weather/ic-w-09-mist-full.svg,Huế,1
@@ -4616,4 +4616,4 @@
 2025-08-18 13:00:00+07:00,55.0,7.2,65.0,/dl/web/weather/ic-weather-10d.svg,Huế,1
 2025-08-18 14:00:00+07:00,12.0,5.1,71.0,/dl/web/weather/ic-weather-10d.svg,Huế,1
 2025-08-18 15:00:00+07:00,12.0,4.0,83.0,/dl/web/weather/ic-weather-10d.svg,Huế,1
-2025-08-18 16:00:00+07:00,12.0,3.2,83.0,/dl/web/weather/ic-weather-10d.svg,Huế,-1
+2025-08-18 16:00:00+07:00,14.0,3.2,83.0,/dl/web/weather/ic-weather-10d.svg,Huế,-1

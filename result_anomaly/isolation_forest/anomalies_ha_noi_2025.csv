@@ -402,7 +402,7 @@
 2025-02-07 05:00:00+07:00,43.0,21.6,80.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
 2025-02-07 06:00:00+07:00,43.0,22.2,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
 2025-02-07 07:00:00+07:00,45.0,21.2,77.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
-2025-02-07 08:00:00+07:00,44.0,21.1,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
+2025-02-07 08:00:00+07:00,44.0,21.1,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-02-07 09:00:00+07:00,44.0,20.8,72.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-02-07 10:00:00+07:00,44.0,20.3,72.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-02-07 11:00:00+07:00,44.0,20.3,72.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
@@ -537,13 +537,13 @@
 2025-02-12 20:00:00+07:00,190.0,3.1,65.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
 2025-02-12 21:00:00+07:00,199.0,3.1,65.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
 2025-02-12 22:00:00+07:00,203.0,7.6,68.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
-2025-02-12 23:00:00+07:00,204.0,12.2,73.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
+2025-02-12 23:00:00+07:00,204.0,12.2,73.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
 2025-02-13 00:00:00+07:00,196.0,12.4,77.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-02-13 01:00:00+07:00,196.0,10.6,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-02-13 02:00:00+07:00,191.0,10.0,80.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-02-13 03:00:00+07:00,190.0,2.9,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-02-13 04:00:00+07:00,189.0,2.6,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
-2025-02-13 05:00:00+07:00,192.0,2.7,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
+2025-02-13 05:00:00+07:00,192.0,2.7,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-02-13 06:00:00+07:00,187.0,5.3,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-02-13 08:00:00+07:00,199.0,13.7,68.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
 2025-02-13 09:00:00+07:00,195.0,12.6,64.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
@@ -977,7 +977,7 @@
 2025-03-27 15:00:00+07:00,152.0,29.3,38.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hà Nội,-1
 2025-03-27 16:00:00+07:00,157.0,29.3,38.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hà Nội,-1
 2025-03-27 17:00:00+07:00,158.0,24.9,74.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hà Nội,-1
-2025-03-27 18:00:00+07:00,159.0,24.0,73.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hà Nội,1
+2025-03-27 18:00:00+07:00,159.0,24.0,73.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hà Nội,-1
 2025-03-27 19:00:00+07:00,167.0,21.1,84.0,/dl/web/weather/ic-w-11-night-few-clouds-full.svg,Hà Nội,1
 2025-03-27 20:00:00+07:00,166.0,16.9,94.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hà Nội,1
 2025-03-27 21:00:00+07:00,172.0,16.9,94.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hà Nội,1
@@ -1196,7 +1196,7 @@
 2025-04-05 23:00:00+07:00,186.0,5.0,92.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-04-06 00:00:00+07:00,181.0,7.4,92.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-04-06 01:00:00+07:00,186.0,8.2,96.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
-2025-04-06 03:00:00+07:00,173.0,2.1,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
+2025-04-06 03:00:00+07:00,173.0,2.1,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-04-06 04:00:00+07:00,165.0,1.6,94.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hà Nội,-1
 2025-04-06 05:00:00+07:00,166.0,2.7,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-04-06 06:00:00+07:00,166.0,5.1,94.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hà Nội,1
@@ -1737,7 +1737,7 @@
 2025-04-28 21:00:00+07:00,112.0,15.3,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-04-28 22:00:00+07:00,110.0,15.3,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-04-28 23:00:00+07:00,100.0,2.4,97.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
-2025-04-29 01:00:00+07:00,102.0,2.3,96.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
+2025-04-29 01:00:00+07:00,102.0,2.3,96.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-04-29 02:00:00+07:00,97.0,2.3,96.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-04-29 03:00:00+07:00,107.0,6.4,90.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-04-29 04:00:00+07:00,119.0,6.4,90.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
@@ -2059,7 +2059,7 @@
 2025-05-12 11:00:00+07:00,88.0,1.8,49.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-05-12 12:00:00+07:00,75.0,3.1,46.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-05-12 13:00:00+07:00,72.0,3.7,42.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
-2025-05-12 14:00:00+07:00,69.0,3.7,42.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
+2025-05-12 14:00:00+07:00,69.0,3.7,42.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
 2025-05-12 15:00:00+07:00,69.0,5.1,34.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hà Nội,-1
 2025-05-12 16:00:00+07:00,71.0,6.6,42.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hà Nội,1
 2025-05-12 17:00:00+07:00,73.0,6.6,42.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hà Nội,1
@@ -2425,7 +2425,7 @@
 2025-05-27 22:00:00+07:00,180.0,6.1,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-05-27 23:00:00+07:00,186.0,5.5,96.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
 2025-05-28 00:00:00+07:00,189.0,5.5,96.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
-2025-05-28 01:00:00+07:00,187.0,4.7,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
+2025-05-28 01:00:00+07:00,187.0,4.7,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
 2025-05-28 02:00:00+07:00,187.0,4.8,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,1
 2025-05-28 03:00:00+07:00,184.0,4.3,97.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
 2025-05-28 04:00:00+07:00,185.0,4.3,97.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hà Nội,-1
@@ -4040,4 +4040,4 @@
 2025-08-18 13:00:00+07:00,56.0,17.1,75.0,/dl/web/weather/ic-weather-10d.svg,Hà Nội,1
 2025-08-18 14:00:00+07:00,53.0,14.7,76.0,/dl/web/weather/ic-weather-10d.svg,Hà Nội,1
 2025-08-18 15:00:00+07:00,53.0,12.1,75.0,/dl/web/weather/ic-weather-04d.svg,Hà Nội,1
-2025-08-18 16:00:00+07:00,53.0,12.1,75.0,/dl/web/weather/ic-weather-04d.svg,Hà Nội,1
+2025-08-18 16:00:00+07:00,54.0,11.0,74.5,/dl/web/weather/ic-weather-04d.svg,Hà Nội,1
