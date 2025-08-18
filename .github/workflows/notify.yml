@@ -83,7 +83,6 @@ jobs:
             printf 'EOF\n'
           } >> "$GITHUB_OUTPUT"
 
-
       # DEMO (chạy tay)
       - name: Build DEMO report (manual run)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.demo }}
