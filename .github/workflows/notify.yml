@@ -16,14 +16,8 @@ permissions:
   contents: read
   issues: write
 
-# Tránh chồng chéo giữa các lần chạy
-concurrency:
-  group: notify-${{ github.event.workflow_run.id || github.run_id }}
-  cancel-in-progress: false
-
 jobs:
   notify:
-    # Chạy khi detect thành công hoặc khi bấm tay
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     runs-on: ubuntu-latest
 
@@ -42,7 +36,6 @@ jobs:
           echo "current_tip=$(git rev-parse HEAD)"
           git log --oneline -3 || true
 
-      # Python env
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -81,7 +74,6 @@ jobs:
             printf 'EOF\n'
           } >> "$GITHUB_OUTPUT"
 
-      # DEMO (chạy tay)
       - name: Build DEMO report (manual run)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.demo }}
         run: |
@@ -94,7 +86,6 @@ jobs:
           | Ho Chi Minh City | 2025-08-16 19:00 | 175 | 11.80 | IsolationForest | result_anomaly/isolation_forest/anomalies_ho_chi_minh_2025.csv |
           MD
 
-      # Render (tự động sau detect, hoặc khi chạy tay)
       - name: Render report (auto run after detect)
         if: ${{ (github.event_name == 'workflow_run' && steps.diff.outputs.files != '') || github.event_name == 'workflow_dispatch' }}
         env:
@@ -103,7 +94,6 @@ jobs:
         run: |
           python notify/render_email.py
 
-      # Tạo/cập nhật Issue thông báo
       - name: Create/Update alert issue and ping you
         if: hashFiles('out/anomaly_email.md') != ''
         uses: actions/github-script@v7
@@ -137,7 +127,6 @@ jobs:
               body: `Cập nhật: ${vnTime} (Asia/Ho_Chi_Minh) ${ping}`
             });
 
-      # Gửi email khi có báo cáo
       - name: Send email if anomalies detected
         if: hashFiles('out/anomaly_email.md') != ''
         uses: dawidd6/action-send-mail@v3
