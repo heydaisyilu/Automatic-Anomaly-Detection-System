@@ -65,15 +65,31 @@ jobs:
           set -e
           echo "BASE_SHA=$BASE_SHA"
           echo "BRANCH=$BRANCH"
-          git fetch origin "$BRANCH" --depth=0
-          # đảm bảo đang ở tip mới nhất
+
+          # đảm bảo repo đầy đủ lịch sử: nếu là clone nông, bỏ unshallow
+          if git rev-parse --is-shallow-repository >/dev/null 2>&1 && git rev-parse --is-shallow-repository | grep -q true; then
+            git fetch --unshallow --no-tags --prune origin
+          else
+            git fetch --no-tags --prune origin
+          fi
+
+          # checkout nhánh rồi kéo tip mới nhất
           git checkout -q "$BRANCH"
-          git pull --ff-only
+          git pull --ff-only --no-tags
+
           echo "HEAD tip: $(git rev-parse HEAD)"
-          # liệt kê thay đổi liên quan kết quả detect
+
+          # nếu BASE_SHA chưa có trong local (ví dụ do clone nông), kéo thêm cho chắc
+          if ! git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+            echo "BASE_SHA chưa có local, fetch để lấy commit base..."
+            git fetch --no-tags origin "$BASE_SHA:$BASE_SHA" || true
+          fi
+
+          # liệt kê thay đổi do detect push
           CHANGED="$(git diff --name-only "$BASE_SHA..HEAD" -- \
             result_anomaly \
             detection/detection_output.ipynb || true)"
+
           echo "Changed anomaly files since detect run:"
           echo "$CHANGED"
           echo "files=$(echo "$CHANGED" | paste -sd "," -)" >> "$GITHUB_OUTPUT"
