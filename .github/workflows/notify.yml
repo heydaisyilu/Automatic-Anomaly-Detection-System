@@ -26,17 +26,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout at detect commit (workflow_run)
-        if: ${{ github.event_name == 'workflow_run' }}
+      # Luôn checkout main để repo có commit anomaly mới nhất (KHÔNG dùng head_sha)
+      - name: Checkout main branch (always)
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
-          fetch-depth: 0
-
-      - name: Checkout (manual or others)
-        if: ${{ github.event_name != 'workflow_run' }}
-        uses: actions/checkout@v4
-        with:
+          ref: main
           fetch-depth: 0
 
       - name: Setup Python
@@ -54,14 +48,10 @@ jobs:
         if: ${{ github.event_name == 'workflow_run' }}
         run: |
           set -e
-          echo "Find 2 latest detect-anomalies commits..."
-          # Get current commit (should be detect-anomalies)
-          CURRENT_COMMIT=$(git rev-parse HEAD)
-          # Find 2 latest commits with the message
-          DETECT_COMMITS=$(git log --pretty=format:"%H %s" --grep="Auto-detect anomalies, update results & notebook" | awk '/Auto-detect anomalies, update results & notebook/{print $1}')
+          echo "Find 2 latest detect-anomalies commits on main..."
+          DETECT_COMMITS=$(git log main --pretty=format:"%H %s" --grep="Auto-detect anomalies, update results & notebook" | awk '/Auto-detect anomalies, update results & notebook/{print $1}')
           LATEST_COMMIT=$(echo "$DETECT_COMMITS" | sed -n '1p')
           PREV_COMMIT=$(echo "$DETECT_COMMITS" | sed -n '2p')
-          echo "CURRENT_COMMIT=$CURRENT_COMMIT"
           echo "LATEST_DETECT_COMMIT=$LATEST_COMMIT"
           echo "PREV_DETECT_COMMIT=$PREV_COMMIT"
           # Nếu không tìm ra 2 commit, thì ls toàn bộ file anomaly
@@ -99,7 +89,7 @@ jobs:
         if: hashFiles('out/anomaly_email.md') != ''
         uses: actions/github-script@v7
         env:
-          PING_USER: heydaisyilu   # đổi thành username GitHub của bạn nếu khác
+          PING_USER: heydaisyilu
         with:
           script: |
             const fs = require('fs');
