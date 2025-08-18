@@ -1,8 +1,9 @@
 name: Merge AQI Data for All Cities
 
 on:
-  schedule:
-    - cron: '5 * * * *'  
+  workflow_run:
+    workflows: ["Crawl IQAir Data"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
