@@ -16,15 +16,21 @@ permissions:
   contents: read
   issues: write
 
+concurrency:
+  group: notify-${{ github.event.workflow_run.id || github.run_id }}
+  cancel-in-progress: false
+
 jobs:
   notify:
+    # Chạy khi detect thành công hoặc khi bấm tay
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout branch (has latest anomaly commit)
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.workflow_run.head_branch || 'main' }}
           fetch-depth: 0
 
       - name: Debug context
