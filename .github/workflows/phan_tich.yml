@@ -1,8 +1,9 @@
 name: Analyze AQI
 
 on:
-  schedule:
-    - cron: "10 * * * *"   
+  workflow_run:
+    workflows: ["Merge AQI Data for All Cities"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
