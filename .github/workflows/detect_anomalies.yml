@@ -1,8 +1,9 @@
 name: Detect AQI Anomalies
 
 on:
-  schedule:
-    - cron: "15 * * * *"
+  workflow_run:
+    workflows: ["Analyze AQI"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
