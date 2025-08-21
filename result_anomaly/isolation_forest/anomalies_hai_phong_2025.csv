@@ -110,15 +110,15 @@
 2025-01-26 09:00:00+07:00,33.0,24.1,67.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-01-26 10:00:00+07:00,33.0,24.1,67.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-01-26 11:00:00+07:00,53.0,22.2,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-01-26 12:00:00+07:00,44.0,22.2,67.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-01-26 12:00:00+07:00,44.0,22.2,67.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-01-26 13:00:00+07:00,40.0,24.1,72.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-01-26 14:00:00+07:00,33.0,18.5,62.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-01-26 14:00:00+07:00,33.0,18.5,62.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-01-26 15:00:00+07:00,50.0,20.4,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-01-26 16:00:00+07:00,50.0,16.7,58.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-01-26 17:00:00+07:00,39.0,24.1,55.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-01-26 18:00:00+07:00,53.0,20.4,51.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-01-26 19:00:00+07:00,56.0,24.1,51.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
-2025-01-26 20:00:00+07:00,60.0,18.5,51.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
+2025-01-26 20:00:00+07:00,60.0,18.5,51.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
 2025-01-26 21:00:00+07:00,56.0,20.4,51.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
 2025-01-26 22:00:00+07:00,55.0,18.5,51.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
 2025-01-26 23:00:00+07:00,56.0,14.8,51.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
@@ -144,7 +144,7 @@
 2025-01-27 19:00:00+07:00,69.0,11.1,44.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-01-27 20:00:00+07:00,132.0,7.4,58.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-01-27 21:00:00+07:00,81.0,7.4,58.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
-2025-01-27 22:00:00+07:00,75.0,0.0,62.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
+2025-01-27 22:00:00+07:00,75.0,0.0,62.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-01-27 23:00:00+07:00,81.0,5.5,58.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-01-28 00:00:00+07:00,112.0,9.2,62.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-01-28 01:00:00+07:00,90.0,5.5,58.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
@@ -200,7 +200,7 @@
 2025-01-30 04:00:00+07:00,96.0,3.7,77.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-01-30 05:00:00+07:00,97.0,5.5,88.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-01-30 06:00:00+07:00,96.0,3.7,82.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
-2025-01-30 07:00:00+07:00,91.0,0.0,82.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
+2025-01-30 07:00:00+07:00,91.0,0.0,82.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-01-30 08:00:00+07:00,80.0,3.7,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-01-30 09:00:00+07:00,139.0,5.5,67.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-01-30 10:00:00+07:00,139.0,5.5,67.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -327,7 +327,7 @@
 2025-02-04 11:00:00+07:00,84.0,11.1,48.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-02-04 12:00:00+07:00,77.0,9.2,48.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-02-04 13:00:00+07:00,81.0,3.7,45.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
-2025-02-04 14:00:00+07:00,84.0,3.7,48.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
+2025-02-04 14:00:00+07:00,84.0,3.7,48.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-02-04 15:00:00+07:00,86.0,5.5,42.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-02-04 16:00:00+07:00,92.0,9.2,45.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-02-04 17:00:00+07:00,79.0,14.8,52.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
@@ -365,7 +365,7 @@
 2025-02-06 01:00:00+07:00,158.0,7.4,77.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-06 02:00:00+07:00,158.0,9.2,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-06 03:00:00+07:00,163.0,7.4,88.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
-2025-02-06 04:00:00+07:00,165.0,7.4,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
+2025-02-06 04:00:00+07:00,165.0,7.4,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-02-06 05:00:00+07:00,163.0,3.7,100.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
 2025-02-06 06:00:00+07:00,158.0,5.5,100.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
 2025-02-06 07:00:00+07:00,144.0,5.5,100.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
@@ -387,9 +387,9 @@
 2025-02-06 23:00:00+07:00,105.0,11.1,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-07 00:00:00+07:00,134.0,11.1,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-02-07 01:00:00+07:00,144.0,9.2,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
-2025-02-07 02:00:00+07:00,105.0,14.8,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
+2025-02-07 02:00:00+07:00,105.0,14.8,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
 2025-02-07 03:00:00+07:00,105.0,9.2,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
-2025-02-07 04:00:00+07:00,105.0,11.1,100.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-02-07 04:00:00+07:00,105.0,11.1,100.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-07 05:00:00+07:00,44.0,11.1,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-02-07 06:00:00+07:00,41.0,11.1,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-02-07 07:00:00+07:00,35.0,13.0,100.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
@@ -453,7 +453,7 @@
 2025-02-09 17:00:00+07:00,117.0,5.5,48.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-09 18:00:00+07:00,137.0,3.7,51.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-09 19:00:00+07:00,154.0,7.4,59.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-02-09 20:00:00+07:00,157.0,7.4,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-02-09 20:00:00+07:00,157.0,7.4,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-09 21:00:00+07:00,162.0,7.4,58.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-09 22:00:00+07:00,162.0,3.7,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-09 23:00:00+07:00,155.0,5.5,67.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -535,10 +535,10 @@
 2025-02-13 03:00:00+07:00,122.0,7.4,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-13 04:00:00+07:00,133.0,5.5,100.0,/dl/web/weather/ic-w-11-night-few-clouds-full.svg,Hải Phòng,-1
 2025-02-13 05:00:00+07:00,155.0,3.7,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
-2025-02-13 06:00:00+07:00,166.0,7.4,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
+2025-02-13 06:00:00+07:00,166.0,7.4,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-02-13 08:00:00+07:00,189.0,5.5,88.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
-2025-02-13 09:00:00+07:00,169.0,9.2,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-02-13 10:00:00+07:00,169.0,9.2,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-02-13 09:00:00+07:00,169.0,9.2,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-02-13 10:00:00+07:00,169.0,9.2,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-13 11:00:00+07:00,164.0,9.2,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-13 12:00:00+07:00,168.0,5.5,83.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
 2025-02-13 13:00:00+07:00,162.0,5.5,73.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
@@ -605,7 +605,7 @@
 2025-02-16 02:00:00+07:00,107.0,11.1,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-16 03:00:00+07:00,105.0,9.2,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-16 04:00:00+07:00,123.0,11.1,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-02-16 05:00:00+07:00,137.0,14.8,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-02-16 05:00:00+07:00,137.0,14.8,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-16 06:00:00+07:00,133.0,14.8,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-02-16 07:00:00+07:00,127.0,9.2,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-02-16 08:00:00+07:00,113.0,11.1,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -729,8 +729,8 @@
 2025-02-21 08:00:00+07:00,168.0,13.0,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-21 09:00:00+07:00,167.0,13.0,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-21 10:00:00+07:00,167.0,16.7,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-02-21 11:00:00+07:00,155.0,16.7,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-02-21 12:00:00+07:00,155.0,16.7,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-02-21 11:00:00+07:00,155.0,16.7,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-02-21 12:00:00+07:00,155.0,16.7,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-21 13:00:00+07:00,149.0,14.8,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-21 14:00:00+07:00,137.0,14.8,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-21 15:00:00+07:00,119.0,16.7,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -760,7 +760,7 @@
 2025-02-22 17:00:00+07:00,156.0,13.0,77.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-22 18:00:00+07:00,160.0,16.7,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-22 19:00:00+07:00,163.0,16.7,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-02-22 20:00:00+07:00,159.0,14.8,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-02-22 20:00:00+07:00,159.0,14.8,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-22 21:00:00+07:00,156.0,14.8,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-22 22:00:00+07:00,158.0,10.0,75.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-22 23:00:00+07:00,161.0,11.1,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -822,7 +822,7 @@
 2025-02-25 07:00:00+07:00,169.0,7.4,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-25 08:00:00+07:00,177.0,5.5,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
 2025-02-25 09:00:00+07:00,171.0,1.8,88.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
-2025-02-25 10:00:00+07:00,171.0,5.5,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
+2025-02-25 10:00:00+07:00,171.0,5.5,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-02-25 11:00:00+07:00,166.0,5.5,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-02-25 12:00:00+07:00,165.0,3.7,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
 2025-02-25 13:00:00+07:00,168.0,5.5,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
@@ -831,7 +831,7 @@
 2025-02-25 16:00:00+07:00,153.0,3.7,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-02-25 17:00:00+07:00,163.0,3.7,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
 2025-02-25 18:00:00+07:00,165.0,5.5,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
-2025-02-25 19:00:00+07:00,165.0,7.4,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
+2025-02-25 19:00:00+07:00,165.0,7.4,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-02-25 20:00:00+07:00,170.0,7.4,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
 2025-02-25 21:00:00+07:00,172.0,7.4,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
 2025-02-25 22:00:00+07:00,161.0,3.7,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
@@ -849,7 +849,7 @@
 2025-02-26 11:00:00+07:00,73.0,7.4,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-26 12:00:00+07:00,97.0,5.5,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-26 13:00:00+07:00,154.0,7.4,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
-2025-02-26 14:00:00+07:00,122.0,7.4,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
+2025-02-26 14:00:00+07:00,122.0,7.4,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
 2025-02-26 15:00:00+07:00,119.0,9.2,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-02-26 17:00:00+07:00,137.0,9.2,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-02-26 18:00:00+07:00,124.0,3.7,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -874,7 +874,7 @@
 2025-02-27 13:00:00+07:00,170.0,3.7,82.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
 2025-02-27 14:00:00+07:00,174.0,7.9,69.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-02-27 15:00:00+07:00,172.0,1.8,83.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
-2025-02-27 16:00:00+07:00,172.0,5.5,83.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
+2025-02-27 16:00:00+07:00,172.0,5.5,83.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-02-27 17:00:00+07:00,165.0,5.5,83.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-02-27 18:00:00+07:00,153.0,13.0,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-02-27 19:00:00+07:00,119.0,13.0,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -1004,8 +1004,8 @@
 2025-03-04 23:00:00+07:00,81.0,11.1,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-05 00:00:00+07:00,87.0,11.1,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-05 01:00:00+07:00,88.0,13.0,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
-2025-03-05 02:00:00+07:00,88.0,14.8,100.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
-2025-03-05 03:00:00+07:00,71.0,16.7,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
+2025-03-05 02:00:00+07:00,88.0,14.8,100.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
+2025-03-05 03:00:00+07:00,71.0,16.7,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
 2025-03-05 04:00:00+07:00,84.0,11.1,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-03-05 05:00:00+07:00,90.0,7.4,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-03-05 06:00:00+07:00,84.0,7.4,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
@@ -1024,7 +1024,7 @@
 2025-03-05 19:00:00+07:00,99.0,7.4,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-05 20:00:00+07:00,99.0,20.4,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-05 21:00:00+07:00,105.0,20.4,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-03-05 22:00:00+07:00,117.0,20.4,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-03-05 22:00:00+07:00,117.0,20.4,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-05 23:00:00+07:00,139.0,16.7,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-06 00:00:00+07:00,142.0,16.7,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-06 01:00:00+07:00,139.0,16.7,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -1106,7 +1106,7 @@
 2025-03-09 06:00:00+07:00,96.0,5.5,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-09 07:00:00+07:00,105.0,5.5,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-03-09 08:00:00+07:00,124.0,5.5,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
-2025-03-09 09:00:00+07:00,124.0,5.5,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
+2025-03-09 09:00:00+07:00,124.0,5.5,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
 2025-03-09 10:00:00+07:00,134.0,5.5,100.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
 2025-03-09 11:00:00+07:00,139.0,7.4,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
 2025-03-09 12:00:00+07:00,142.0,7.4,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
@@ -1322,7 +1322,7 @@
 2025-03-18 10:00:00+07:00,115.0,14.8,48.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-03-18 11:00:00+07:00,110.0,14.8,48.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-03-18 12:00:00+07:00,105.0,13.0,48.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
-2025-03-18 13:00:00+07:00,105.0,11.1,45.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
+2025-03-18 13:00:00+07:00,105.0,11.1,45.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-03-18 14:00:00+07:00,110.0,14.8,45.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-03-18 15:00:00+07:00,102.0,13.0,43.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,-1
 2025-03-18 17:00:00+07:00,116.0,9.2,43.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
@@ -1352,8 +1352,8 @@
 2025-03-19 17:00:00+07:00,89.0,16.7,40.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-03-19 18:00:00+07:00,85.0,16.7,46.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-03-19 19:00:00+07:00,78.0,13.0,52.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
-2025-03-19 20:00:00+07:00,76.0,1.8,55.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
-2025-03-19 21:00:00+07:00,74.0,1.8,55.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
+2025-03-19 20:00:00+07:00,76.0,1.8,55.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
+2025-03-19 21:00:00+07:00,74.0,1.8,55.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-03-19 22:00:00+07:00,75.0,3.7,59.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-03-19 23:00:00+07:00,80.0,1.8,63.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-03-20 00:00:00+07:00,82.0,1.8,63.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
@@ -1361,7 +1361,7 @@
 2025-03-20 02:00:00+07:00,103.0,5.5,63.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-03-20 04:00:00+07:00,128.0,7.4,59.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-03-20 05:00:00+07:00,142.0,5.5,63.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
-2025-03-20 06:00:00+07:00,163.0,7.4,72.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
+2025-03-20 06:00:00+07:00,163.0,7.4,72.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-03-20 07:00:00+07:00,168.0,3.7,68.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-03-20 08:00:00+07:00,171.0,7.4,63.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-03-20 09:00:00+07:00,173.0,7.4,49.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
@@ -1417,7 +1417,7 @@
 2025-03-22 13:00:00+07:00,87.0,13.0,50.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-03-22 14:00:00+07:00,86.0,13.0,57.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-03-22 15:00:00+07:00,83.0,13.0,57.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
-2025-03-22 16:00:00+07:00,81.0,11.1,41.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
+2025-03-22 16:00:00+07:00,81.0,11.1,41.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-03-22 17:00:00+07:00,85.0,14.8,53.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-03-22 18:00:00+07:00,93.0,18.5,60.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-03-22 19:00:00+07:00,103.0,14.8,73.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
@@ -1443,7 +1443,7 @@
 2025-03-23 15:00:00+07:00,96.0,14.8,61.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
 2025-03-23 16:00:00+07:00,86.0,16.7,53.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-03-23 17:00:00+07:00,91.0,14.8,50.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
-2025-03-23 18:00:00+07:00,92.0,16.7,50.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
+2025-03-23 18:00:00+07:00,92.0,16.7,50.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-03-23 19:00:00+07:00,101.0,16.7,68.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-03-23 20:00:00+07:00,112.0,9.2,83.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-03-23 21:00:00+07:00,112.0,9.2,83.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
@@ -1466,7 +1466,7 @@
 2025-03-24 15:00:00+07:00,171.0,11.1,57.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-03-24 16:00:00+07:00,168.0,11.1,57.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-03-24 17:00:00+07:00,164.0,18.5,73.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
-2025-03-24 18:00:00+07:00,151.0,16.7,78.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
+2025-03-24 18:00:00+07:00,151.0,16.7,78.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-03-24 19:00:00+07:00,143.0,16.7,78.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-03-24 20:00:00+07:00,122.0,14.8,83.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-03-24 21:00:00+07:00,110.0,14.8,83.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
@@ -1511,7 +1511,7 @@
 2025-03-26 12:00:00+07:00,71.0,14.8,73.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-26 13:00:00+07:00,75.0,16.7,65.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-26 14:00:00+07:00,67.0,18.5,61.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-03-26 15:00:00+07:00,68.0,20.4,56.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-03-26 15:00:00+07:00,68.0,20.4,56.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-26 16:00:00+07:00,72.0,18.5,61.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-26 17:00:00+07:00,78.0,16.7,67.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-03-26 18:00:00+07:00,74.0,14.8,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -1655,7 +1655,7 @@
 2025-04-01 17:00:00+07:00,97.0,13.0,31.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-04-01 18:00:00+07:00,107.0,13.0,31.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-04-01 19:00:00+07:00,106.0,13.0,31.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
-2025-04-01 20:00:00+07:00,121.0,3.7,56.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
+2025-04-01 20:00:00+07:00,121.0,3.7,56.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-04-01 21:00:00+07:00,140.0,3.7,56.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
 2025-04-01 22:00:00+07:00,137.0,18.5,72.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
 2025-04-01 23:00:00+07:00,139.0,14.8,72.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
@@ -1676,7 +1676,7 @@
 2025-04-02 14:00:00+07:00,87.0,11.1,31.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-04-02 15:00:00+07:00,87.0,13.0,36.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-04-02 16:00:00+07:00,87.0,14.8,41.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
-2025-04-02 17:00:00+07:00,87.0,14.8,43.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
+2025-04-02 17:00:00+07:00,87.0,14.8,43.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-04-02 18:00:00+07:00,97.0,16.7,56.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-04-02 19:00:00+07:00,106.0,16.7,60.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
 2025-04-02 20:00:00+07:00,94.0,11.1,64.0,/dl/web/weather/ic-w-11-night-few-clouds-full.svg,Hải Phòng,1
@@ -1691,13 +1691,13 @@
 2025-04-03 05:00:00+07:00,98.0,3.7,64.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-04-03 06:00:00+07:00,105.0,6.6,57.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-04-03 07:00:00+07:00,129.0,6.0,59.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
-2025-04-03 08:00:00+07:00,118.0,8.9,49.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
+2025-04-03 08:00:00+07:00,118.0,8.9,49.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-04-03 09:00:00+07:00,96.0,12.1,48.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-04-03 10:00:00+07:00,105.0,11.1,56.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-04-03 11:00:00+07:00,96.0,11.1,56.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-04-03 12:00:00+07:00,85.0,14.8,41.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-04-03 13:00:00+07:00,84.0,14.8,41.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
-2025-04-03 14:00:00+07:00,85.0,11.1,41.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
+2025-04-03 14:00:00+07:00,85.0,11.1,41.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-04-03 15:00:00+07:00,85.0,11.1,38.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-04-03 16:00:00+07:00,86.0,14.8,41.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-04-03 17:00:00+07:00,91.0,14.8,50.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
@@ -1784,7 +1784,7 @@
 2025-04-07 03:00:00+07:00,158.0,7.4,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-04-07 04:00:00+07:00,164.0,9.2,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-04-07 05:00:00+07:00,165.0,3.7,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-04-07 06:00:00+07:00,168.0,9.2,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-04-07 06:00:00+07:00,168.0,9.2,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-04-07 07:00:00+07:00,171.0,11.1,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-04-07 08:00:00+07:00,167.0,14.8,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-04-07 09:00:00+07:00,165.0,13.0,83.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
@@ -1827,7 +1827,7 @@
 2025-04-08 22:00:00+07:00,107.0,7.4,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-04-08 23:00:00+07:00,107.0,9.2,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-04-09 00:00:00+07:00,124.0,13.0,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-04-09 01:00:00+07:00,139.0,14.8,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,1
+2025-04-09 01:00:00+07:00,139.0,14.8,94.0,/dl/web/weather/ic-w-09-mist-full.svg,Hải Phòng,-1
 2025-04-09 02:00:00+07:00,124.0,11.1,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-04-09 03:00:00+07:00,107.0,5.5,94.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-04-09 04:00:00+07:00,112.0,5.5,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -1917,7 +1917,7 @@
 2025-04-12 18:00:00+07:00,115.0,13.0,83.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-04-12 19:00:00+07:00,115.0,25.9,61.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,-1
 2025-04-12 20:00:00+07:00,55.0,18.5,53.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
-2025-04-12 21:00:00+07:00,50.0,18.5,53.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
+2025-04-12 21:00:00+07:00,50.0,18.5,53.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,-1
 2025-04-12 22:00:00+07:00,52.0,24.1,50.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,-1
 2025-04-12 23:00:00+07:00,61.0,25.9,60.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,-1
 2025-04-13 00:00:00+07:00,55.0,9.2,73.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
@@ -1950,7 +1950,7 @@
 2025-04-14 03:00:00+07:00,99.0,1.8,68.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-04-14 04:00:00+07:00,99.0,3.7,68.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-04-14 05:00:00+07:00,98.0,3.7,68.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
-2025-04-14 06:00:00+07:00,99.0,0.0,68.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,-1
+2025-04-14 06:00:00+07:00,99.0,0.0,68.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-04-14 07:00:00+07:00,101.0,7.4,73.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-04-14 08:00:00+07:00,129.0,9.2,68.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
 2025-04-14 09:00:00+07:00,126.0,7.4,57.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
@@ -2583,7 +2583,7 @@
 2025-05-10 22:00:00+07:00,75.0,14.8,88.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
 2025-05-10 23:00:00+07:00,47.0,9.2,88.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
 2025-05-11 00:00:00+07:00,50.0,14.8,94.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
-2025-05-11 01:00:00+07:00,22.0,16.7,94.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
+2025-05-11 01:00:00+07:00,22.0,16.7,94.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,-1
 2025-05-11 02:00:00+07:00,42.0,11.1,94.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
 2025-05-11 03:00:00+07:00,36.0,7.4,94.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
 2025-05-11 04:00:00+07:00,42.0,7.4,94.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
@@ -2617,13 +2617,13 @@
 2025-05-12 08:00:00+07:00,76.0,3.7,61.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-05-12 09:00:00+07:00,71.0,5.5,51.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-05-12 10:00:00+07:00,66.0,9.2,36.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
-2025-05-12 11:00:00+07:00,66.0,7.4,42.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
+2025-05-12 11:00:00+07:00,66.0,7.4,42.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-05-12 12:00:00+07:00,66.0,11.1,45.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-05-12 13:00:00+07:00,66.0,13.0,45.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-05-12 14:00:00+07:00,65.0,18.5,45.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-05-12 15:00:00+07:00,62.0,14.8,48.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
-2025-05-12 16:00:00+07:00,63.0,18.5,51.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
-2025-05-12 17:00:00+07:00,65.0,18.5,51.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
+2025-05-12 16:00:00+07:00,63.0,18.5,51.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
+2025-05-12 17:00:00+07:00,65.0,18.5,51.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
 2025-05-12 18:00:00+07:00,67.0,13.5,59.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-05-12 19:00:00+07:00,66.0,10.8,66.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-05-12 20:00:00+07:00,65.0,9.7,73.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
@@ -2693,7 +2693,7 @@
 2025-05-15 12:00:00+07:00,31.0,19.8,60.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-05-15 13:00:00+07:00,19.0,18.7,59.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-05-15 14:00:00+07:00,17.0,19.2,61.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
-2025-05-15 15:00:00+07:00,22.0,18.0,65.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
+2025-05-15 15:00:00+07:00,22.0,18.0,65.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-05-15 16:00:00+07:00,33.0,16.6,69.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-05-15 17:00:00+07:00,36.0,13.7,73.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-05-15 18:00:00+07:00,44.0,10.8,80.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -2754,7 +2754,7 @@
 2025-05-18 01:00:00+07:00,53.0,8.9,97.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-05-18 02:00:00+07:00,22.0,6.0,96.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-05-18 03:00:00+07:00,25.0,5.8,96.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-05-18 04:00:00+07:00,17.0,5.1,95.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-05-18 04:00:00+07:00,17.0,5.1,95.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-05-18 05:00:00+07:00,17.0,2.9,95.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-05-18 06:00:00+07:00,19.0,3.5,93.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-05-18 07:00:00+07:00,25.0,5.6,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -2834,7 +2834,7 @@
 2025-05-21 09:00:00+07:00,61.0,16.7,84.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-05-21 10:00:00+07:00,59.0,18.5,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-05-21 11:00:00+07:00,59.0,22.2,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-05-21 12:00:00+07:00,59.0,25.9,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-05-21 12:00:00+07:00,59.0,25.9,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-05-21 13:00:00+07:00,57.0,25.9,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-05-21 14:00:00+07:00,56.0,24.1,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-05-21 15:00:00+07:00,56.0,18.5,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -2885,7 +2885,7 @@
 2025-05-23 12:00:00+07:00,19.0,20.4,70.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-05-23 13:00:00+07:00,17.0,24.1,70.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-05-23 14:00:00+07:00,22.0,13.0,74.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
-2025-05-23 15:00:00+07:00,17.0,14.8,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
+2025-05-23 15:00:00+07:00,17.0,14.8,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
 2025-05-23 16:00:00+07:00,28.0,9.2,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-05-23 17:00:00+07:00,39.0,5.5,94.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-05-23 18:00:00+07:00,47.0,7.4,94.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
@@ -2979,7 +2979,7 @@
 2025-05-27 11:00:00+07:00,108.0,16.7,69.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-05-27 12:00:00+07:00,113.0,14.8,69.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-05-27 13:00:00+07:00,131.0,16.7,74.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
-2025-05-27 14:00:00+07:00,139.0,18.5,74.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,-1
+2025-05-27 14:00:00+07:00,139.0,18.5,74.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
 2025-05-27 15:00:00+07:00,127.0,13.0,70.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-05-27 16:00:00+07:00,122.0,9.2,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-05-27 17:00:00+07:00,132.0,9.2,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -3236,7 +3236,7 @@
 2025-06-07 06:00:00+07:00,44.0,11.1,84.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
 2025-06-07 07:00:00+07:00,44.0,13.0,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-07 08:00:00+07:00,44.0,13.0,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-06-07 09:00:00+07:00,39.0,22.2,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-06-07 09:00:00+07:00,39.0,22.2,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-07 10:00:00+07:00,44.0,18.5,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-07 11:00:00+07:00,44.0,16.7,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-07 12:00:00+07:00,50.0,22.2,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -3434,7 +3434,7 @@
 2025-06-15 12:00:00+07:00,55.0,16.7,70.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-06-15 13:00:00+07:00,50.0,18.5,70.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
 2025-06-15 14:00:00+07:00,39.0,20.4,70.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
-2025-06-15 15:00:00+07:00,39.0,20.4,66.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
+2025-06-15 15:00:00+07:00,39.0,20.4,66.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,1
 2025-06-15 16:00:00+07:00,33.0,18.5,70.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-06-15 17:00:00+07:00,28.0,14.8,74.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-06-15 18:00:00+07:00,33.0,11.1,74.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
@@ -3446,7 +3446,7 @@
 2025-06-16 00:00:00+07:00,22.0,9.2,83.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-06-16 01:00:00+07:00,39.0,3.7,78.0,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,Hải Phòng,1
 2025-06-16 02:00:00+07:00,50.0,1.8,83.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
-2025-06-16 03:00:00+07:00,33.0,0.0,83.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,-1
+2025-06-16 03:00:00+07:00,33.0,0.0,83.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
 2025-06-16 04:00:00+07:00,44.0,9.2,89.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
 2025-06-16 05:00:00+07:00,68.0,3.7,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-16 06:00:00+07:00,71.0,5.5,89.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
@@ -3505,7 +3505,7 @@
 2025-06-18 23:00:00+07:00,64.0,16.7,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-19 00:00:00+07:00,66.0,22.2,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-19 01:00:00+07:00,66.0,22.2,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-06-19 02:00:00+07:00,66.0,25.9,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-06-19 02:00:00+07:00,66.0,25.9,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-06-19 03:00:00+07:00,68.0,24.1,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-19 04:00:00+07:00,66.0,24.1,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-19 05:00:00+07:00,68.0,18.5,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -3517,9 +3517,9 @@
 2025-06-19 11:00:00+07:00,66.0,20.4,84.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-19 12:00:00+07:00,66.0,22.2,84.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-19 13:00:00+07:00,64.0,24.1,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-06-19 14:00:00+07:00,60.0,25.9,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-06-19 14:00:00+07:00,60.0,25.9,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-06-19 15:00:00+07:00,56.0,24.1,84.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-06-19 16:00:00+07:00,56.0,25.9,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-06-19 16:00:00+07:00,56.0,25.9,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-06-19 17:00:00+07:00,56.0,18.5,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-19 18:00:00+07:00,63.0,18.5,79.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
 2025-06-19 19:00:00+07:00,64.0,14.8,84.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -3656,8 +3656,8 @@
 2025-06-25 12:00:00+07:00,33.0,16.7,64.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
 2025-06-25 13:00:00+07:00,22.0,17.9,61.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,-1
 2025-06-25 14:00:00+07:00,17.0,17.9,64.0,/dl/web/weather/ic-w-01-clear-sky-full.svg,Hải Phòng,-1
-2025-06-25 15:00:00+07:00,22.0,17.7,66.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-06-25 16:00:00+07:00,17.0,17.7,69.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-06-25 15:00:00+07:00,22.0,17.7,66.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-06-25 16:00:00+07:00,17.0,17.7,69.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-06-25 17:00:00+07:00,22.0,17.1,73.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-25 18:00:00+07:00,28.0,14.5,74.0,/dl/web/weather/ic-w-02-new-clouds-full.svg,Hải Phòng,1
 2025-06-25 19:00:00+07:00,39.0,10.5,80.0,/dl/web/weather/ic-w-11-night-few-clouds-full.svg,Hải Phòng,1
@@ -3700,7 +3700,7 @@
 2025-06-27 11:00:00+07:00,31.0,14.8,82.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-06-27 12:00:00+07:00,25.0,16.4,87.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-06-27 13:00:00+07:00,28.0,17.1,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-06-27 14:00:00+07:00,25.0,21.2,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-06-27 14:00:00+07:00,25.0,21.2,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-06-27 15:00:00+07:00,22.0,20.1,82.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-27 16:00:00+07:00,33.0,20.4,78.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-27 17:00:00+07:00,31.0,20.0,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -3748,9 +3748,9 @@
 2025-06-29 13:00:00+07:00,11.0,18.0,70.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-06-29 14:00:00+07:00,6.0,17.4,71.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-06-29 15:00:00+07:00,6.0,17.4,77.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-06-29 16:00:00+07:00,11.0,17.1,75.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
-2025-06-29 17:00:00+07:00,11.0,17.5,75.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-06-29 18:00:00+07:00,11.0,16.7,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-06-29 16:00:00+07:00,11.0,17.1,75.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
+2025-06-29 17:00:00+07:00,11.0,17.5,75.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-06-29 18:00:00+07:00,11.0,16.7,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-06-29 19:00:00+07:00,17.0,16.7,79.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-29 20:00:00+07:00,22.0,10.9,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-06-29 21:00:00+07:00,17.0,10.8,83.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -3825,7 +3825,7 @@
 2025-07-03 07:00:00+07:00,17.0,10.5,91.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-07-03 08:00:00+07:00,28.0,7.7,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-03 09:00:00+07:00,22.0,10.0,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-07-03 10:00:00+07:00,17.0,12.6,96.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
+2025-07-03 10:00:00+07:00,17.0,12.6,96.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,-1
 2025-07-03 11:00:00+07:00,17.0,14.6,90.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-07-03 12:00:00+07:00,22.0,16.4,90.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-03 13:00:00+07:00,28.0,17.9,74.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
@@ -3911,7 +3911,7 @@
 2025-07-07 00:00:00+07:00,17.0,4.3,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-07 01:00:00+07:00,17.0,4.3,87.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-07 02:00:00+07:00,17.0,2.1,93.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-07-07 03:00:00+07:00,22.0,2.1,93.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-07-07 03:00:00+07:00,22.0,2.1,93.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-07-07 04:00:00+07:00,33.0,3.7,89.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
 2025-07-07 05:00:00+07:00,28.0,4.0,89.0,/dl/web/weather/ic-w-12-night-rain-full.svg,Hải Phòng,1
 2025-07-07 06:00:00+07:00,39.0,4.3,91.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
@@ -3919,13 +3919,13 @@
 2025-07-07 08:00:00+07:00,53.0,2.1,78.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-07-07 09:00:00+07:00,28.0,4.7,67.0,/dl/web/weather/ic-w-06-rain-full.svg,Hải Phòng,1
 2025-07-07 10:00:00+07:00,22.0,6.9,66.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-07-07 11:00:00+07:00,25.0,9.0,59.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-07-07 12:00:00+07:00,22.0,11.4,60.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-07-07 11:00:00+07:00,25.0,9.0,59.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-07-07 12:00:00+07:00,22.0,11.4,60.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-07 13:00:00+07:00,22.0,12.2,64.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-07 14:00:00+07:00,22.0,14.5,63.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-07 15:00:00+07:00,11.0,13.5,64.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
-2025-07-07 16:00:00+07:00,17.0,14.6,65.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-07-07 17:00:00+07:00,17.0,16.3,70.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
+2025-07-07 16:00:00+07:00,17.0,14.6,65.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-07-07 17:00:00+07:00,17.0,16.3,70.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-07-07 18:00:00+07:00,17.0,14.2,75.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-07 19:00:00+07:00,39.0,8.5,77.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-07 20:00:00+07:00,55.0,7.1,80.0,/dl/web/weather/ic-w-11-night-few-clouds-full.svg,Hải Phòng,1
@@ -4068,7 +4068,7 @@
 2025-07-13 23:00:00+07:00,113.0,5.3,84.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-14 00:00:00+07:00,96.0,5.0,88.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-14 01:00:00+07:00,96.0,2.4,87.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
-2025-07-14 02:00:00+07:00,124.0,1.4,92.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
+2025-07-14 02:00:00+07:00,124.0,1.4,92.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-14 03:00:00+07:00,122.0,1.6,93.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,1
 2025-07-14 04:00:00+07:00,128.0,0.3,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
 2025-07-14 05:00:00+07:00,143.0,0.5,89.0,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,Hải Phòng,-1
@@ -4147,7 +4147,7 @@
 2025-07-17 11:00:00+07:00,19.0,14.3,61.0,/dl/web/weather/ic-weather-03d.svg,Hải Phòng,-1
 2025-07-17 12:00:00+07:00,19.0,14.6,60.0,/dl/web/weather/ic-weather-03d.svg,Hải Phòng,-1
 2025-07-17 13:00:00+07:00,17.0,13.4,55.0,/dl/web/weather/ic-weather-03d.svg,Hải Phòng,-1
-2025-07-17 14:00:00+07:00,22.0,12.9,58.0,/dl/web/weather/ic-weather-01d.svg,Hải Phòng,-1
+2025-07-17 14:00:00+07:00,22.0,12.9,58.0,/dl/web/weather/ic-weather-01d.svg,Hải Phòng,1
 2025-07-17 15:00:00+07:00,19.0,14.6,58.0,/dl/web/weather/ic-weather-01d.svg,Hải Phòng,-1
 2025-07-17 16:00:00+07:00,19.0,15.8,62.0,/dl/web/weather/ic-weather-01d.svg,Hải Phòng,-1
 2025-07-17 17:00:00+07:00,17.0,16.3,66.0,/dl/web/weather/ic-weather-03d.svg,Hải Phòng,-1
@@ -4236,7 +4236,7 @@
 2025-07-21 05:00:00+07:00,99.0,12.7,94.0,/dl/web/weather/ic-weather-10n.svg,Hải Phòng,1
 2025-07-21 06:00:00+07:00,97.0,12.9,99.0,/dl/web/weather/ic-weather-10d.svg,Hải Phòng,1
 2025-07-21 07:00:00+07:00,94.0,14.0,94.0,/dl/web/weather/ic-weather-10d.svg,Hải Phòng,1
-2025-07-21 08:00:00+07:00,123.0,15.8,94.0,/dl/web/weather/ic-weather-10d.svg,Hải Phòng,1
+2025-07-21 08:00:00+07:00,123.0,15.8,94.0,/dl/web/weather/ic-weather-10d.svg,Hải Phòng,-1
 2025-07-21 09:00:00+07:00,111.0,18.8,94.0,/dl/web/weather/ic-weather-10d.svg,Hải Phòng,-1
 2025-07-21 10:00:00+07:00,86.0,18.7,94.0,/dl/web/weather/ic-weather-10d.svg,Hải Phòng,1
 2025-07-21 11:00:00+07:00,97.0,20.4,98.0,/dl/web/weather/ic-weather-10d.svg,Hải Phòng,-1
@@ -4290,7 +4290,7 @@
 2025-07-23 13:00:00+07:00,22.0,15.8,68.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-23 14:00:00+07:00,17.0,18.0,66.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,-1
 2025-07-23 15:00:00+07:00,17.0,18.5,67.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,-1
-2025-07-23 16:00:00+07:00,17.0,17.1,69.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
+2025-07-23 16:00:00+07:00,17.0,17.1,69.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,-1
 2025-07-23 17:00:00+07:00,28.0,15.0,75.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-23 18:00:00+07:00,17.0,12.6,80.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-23 19:00:00+07:00,22.0,10.1,83.0,/dl/web/weather/ic-weather-04n.svg,Hải Phòng,1
@@ -4393,7 +4393,7 @@
 2025-07-27 21:00:00+07:00,36.0,7.7,80.0,/dl/web/weather/ic-weather-02n.svg,Hải Phòng,1
 2025-07-27 22:00:00+07:00,25.0,6.0,80.0,/dl/web/weather/ic-weather-02n.svg,Hải Phòng,1
 2025-07-27 23:00:00+07:00,17.0,5.8,83.0,/dl/web/weather/ic-weather-02n.svg,Hải Phòng,1
-2025-07-28 00:00:00+07:00,14.0,3.1,85.0,/dl/web/weather/ic-weather-02n.svg,Hải Phòng,1
+2025-07-28 00:00:00+07:00,14.0,3.1,85.0,/dl/web/weather/ic-weather-02n.svg,Hải Phòng,-1
 2025-07-28 01:00:00+07:00,36.0,0.5,87.0,/dl/web/weather/ic-weather-02n.svg,Hải Phòng,1
 2025-07-28 02:00:00+07:00,56.0,4.3,90.0,/dl/web/weather/ic-weather-02n.svg,Hải Phòng,1
 2025-07-28 03:00:00+07:00,56.0,3.4,90.0,/dl/web/weather/ic-weather-03n.svg,Hải Phòng,1
@@ -4402,13 +4402,13 @@
 2025-07-28 06:00:00+07:00,60.0,3.5,94.0,/dl/web/weather/ic-weather-03d.svg,Hải Phòng,1
 2025-07-28 07:00:00+07:00,63.0,3.4,88.0,/dl/web/weather/ic-weather-03d.svg,Hải Phòng,1
 2025-07-28 08:00:00+07:00,83.0,1.4,77.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
-2025-07-28 09:00:00+07:00,71.0,0.2,74.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,-1
+2025-07-28 09:00:00+07:00,71.0,0.2,74.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-28 10:00:00+07:00,76.0,2.7,66.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-28 11:00:00+07:00,79.0,4.5,62.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-28 12:00:00+07:00,79.0,5.1,64.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-28 13:00:00+07:00,90.0,4.5,64.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-28 14:00:00+07:00,73.0,1.9,60.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
-2025-07-28 15:00:00+07:00,69.0,1.0,59.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,-1
+2025-07-28 15:00:00+07:00,69.0,1.0,59.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-28 16:00:00+07:00,69.0,3.1,63.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-28 17:00:00+07:00,62.0,8.5,70.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-28 18:00:00+07:00,55.0,11.6,80.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
@@ -4456,7 +4456,7 @@
 2025-07-30 12:00:00+07:00,50.0,8.2,59.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-30 13:00:00+07:00,33.0,7.7,57.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-30 14:00:00+07:00,25.0,6.9,55.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,-1
-2025-07-30 15:00:00+07:00,28.0,7.7,57.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,-1
+2025-07-30 15:00:00+07:00,28.0,7.7,57.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-30 16:00:00+07:00,53.0,10.3,65.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-30 17:00:00+07:00,57.0,11.7,72.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
 2025-07-30 18:00:00+07:00,61.0,12.1,79.0,/dl/web/weather/ic-weather-04d.svg,Hải Phòng,1
@@ -4691,3 +4691,4 @@
 2025-08-21 22:00:00+07:00,56.0,7.8,89.0,/dl/web/weather/ic-weather-04n.svg,Hải Phòng,1
 2025-08-21 23:00:00+07:00,59.0,7.9,89.0,/dl/web/weather/ic-weather-04n.svg,Hải Phòng,1
 2025-08-22 00:00:00+07:00,55.0,7.7,89.0,/dl/web/weather/ic-weather-04n.svg,Hải Phòng,1
+2025-08-22 01:00:00+07:00,54.0,8.6,93.0,/dl/web/weather/ic-weather-04n.svg,Hải Phòng,1
