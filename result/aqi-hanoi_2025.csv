@@ -4426,3 +4426,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-09-05 02:00:00+07:00,73.0,6.5,87.0,/dl/web/weather/ic-weather-02n.svg,Hà Nội
 2025-09-05 03:00:00+07:00,70.0,5.8,88.0,/dl/web/weather/ic-weather-03n.svg,Hà Nội
 2025-09-05 04:00:00+07:00,77.0,4.8,89.0,/dl/web/weather/ic-weather-04n.svg,Hà Nội
+2025-09-05 05:00:00+07:00,77.0,6.4,90.0,/dl/web/weather/ic-weather-04n.svg,Hà Nội
+2025-09-05 06:00:00+07:00,77.0,4.0,91.0,/dl/web/weather/ic-weather-04d.svg,Hà Nội
