@@ -5209,3 +5209,4 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-09-14 04:00:00+07:00,107.0,2.9,89.0,/dl/web/weather/ic-weather-01n.svg,Vinh
 2025-09-14 05:00:00+07:00,110.0,3.1,90.0,/dl/web/weather/ic-weather-02n.svg,Vinh
 2025-09-14 06:00:00+07:00,112.0,3.9,91.0,/dl/web/weather/ic-weather-03d.svg,Vinh
+2025-09-14 08:00:00+07:00,152.0,5.0,83.0,/dl/web/weather/ic-weather-04d.svg,Vinh
