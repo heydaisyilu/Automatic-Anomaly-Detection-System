@@ -1,17 +1,17 @@
 name: Notify anomalies by issue
-"""
-on:
-  workflow_run:
-    workflows: ["Detect AQI Anomalies"]
-    types: [completed]
-  workflow_dispatch:
-    inputs:
-      demo:
-        description: "Gửi thông báo DEMO ngay"
-        required: false
-        default: false
-        type: boolean
-"""
+
+
+# on:
+#   workflow_run:
+#     workflows: ["Detect AQI Anomalies"]
+#     types: [completed]
+#   workflow_dispatch:
+#     inputs:
+#       demo:
+#         description: "Gửi thông báo DEMO ngay"
+#         required: false
+#         default: false
+#         type: boolean
 
 permissions:
   contents: read
