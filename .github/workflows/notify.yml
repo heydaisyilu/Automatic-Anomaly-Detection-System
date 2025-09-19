@@ -1,11 +1,11 @@
 name: Notify anomalies by issue
 
 
-# on:
+on:
 #   workflow_run:
 #     workflows: ["Detect AQI Anomalies"]
 #     types: [completed]
-#   workflow_dispatch:
+  workflow_dispatch:
 #     inputs:
 #       demo:
 #         description: "Gửi thông báo DEMO ngay"
