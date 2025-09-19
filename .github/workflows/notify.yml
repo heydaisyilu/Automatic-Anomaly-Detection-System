@@ -1,5 +1,5 @@
 name: Notify anomalies by issue
-
+"""
 on:
   workflow_run:
     workflows: ["Detect AQI Anomalies"]
@@ -11,6 +11,7 @@ on:
         required: false
         default: false
         type: boolean
+"""
 
 permissions:
   contents: read
