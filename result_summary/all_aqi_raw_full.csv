@@ -5400,6 +5400,7 @@
 2025-09-21 15:27:51.596023+07:00,Cần Thơ,50,16.0 km/h,73%,/dl/web/weather/ic-weather-04d.svg,16.0,73.0,2025-09,15
 2025-09-21 16:22:04.041644+07:00,Cần Thơ,44,14.7 km/h,70%,/dl/web/weather/ic-weather-04d.svg,14.7,70.0,2025-09,16
 2025-09-21 17:23:10.835107+07:00,Cần Thơ,69,13.5 km/h,71%,/dl/web/weather/ic-weather-04d.svg,13.5,71.0,2025-09,17
+2025-09-21 18:18:08.470674+07:00,Cần Thơ,66,11.9 km/h,77%,/dl/web/weather/ic-weather-04n.svg,11.9,77.0,2025-09,18
 2025-04-01 00:02:26.285035+07:00,Đà Nẵng,33,18.5 km/h,83%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,18.5,83.0,2025-04,0
 2025-04-01 01:01:55.078723+07:00,Đà Nẵng,22,16.7 km/h,78%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,16.7,78.0,2025-04,1
 2025-04-01 02:01:43.332294+07:00,Đà Nẵng,22,7.4 km/h,78%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,7.4,78.0,2025-04,2
@@ -10229,6 +10230,7 @@
 2025-09-21 15:27:45.143764+07:00,Đà Nẵng,21,7.3 km/h,68%,/dl/web/weather/ic-weather-10d.svg,7.3,68.0,2025-09,15
 2025-09-21 16:21:58.081520+07:00,Đà Nẵng,21,6.5 km/h,71%,/dl/web/weather/ic-weather-04d.svg,6.5,71.0,2025-09,16
 2025-09-21 17:23:04.430534+07:00,Đà Nẵng,18,6.4 km/h,75%,/dl/web/weather/ic-weather-04d.svg,6.4,75.0,2025-09,17
+2025-09-21 18:18:02.458467+07:00,Đà Nẵng,29,4.5 km/h,76%,/dl/web/weather/ic-weather-04n.svg,4.5,76.0,2025-09,18
 2025-04-01 00:02:31.812848+07:00,Hải Phòng,69,7.4 km/h,72%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,7.4,72.0,2025-04,0
 2025-04-01 01:02:00.618245+07:00,Hải Phòng,68,7.4 km/h,63%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,7.4,63.0,2025-04,1
 2025-04-01 02:01:48.457580+07:00,Hải Phòng,67,7.4 km/h,63%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,7.4,63.0,2025-04,2
@@ -15625,6 +15627,7 @@
 2025-09-21 15:27:47.022076+07:00,Hải Phòng,67,10.6 km/h,80%,/dl/web/weather/ic-weather-10d.svg,10.6,80.0,2025-09,15
 2025-09-21 16:21:59.926753+07:00,Hải Phòng,74,11.0 km/h,82%,/dl/web/weather/ic-weather-10d.svg,11.0,82.0,2025-09,16
 2025-09-21 17:23:06.523785+07:00,Hải Phòng,66,9.5 km/h,85%,/dl/web/weather/ic-weather-02d.svg,9.5,85.0,2025-09,17
+2025-09-21 18:18:04.444453+07:00,Hải Phòng,75,7.7 km/h,92%,/dl/web/weather/ic-weather-02n.svg,7.7,92.0,2025-09,18
 2025-04-01 00:02:14.474326+07:00,Hà Nội,92,6.4 km/h,61%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,6.4,61.0,2025-04,0
 2025-04-01 01:01:44.025916+07:00,Hà Nội,97,4.3 km/h,62%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,4.3,62.0,2025-04,1
 2025-04-01 02:01:33.451243+07:00,Hà Nội,106,10.8 km/h,64%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,10.8,64.0,2025-04,2
@@ -20458,6 +20461,7 @@
 2025-09-21 15:27:40.166175+07:00,Hà Nội,117,6.7 km/h,57%,/dl/web/weather/ic-weather-10d.svg,6.7,57.0,2025-09,15
 2025-09-21 16:21:54.178004+07:00,Hà Nội,98,10.9 km/h,75%,/dl/web/weather/ic-weather-10d.svg,10.9,75.0,2025-09,16
 2025-09-21 17:23:00.408178+07:00,Hà Nội,107,9.6 km/h,80%,/dl/web/weather/ic-weather-10d.svg,9.6,80.0,2025-09,17
+2025-09-21 18:17:58.572257+07:00,Hà Nội,112,9.5 km/h,78%,/dl/web/weather/ic-weather-04n.svg,9.5,78.0,2025-09,18
 2025-04-01 00:02:19.727502+07:00,Hồ Chí Minh,99,7.4 km/h,78%,/dl/web/weather/ic-w-12-night-rain-full.svg,7.4,78.0,2025-04,0
 2025-04-01 01:01:49.308663+07:00,Hồ Chí Minh,116,5.5 km/h,78%,/dl/web/weather/ic-w-10-night-clear-sky-full.svg,5.5,78.0,2025-04,1
 2025-04-01 02:01:38.330681+07:00,Hồ Chí Minh,132,9.2 km/h,80%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,9.2,80.0,2025-04,2
@@ -25278,6 +25282,7 @@
 2025-09-21 15:27:42.448315+07:00,Hồ Chí Minh,44,10.5 km/h,61%,/dl/web/weather/ic-weather-04d.svg,10.5,61.0,2025-09,15
 2025-09-21 16:21:56.140761+07:00,Hồ Chí Minh,49,7.7 km/h,67%,/dl/web/weather/ic-weather-04d.svg,7.7,67.0,2025-09,16
 2025-09-21 17:23:02.458926+07:00,Hồ Chí Minh,50,10.1 km/h,69%,/dl/web/weather/ic-weather-04d.svg,10.1,69.0,2025-09,17
+2025-09-21 18:18:00.572901+07:00,Hồ Chí Minh,54,8.1 km/h,74%,/dl/web/weather/ic-weather-04n.svg,8.1,74.0,2025-09,18
 2025-04-01 00:02:47.268394+07:00,Huế,61,11.1 km/h,100%,/dl/web/weather/ic-w-09-mist-full.svg,11.1,100.0,2025-04,0
 2025-04-01 01:02:17.100943+07:00,Huế,61,13.0 km/h,100%,/dl/web/weather/ic-w-09-mist-full.svg,13.0,100.0,2025-04,1
 2025-04-01 02:02:03.555829+07:00,Huế,58,9.2 km/h,100%,/dl/web/weather/ic-w-09-mist-full.svg,9.2,100.0,2025-04,2
@@ -30674,6 +30679,7 @@
 2025-09-21 15:27:54.533756+07:00,Huế,47,3.5 km/h,76%,/dl/web/weather/ic-weather-10d.svg,3.5,76.0,2025-09,15
 2025-09-21 16:22:06.774633+07:00,Huế,47,3.5 km/h,70%,/dl/web/weather/ic-weather-10d.svg,3.5,70.0,2025-09,16
 2025-09-21 17:23:13.473752+07:00,Huế,47,2.7 km/h,81%,/dl/web/weather/ic-weather-04d.svg,2.7,81.0,2025-09,17
+2025-09-21 18:18:10.848298+07:00,Huế,49,3.1 km/h,87%,/dl/web/weather/ic-weather-04n.svg,3.1,87.0,2025-09,18
 2025-04-01 00:02:36.829174+07:00,Nha Trang,21,9.5 km/h,87%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,9.5,87.0,2025-04,0
 2025-04-01 01:02:05.902636+07:00,Nha Trang,21,9.2 km/h,89%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,9.2,89.0,2025-04,1
 2025-04-01 02:01:53.554938+07:00,Nha Trang,20,9.2 km/h,89%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,9.2,89.0,2025-04,2
@@ -36071,6 +36077,7 @@
 2025-09-21 15:27:49.228947+07:00,Nha Trang,26,5.1 km/h,78%,/dl/web/weather/ic-weather-04d.svg,5.1,78.0,2025-09,15
 2025-09-21 16:22:02.186244+07:00,Nha Trang,26,3.8 km/h,80%,/dl/web/weather/ic-weather-04d.svg,3.8,80.0,2025-09,16
 2025-09-21 17:23:09.014540+07:00,Nha Trang,26,3.2 km/h,80%,/dl/web/weather/ic-weather-04d.svg,3.2,80.0,2025-09,17
+2025-09-21 18:18:06.404454+07:00,Nha Trang,26,1.4 km/h,76%,/dl/web/weather/ic-weather-04n.svg,1.4,76.0,2025-09,18
 2025-04-01 00:02:53.959869+07:00,Vinh,91,0.6 km/h,78%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,0.6,78.0,2025-04,0
 2025-04-01 01:02:22.749245+07:00,Vinh,91,2.1 km/h,79%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,2.1,79.0,2025-04,1
 2025-04-01 02:02:08.440810+07:00,Vinh,94,3.2 km/h,80%,/dl/web/weather/ic-w-04-scattered-clouds-full.svg,3.2,80.0,2025-04,2
@@ -41470,3 +41477,4 @@
 2025-09-21 15:27:56.944333+07:00,Vinh,33,7.4 km/h,73%,/dl/web/weather/ic-weather-04d.svg,7.4,73.0,2025-09,15
 2025-09-21 16:22:09.060900+07:00,Vinh,53,7.7 km/h,76%,/dl/web/weather/ic-weather-04d.svg,7.7,76.0,2025-09,16
 2025-09-21 17:23:15.635205+07:00,Vinh,66,6.8 km/h,82%,/dl/web/weather/ic-weather-04d.svg,6.8,82.0,2025-09,17
+2025-09-21 18:18:13.013060+07:00,Vinh,77,5.9 km/h,85%,/dl/web/weather/ic-weather-04n.svg,5.9,85.0,2025-09,18
