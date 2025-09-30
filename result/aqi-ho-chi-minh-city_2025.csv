@@ -5005,3 +5005,4 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-10-01 00:00:00+07:00,86.0,2.8,89.0,/dl/web/weather/ic-weather-04n.svg,Hồ Chí Minh
 2025-10-01 01:00:00+07:00,97.0,2.1,90.0,/dl/web/weather/ic-weather-04n.svg,Hồ Chí Minh
 2025-10-01 02:00:00+07:00,110.0,2.3,91.0,/dl/web/weather/ic-weather-03n.svg,Hồ Chí Minh
+2025-10-01 03:00:00+07:00,121.0,0.2,93.0,/dl/web/weather/ic-weather-02n.svg,Hồ Chí Minh
