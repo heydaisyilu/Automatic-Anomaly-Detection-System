@@ -5596,3 +5596,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-10-01 17:00:00+07:00,67.0,4.8,78.0,/dl/web/weather/ic-weather-04d.svg,Nha Trang
 2025-10-01 18:00:00+07:00,67.0,3.8,78.0,/dl/web/weather/ic-weather-04n.svg,Nha Trang
 2025-10-01 19:00:00+07:00,68.0,2.4,81.0,/dl/web/weather/ic-weather-04n.svg,Nha Trang
+2025-10-01 20:00:00+07:00,68.0,1.5,83.0,/dl/web/weather/ic-weather-04n.svg,Nha Trang
+2025-10-01 21:00:00+07:00,68.0,1.6,83.0,/dl/web/weather/ic-weather-04n.svg,Nha Trang
