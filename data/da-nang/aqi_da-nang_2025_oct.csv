@@ -30,3 +30,4 @@ timestamp,city,aqi,weather_icon,wind_speed,humidity
 2025-10-02T06:21:10.493951+07:00,Đà Nẵng,102,/dl/web/weather/ic-weather-10d.svg,3.4 km/h,93%
 2025-10-02T08:50:51.576788+07:00,Đà Nẵng,65,/dl/web/weather/ic-weather-02d.svg,1.9 km/h,88%
 2025-10-02T10:01:27.175219+07:00,Đà Nẵng,59,/dl/web/weather/ic-weather-01d.svg,0.6 km/h,72%
+2025-10-02T11:28:23.579236+07:00,Đà Nẵng,47,/dl/web/weather/ic-weather-01d.svg,4.9 km/h,60%
