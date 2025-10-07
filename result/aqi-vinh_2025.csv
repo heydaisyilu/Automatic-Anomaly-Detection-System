@@ -5718,3 +5718,4 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-10-07 04:00:00+07:00,68.0,2.1,88.0,/dl/web/weather/ic-weather-04n.svg,Vinh
 2025-10-07 05:00:00+07:00,60.0,2.1,89.0,/dl/web/weather/ic-weather-04n.svg,Vinh
 2025-10-07 06:00:00+07:00,60.0,1.1,90.0,/dl/web/weather/ic-weather-04d.svg,Vinh
+2025-10-07 08:00:00+07:00,90.0,0.3,82.0,/dl/web/weather/ic-weather-04d.svg,Vinh
