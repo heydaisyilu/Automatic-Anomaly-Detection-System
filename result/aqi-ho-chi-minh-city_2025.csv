@@ -5252,3 +5252,4 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-10-12 03:00:00+07:00,106.0,2.6,89.0,/dl/web/weather/ic-weather-03n.svg,Hồ Chí Minh
 2025-10-12 04:00:00+07:00,115.0,2.9,91.0,/dl/web/weather/ic-weather-04n.svg,Hồ Chí Minh
 2025-10-12 05:00:00+07:00,96.0,1.7,92.0,/dl/web/weather/ic-weather-04n.svg,Hồ Chí Minh
+2025-10-12 06:00:00+07:00,111.0,0.9,91.0,/dl/web/weather/ic-weather-04d.svg,Hồ Chí Minh
