@@ -316,3 +316,4 @@ timestamp,city,aqi,weather_icon,wind_speed,humidity
 2025-10-15T03:27:36.288917+07:00,Hải Phòng,77,/dl/web/weather/ic-weather-50n.svg,2.3 km/h,94%
 2025-10-15T04:21:44.538177+07:00,Hải Phòng,55,/dl/web/weather/ic-weather-10n.svg,13.8 km/h,94%
 2025-10-15T05:23:36.665797+07:00,Hải Phòng,11,/dl/web/weather/ic-weather-10n.svg,1.1 km/h,94%
+2025-10-15T06:22:37.527575+07:00,Hải Phòng,11,/dl/web/weather/ic-weather-10d.svg,3.4 km/h,100%
