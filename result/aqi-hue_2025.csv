@@ -5906,3 +5906,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-10-15 20:00:00+07:00,19.0,8.1,83.0,/dl/web/weather/ic-weather-03n.svg,Huế
 2025-10-15 21:00:00+07:00,17.0,2.3,89.0,/dl/web/weather/ic-weather-03n.svg,Huế
 2025-10-15 22:00:00+07:00,18.0,3.4,89.0,/dl/web/weather/ic-weather-03n.svg,Huế
+2025-10-15 23:00:00+07:00,18.0,3.4,89.0,/dl/web/weather/ic-weather-03n.svg,Huế
+2025-10-16 00:00:00+07:00,18.0,4.6,94.0,/dl/web/weather/ic-weather-04n.svg,Huế
