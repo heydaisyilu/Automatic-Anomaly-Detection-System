@@ -1,9 +1,9 @@
 ﻿city,hour,mean_aqi
 Cần Thơ,0,62.72
-Cần Thơ,1,61.67
-Cần Thơ,2,63.23
-Cần Thơ,3,63.52
-Cần Thơ,4,63.6
+Cần Thơ,1,61.73
+Cần Thơ,2,63.35
+Cần Thơ,3,63.62
+Cần Thơ,4,63.77
 Cần Thơ,5,65.03
 Cần Thơ,6,67.63
 Cần Thơ,7,73.5
@@ -24,9 +24,9 @@ Cần Thơ,21,62.0
 Cần Thơ,22,62.04
 Cần Thơ,23,64.54
 Huế,0,54.51
-Huế,1,53.89
+Huế,1,53.88
 Huế,2,53.58
-Huế,3,53.3
+Huế,3,53.29
 Huế,4,53.55
 Huế,5,53.03
 Huế,6,52.87
@@ -48,10 +48,10 @@ Huế,21,55.88
 Huế,22,55.5
 Huế,23,55.06
 Hà Nội,0,101.09
-Hà Nội,1,99.94
-Hà Nội,2,99.42
-Hà Nội,3,98.8
-Hà Nội,4,100.2
+Hà Nội,1,99.92
+Hà Nội,2,99.45
+Hà Nội,3,98.85
+Hà Nội,4,100.32
 Hà Nội,5,99.98
 Hà Nội,6,101.95
 Hà Nội,7,108.8
@@ -72,10 +72,10 @@ Hà Nội,21,102.69
 Hà Nội,22,105.29
 Hà Nội,23,105.79
 Hải Phòng,0,73.57
-Hải Phòng,1,75.6
-Hải Phòng,2,75.63
-Hải Phòng,3,74.36
-Hải Phòng,4,76.24
+Hải Phòng,1,75.59
+Hải Phòng,2,75.66
+Hải Phòng,3,74.5
+Hải Phòng,4,76.38
 Hải Phòng,5,77.04
 Hải Phòng,6,77.99
 Hải Phòng,7,83.74
@@ -96,10 +96,10 @@ Hải Phòng,21,71.61
 Hải Phòng,22,70.91
 Hải Phòng,23,72.89
 Hồ Chí Minh,0,64.21
-Hồ Chí Minh,1,64.46
-Hồ Chí Minh,2,66.38
-Hồ Chí Minh,3,67.56
-Hồ Chí Minh,4,68.07
+Hồ Chí Minh,1,64.44
+Hồ Chí Minh,2,66.43
+Hồ Chí Minh,3,67.71
+Hồ Chí Minh,4,68.2
 Hồ Chí Minh,5,70.62
 Hồ Chí Minh,6,73.44
 Hồ Chí Minh,7,77.73
@@ -121,9 +121,9 @@ Hồ Chí Minh,22,63.67
 Hồ Chí Minh,23,63.79
 Nha Trang,0,60.57
 Nha Trang,1,60.52
-Nha Trang,2,60.99
-Nha Trang,3,60.75
-Nha Trang,4,61.47
+Nha Trang,2,60.89
+Nha Trang,3,60.65
+Nha Trang,4,61.37
 Nha Trang,5,61.15
 Nha Trang,6,61.46
 Nha Trang,7,63.12
@@ -144,10 +144,10 @@ Nha Trang,21,59.03
 Nha Trang,22,59.17
 Nha Trang,23,60.9
 Vinh,0,79.36
-Vinh,1,78.52
-Vinh,2,79.56
-Vinh,3,80.37
-Vinh,4,79.76
+Vinh,1,78.48
+Vinh,2,79.52
+Vinh,3,80.33
+Vinh,4,79.72
 Vinh,5,79.53
 Vinh,6,80.3
 Vinh,7,82.57
@@ -168,10 +168,10 @@ Vinh,21,79.54
 Vinh,22,78.29
 Vinh,23,78.85
 Đà Nẵng,0,50.44
-Đà Nẵng,1,49.38
+Đà Nẵng,1,49.31
 Đà Nẵng,2,49.4
 Đà Nẵng,3,50.3
-Đà Nẵng,4,52.42
+Đà Nẵng,4,52.43
 Đà Nẵng,5,52.71
 Đà Nẵng,6,54.42
 Đà Nẵng,7,60.68
