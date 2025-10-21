@@ -1,6 +1,6 @@
 ﻿city,hour,mean_aqi
 Cần Thơ,0,62.35
-Cần Thơ,1,61.42
+Cần Thơ,1,61.35
 Cần Thơ,2,63.02
 Cần Thơ,3,63.31
 Cần Thơ,4,63.54
@@ -48,7 +48,7 @@ Huế,21,55.84
 Huế,22,55.46
 Huế,23,55.02
 Hà Nội,0,101.05
-Hà Nội,1,100.2
+Hà Nội,1,100.02
 Hà Nội,2,99.79
 Hà Nội,3,99.14
 Hà Nội,4,100.75
@@ -72,7 +72,7 @@ Hà Nội,21,102.53
 Hà Nội,22,105.1
 Hà Nội,23,105.54
 Hải Phòng,0,73.39
-Hải Phòng,1,75.52
+Hải Phòng,1,75.33
 Hải Phòng,2,75.61
 Hải Phòng,3,74.5
 Hải Phòng,4,76.28
@@ -96,7 +96,7 @@ Hải Phòng,21,71.52
 Hải Phòng,22,70.79
 Hải Phòng,23,72.67
 Hồ Chí Minh,0,64.52
-Hồ Chí Minh,1,64.77
+Hồ Chí Minh,1,64.78
 Hồ Chí Minh,2,66.88
 Hồ Chí Minh,3,67.99
 Hồ Chí Minh,4,68.42
@@ -120,7 +120,7 @@ Hồ Chí Minh,21,63.17
 Hồ Chí Minh,22,63.81
 Hồ Chí Minh,23,64.06
 Nha Trang,0,60.07
-Nha Trang,1,60.03
+Nha Trang,1,60.02
 Nha Trang,2,60.53
 Nha Trang,3,60.31
 Nha Trang,4,61.02
@@ -144,7 +144,7 @@ Nha Trang,21,58.43
 Nha Trang,22,58.56
 Nha Trang,23,60.4
 Vinh,0,79.62
-Vinh,1,78.85
+Vinh,1,78.81
 Vinh,2,79.86
 Vinh,3,80.38
 Vinh,4,79.6
@@ -168,7 +168,7 @@ Vinh,21,79.72
 Vinh,22,78.52
 Vinh,23,79.09
 Đà Nẵng,0,50.5
-Đà Nẵng,1,49.36
+Đà Nẵng,1,49.32
 Đà Nẵng,2,49.33
 Đà Nẵng,3,50.27
 Đà Nẵng,4,52.3
