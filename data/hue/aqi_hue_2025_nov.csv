@@ -1,0 +1,2 @@
+timestamp,city,aqi,weather_icon,wind_speed,humidity
+2025-11-01T00:24:00.241632+07:00,Huế,55,/dl/web/weather/ic-weather-10n.svg,3.4 km/h,100%
