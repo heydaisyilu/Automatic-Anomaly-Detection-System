@@ -1,3 +1,4 @@
 timestamp,city,aqi,weather_icon,wind_speed,humidity
 2025-11-01T00:23:46.642306+07:00,Hà Nội,36,/dl/web/weather/ic-weather-04n.svg,8.0 km/h,88%
 2025-11-01T01:36:58.082868+07:00,Hà Nội,36,/dl/web/weather/ic-weather-04n.svg,8.6 km/h,90%
+2025-11-01T02:19:12.011732+07:00,Hà Nội,37,/dl/web/weather/ic-weather-04n.svg,9.8 km/h,90%
