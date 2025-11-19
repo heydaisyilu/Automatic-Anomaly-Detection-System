@@ -6669,3 +6669,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-11-19 16:00:00+07:00,13.0,8.1,63.0,/dl/web/weather/ic-weather-01d.svg,Hải Phòng
 2025-11-19 17:00:00+07:00,16.0,6.9,63.0,/dl/web/weather/ic-weather-01d.svg,Hải Phòng
 2025-11-19 18:00:00+07:00,21.0,6.9,63.0,/dl/web/weather/ic-weather-01n.svg,Hải Phòng
+2025-11-19 19:00:00+07:00,26.0,4.6,63.0,/dl/web/weather/ic-weather-01n.svg,Hải Phòng
+2025-11-19 20:00:00+07:00,23.0,2.3,67.0,/dl/web/weather/ic-weather-01n.svg,Hải Phòng
