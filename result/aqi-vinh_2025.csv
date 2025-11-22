@@ -6733,3 +6733,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-11-22 12:00:00+07:00,65.0,6.0,66.0,/dl/web/weather/ic-weather-04d.svg,Vinh
 2025-11-22 13:00:00+07:00,65.0,7.0,66.0,/dl/web/weather/ic-weather-04d.svg,Vinh
 2025-11-22 14:00:00+07:00,66.0,8.4,67.0,/dl/web/weather/ic-weather-03d.svg,Vinh
+2025-11-22 15:00:00+07:00,66.0,8.7,67.0,/dl/web/weather/ic-weather-03d.svg,Vinh
+2025-11-22 16:00:00+07:00,66.0,7.9,69.0,/dl/web/weather/ic-weather-03d.svg,Vinh
