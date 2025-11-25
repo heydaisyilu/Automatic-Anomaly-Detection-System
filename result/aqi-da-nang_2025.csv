@@ -6242,3 +6242,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-11-25 23:00:00+07:00,90.0,0.0,88.0,/dl/web/weather/ic-weather-03n.svg,Đà Nẵng
 2025-11-26 00:00:00+07:00,86.0,0.0,94.0,/dl/web/weather/ic-weather-04n.svg,Đà Nẵng
 2025-11-26 01:00:00+07:00,102.0,1.1,88.0,/dl/web/weather/ic-weather-04n.svg,Đà Nẵng
+2025-11-26 02:00:00+07:00,102.0,4.6,88.0,/dl/web/weather/ic-weather-04n.svg,Đà Nẵng
+2025-11-26 03:00:00+07:00,97.0,3.4,100.0,/dl/web/weather/ic-weather-50n.svg,Đà Nẵng
