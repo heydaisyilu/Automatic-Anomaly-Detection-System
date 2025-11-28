@@ -6283,3 +6283,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-11-28 04:00:00+07:00,83.0,8.1,77.0,/dl/web/weather/ic-weather-01n.svg,Hồ Chí Minh
 2025-11-28 05:00:00+07:00,88.0,8.1,76.0,/dl/web/weather/ic-weather-01n.svg,Hồ Chí Minh
 2025-11-28 06:00:00+07:00,90.0,8.0,77.0,/dl/web/weather/ic-weather-01d.svg,Hồ Chí Minh
+2025-11-28 08:00:00+07:00,97.0,6.9,72.0,/dl/web/weather/ic-weather-01d.svg,Hồ Chí Minh
+2025-11-28 10:00:00+07:00,103.0,8.1,63.0,/dl/web/weather/ic-weather-01d.svg,Hồ Chí Minh
