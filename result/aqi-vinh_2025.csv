@@ -7084,3 +7084,4 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-12-08 15:00:00+07:00,120.0,16.0,75.0,/dl/web/weather/ic-weather-04d.svg,Vinh
 2025-12-08 16:00:00+07:00,124.0,10.8,77.0,/dl/web/weather/ic-weather-10d.svg,Vinh
 2025-12-08 17:00:00+07:00,125.0,12.4,83.0,/dl/web/weather/ic-weather-04d.svg,Vinh
+2025-12-08 18:00:00+07:00,125.0,10.0,85.0,/dl/web/weather/ic-weather-04n.svg,Vinh
