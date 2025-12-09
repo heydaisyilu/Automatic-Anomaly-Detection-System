@@ -6540,3 +6540,4 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-12-09 15:00:00+07:00,55.0,13.0,57.0,/dl/web/weather/ic-weather-04d.svg,Đà Nẵng
 2025-12-09 16:00:00+07:00,57.0,11.1,65.0,/dl/web/weather/ic-weather-04d.svg,Đà Nẵng
 2025-12-09 17:00:00+07:00,65.0,11.1,69.0,/dl/web/weather/ic-weather-04d.svg,Đà Nẵng
+2025-12-09 18:00:00+07:00,72.0,5.5,73.0,/dl/web/weather/ic-weather-04n.svg,Đà Nẵng
