@@ -6578,3 +6578,5 @@ timestamp,aqi,wind_speed,humidity,weather_icon,city
 2025-12-11 21:00:00+07:00,236.0,5.2,81.0,/dl/web/weather/ic-weather-04n.svg,Hà Nội
 2025-12-11 22:00:00+07:00,241.0,4.6,82.0,/dl/web/weather/ic-weather-04n.svg,Hà Nội
 2025-12-11 23:00:00+07:00,244.0,3.8,82.0,/dl/web/weather/ic-weather-04n.svg,Hà Nội
+2025-12-12 00:00:00+07:00,242.0,3.8,83.0,/dl/web/weather/ic-weather-04n.svg,Hà Nội
+2025-12-12 01:00:00+07:00,249.0,3.5,84.0,/dl/web/weather/ic-weather-04n.svg,Hà Nội
