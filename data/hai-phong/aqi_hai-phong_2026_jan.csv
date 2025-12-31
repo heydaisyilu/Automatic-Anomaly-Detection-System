@@ -1,0 +1,2 @@
+timestamp,city,aqi,weather_icon,wind_speed,humidity
+2026-01-01T00:24:49.040796+07:00,Hải Phòng,159,/dl/web/weather/ic-weather-02n.svg,13.0 km/h,83%

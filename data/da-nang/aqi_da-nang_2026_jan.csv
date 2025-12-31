@@ -1,0 +1,2 @@
+timestamp,city,aqi,weather_icon,wind_speed,humidity
+2026-01-01T00:24:46.504857+07:00,Đà Nẵng,129,/dl/web/weather/ic-weather-02n.svg,0.0 km/h,88%
