@@ -1,6 +1,6 @@
 ﻿city,weather_type,mean_aqi
 Cần Thơ,Dông bão,64.04
-Cần Thơ,Khác,56.01
+Cần Thơ,Khác,56.02
 Cần Thơ,Mây,67.18
 Cần Thơ,Mưa,48.91
 Cần Thơ,Nắng,75.62
@@ -31,12 +31,12 @@ Nha Trang,Khác,51.67
 Nha Trang,Mây,61.69
 Nha Trang,Mưa,54.43
 Nha Trang,Nắng,60.49
-Vinh,Khác,74.7
+Vinh,Khác,74.71
 Vinh,Mây,84.26
 Vinh,Mưa,76.66
 Vinh,Nắng,99.9
 Đà Nẵng,Dông bão,47.55
-Đà Nẵng,Khác,45.99
+Đà Nẵng,Khác,46.0
 Đà Nẵng,Mây,58.56
 Đà Nẵng,Mưa,45.45
 Đà Nẵng,Nắng,68.28
