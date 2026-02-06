@@ -92,7 +92,7 @@ def _lam_sach_va_resample(df: pd.DataFrame, ten_tp: str) -> pd.DataFrame:
         "weather_icon": _mode_or_last,
         "city": _mode_or_last,
     }
-    df_res = df.resample("1H").agg(agg_map)
+    df_res = df.resample("1h").agg(agg_map)
 
     # Làm gọn số
     for col in ["aqi", "wind_speed", "humidity"]:
