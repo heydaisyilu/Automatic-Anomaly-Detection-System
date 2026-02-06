@@ -100,3 +100,4 @@ timestamp,city,aqi,weather_icon,wind_speed,humidity
 2026-02-06T15:54:05.953228+07:00,Hà Nội,226,/dl/web/weather/ic-weather-02d.svg,4.0 km/h,58%
 2026-02-06T16:53:24.473936+07:00,Hà Nội,215,/dl/web/weather/ic-weather-02d.svg,4.0 km/h,62%
 2026-02-06T17:50:45.661096+07:00,Hà Nội,165,/dl/web/weather/ic-weather-02d.svg,4.0 km/h,62%
+2026-02-06T18:40:00.970466+07:00,Hà Nội,133,/dl/web/weather/ic-weather-02n.svg,2.0 km/h,70%
