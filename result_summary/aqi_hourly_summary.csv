@@ -1,7 +1,7 @@
 ﻿city,hour,mean_aqi
 Cần Thơ,0,66.59
 Cần Thơ,1,65.65
-Cần Thơ,2,66.22
+Cần Thơ,2,66.19
 Cần Thơ,3,65.98
 Cần Thơ,4,66.2
 Cần Thơ,5,67.64
@@ -25,7 +25,7 @@ Cần Thơ,22,68.3
 Cần Thơ,23,68.88
 Huế,0,57.22
 Huế,1,56.58
-Huế,2,56.5
+Huế,2,56.52
 Huế,3,55.95
 Huế,4,56.09
 Huế,5,55.6
@@ -121,7 +121,7 @@ Hồ Chí Minh,22,66.54
 Hồ Chí Minh,23,66.9
 Nha Trang,0,58.31
 Nha Trang,1,58.07
-Nha Trang,2,58.53
+Nha Trang,2,58.54
 Nha Trang,3,58.47
 Nha Trang,4,58.99
 Nha Trang,5,58.42
