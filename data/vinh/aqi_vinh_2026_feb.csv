@@ -253,3 +253,4 @@ timestamp,city,aqi,weather_icon,wind_speed,humidity
 2026-02-16T12:07:59.720975+07:00,Vinh,68,/dl/web/weather/ic-weather-03d.svg,2.0 km/h,67%
 2026-02-16T14:16:04.387878+07:00,Vinh,60,/dl/web/weather/ic-weather-02d.svg,16.0 km/h,67%
 2026-02-16T16:00:28.809877+07:00,Vinh,60,/dl/web/weather/ic-weather-02d.svg,19.0 km/h,71%
+2026-02-16T17:06:55.835335+07:00,Vinh,60,/dl/web/weather/ic-weather-02d.svg,19.0 km/h,75%
