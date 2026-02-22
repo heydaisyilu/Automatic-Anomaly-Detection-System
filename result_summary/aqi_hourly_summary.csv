@@ -1,6 +1,6 @@
 ﻿city,hour,mean_aqi
 Cần Thơ,0,66.78
-Cần Thơ,1,65.78
+Cần Thơ,1,65.81
 Cần Thơ,2,66.28
 Cần Thơ,3,65.98
 Cần Thơ,4,66.22
@@ -24,7 +24,7 @@ Cần Thơ,21,69.34
 Cần Thơ,22,68.74
 Cần Thơ,23,69.16
 Huế,0,57.59
-Huế,1,56.7
+Huế,1,56.71
 Huế,2,56.85
 Huế,3,56.49
 Huế,4,56.38
@@ -96,7 +96,7 @@ Hải Phòng,21,83.1
 Hải Phòng,22,82.87
 Hải Phòng,23,84.51
 Hồ Chí Minh,0,67.56
-Hồ Chí Minh,1,68.33
+Hồ Chí Minh,1,68.3
 Hồ Chí Minh,2,70.41
 Hồ Chí Minh,3,72.19
 Hồ Chí Minh,4,73.52
@@ -120,7 +120,7 @@ Hồ Chí Minh,21,66.03
 Hồ Chí Minh,22,66.84
 Hồ Chí Minh,23,66.87
 Nha Trang,0,58.55
-Nha Trang,1,58.18
+Nha Trang,1,58.2
 Nha Trang,2,58.8
 Nha Trang,3,58.7
 Nha Trang,4,59.19
@@ -144,7 +144,7 @@ Nha Trang,21,57.35
 Nha Trang,22,57.48
 Nha Trang,23,58.73
 Vinh,0,83.38
-Vinh,1,82.93
+Vinh,1,82.88
 Vinh,2,83.59
 Vinh,3,83.75
 Vinh,4,82.99
