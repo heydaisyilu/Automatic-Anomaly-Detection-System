@@ -1,10 +1,10 @@
 ﻿city,AQI_level,count,percent
 Cần Thơ,Kém (101-150),481,5.52
-Cần Thơ,Trung bình (51-100),6009,68.96
+Cần Thơ,Trung bình (51-100),6010,68.96
 Cần Thơ,Tốt (0-50),2143,24.59
 Cần Thơ,Xấu (151-200),81,0.93
 Huế,Kém (101-150),138,1.58
-Huế,Trung bình (51-100),5268,60.5
+Huế,Trung bình (51-100),5269,60.51
 Huế,Tốt (0-50),3295,37.84
 Huế,Xấu (151-200),6,0.07
 Hà Nội,Kém (101-150),1470,18.72
@@ -18,16 +18,16 @@ Hải Phòng,Rất xấu (201-300),13,0.15
 Hải Phòng,Trung bình (51-100),4362,51.84
 Hải Phòng,Tốt (0-50),1779,21.14
 Hải Phòng,Xấu (151-200),811,9.64
-Hồ Chí Minh,Kém (101-150),922,11.34
+Hồ Chí Minh,Kém (101-150),922,11.33
 Hồ Chí Minh,Rất xấu (201-300),3,0.04
-Hồ Chí Minh,Trung bình (51-100),5721,70.33
+Hồ Chí Minh,Trung bình (51-100),5722,70.34
 Hồ Chí Minh,Tốt (0-50),1268,15.59
 Hồ Chí Minh,Xấu (151-200),220,2.7
-Nha Trang,Trung bình (51-100),7360,84.49
-Nha Trang,Tốt (0-50),1351,15.51
+Nha Trang,Trung bình (51-100),7360,84.48
+Nha Trang,Tốt (0-50),1352,15.52
 Vinh,Kém (101-150),1032,11.86
 Vinh,Rất xấu (201-300),28,0.32
-Vinh,Trung bình (51-100),6171,70.94
+Vinh,Trung bình (51-100),6172,70.94
 Vinh,Tốt (0-50),1001,11.51
 Vinh,Xấu (151-200),467,5.37
 Đà Nẵng,Kém (101-150),385,4.91
