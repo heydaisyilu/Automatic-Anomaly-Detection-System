@@ -1,3 +1,4 @@
 timestamp,city,aqi,weather_icon,wind_speed,humidity
 2026-03-01T00:28:57.348882+07:00,Nha Trang,39,/dl/web/weather/ic-weather-01n.svg,6.0 km/h,89%
 2026-03-01T01:44:10.219807+07:00,Nha Trang,66,/dl/web/weather/ic-weather-01n.svg,5.0 km/h,89%
+2026-03-01T02:28:30.785006+07:00,Nha Trang,66,/dl/web/weather/ic-weather-02n.svg,6.0 km/h,89%
