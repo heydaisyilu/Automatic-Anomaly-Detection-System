@@ -25,3 +25,4 @@ timestamp,city,aqi,weather_icon,wind_speed,humidity
 2026-03-02T05:33:57.845764+07:00,Huế,62,/dl/web/weather/ic-weather-02n.svg,5.0 km/h,83%
 2026-03-02T06:32:57.805801+07:00,Huế,64,/dl/web/weather/ic-weather-02n.svg,5.0 km/h,82%
 2026-03-02T09:45:14.152512+07:00,Huế,64,/dl/web/weather/ic-weather-02d.svg,3.0 km/h,64%
+2026-03-02T11:56:24.688286+07:00,Huế,64,/dl/web/weather/ic-weather-01d.svg,10.0 km/h,58%
